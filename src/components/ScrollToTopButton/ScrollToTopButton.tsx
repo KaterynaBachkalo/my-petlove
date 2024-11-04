@@ -32,7 +32,7 @@ const ScrollToTopButton = () => {
       className={`${css.scroll} ${isVisible ? css.visible : ""}`}
       onClick={scrollToTop}
     >
-      <Icon name="chevron-up" />
+      <Icon name="chevron-up" className="" />
     </div>
   );
 };
