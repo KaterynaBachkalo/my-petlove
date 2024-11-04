@@ -1,0 +1,34 @@
+@use "mixins" as mx;
+@use "variables" as var;
+
+%menu-text {
+  @include mx.font(14, 21, -1, 500);
+}
+
+%main-title {
+  @include mx.font(24, 39, 1, 600);
+}
+
+%table-title {
+  @include mx.font(12, 18, -1, 500);
+
+  @include mx.mq("lg") {
+    @include mx.font(14, 21, -1, 500);
+  }
+}
+
+%table-text {
+  @include mx.font(12, 18, -1, 500);
+
+  @include mx.mq("lg") {
+    @include mx.font(14, 21, -1, 500);
+  }
+}
+
+%pagination-text {
+  @include mx.font(12, 12, -1, 500);
+}
+
+%sub-title{
+  @include mx.font(10, 15, -1, 500);
+}

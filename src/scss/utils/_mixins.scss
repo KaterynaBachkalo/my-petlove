@@ -1,0 +1,63 @@
+@use "sass:map";
+@use "sass:list";
+@use "sass:math";
+
+@use "variables" as var;
+@use "functions" as fn;
+
+@mixin font($_fsz, $_lnh, $_ls, $_fw: 400) {
+  font-size: #{$_fsz}px;
+
+  $result: math.div($_lnh, $_fsz);
+
+  line-height: math.div(math.round($result * 100), 100);
+  letter-spacing: #{calc($_ls/100)}em;
+  font-weight: #{$_fw};
+}
+
+@mixin mq(
+  $bp: x-sm,
+  $type: min,
+  $is-retina: false,
+  $retina-image: null,
+  $default-image: null
+) {
+  @if map.has-key(var.$breakpoints, $bp) {
+    $width: map.get(var.$breakpoints, $bp);
+
+    @if $type == max {
+      $width: $width - 0.02px;
+    }
+
+    @media only screen and (#{$type}-width: $width) {
+      @if $is-retina {
+        background: url(#{$default-image}) no-repeat center center;
+        @media (min-device-pixel-ratio: 2),
+          (min-resolution: 192dpi),
+          (min-resolution: 2dppx) {
+          background: url(#{$retina-image}) no-repeat center center;
+          @content;
+        }
+      } @else {
+        @content;
+      }
+    }
+  } @else {
+    @error "This breakpoint doesn't exist";
+  }
+}
+
+@mixin frame($width, $height: $width, $is-circle: false) {
+  width: $width;
+  height: $height;
+
+  @if $is-circle {
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  img {
+    object-fit: cover;
+    object-position: top center;
+  }
+}
