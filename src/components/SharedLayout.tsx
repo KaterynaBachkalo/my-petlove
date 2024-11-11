@@ -13,9 +13,8 @@ export const SharedLayout = () => {
   const [isOpenMenu, setOpenMenu] = useState(false);
 
   return (
-    <div>
+    <div className="container">
       <Header onOpen={setOpenMenu} />
-      <Sidebar onClose={() => setOpenMenu(false)} isOpen={isOpenMenu} />
       {isOpenMenu && (
         <div onClick={() => setOpenMenu(false)}>
           <Sidebar onClose={() => setOpenMenu(false)} isOpen={isOpenMenu} />
