@@ -26,19 +26,21 @@ function App() {
           }
         />
 
-        <Route
-          path="register"
-          element={
-            <RestrictedRoute component={RegisterPage} redirectTo="/login" />
-          }
-        ></Route>
-
-        <Route
-          path="login"
-          element={<RestrictedRoute component={LoginPage} redirectTo="/home" />}
-        ></Route>
-
         <Route path="/" element={<SharedLayout />}>
+          <Route
+            path="register"
+            element={
+              <RestrictedRoute component={RegisterPage} redirectTo="/login" />
+            }
+          ></Route>
+
+          <Route
+            path="login"
+            element={
+              <RestrictedRoute component={LoginPage} redirectTo="/home" />
+            }
+          ></Route>
+
           <Route path="*" element={<Navigate to="home" />} />
         </Route>
       </Routes>
