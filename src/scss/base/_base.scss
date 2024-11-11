@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @use "../utils/placeholders";
 @use "../utils/variables" as var;
 @use "../utils/functions" as fn;
@@ -17,4 +19,21 @@ button {
   font-family: inherit;
   color: fn.get-color("current");
   cursor: pointer;
+}
+
+.container {
+  min-width: map.get(var.$breakpoints, "x-sm");
+  padding: 28px 20px 20px 20px;
+
+  @include mx.mq("sm") {
+    min-width: map.get(var.$breakpoints, "sm");
+  }
+
+  @include mx.mq("md") {
+    min-width: map.get(var.$breakpoints, "md");
+  }
+
+  @include mx.mq("lg") {
+    min-width: map.get(var.$breakpoints, "lg");
+  }
 }
