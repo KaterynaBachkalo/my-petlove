@@ -5,6 +5,14 @@ const RegisterPage = () => {
   return (
     <>
       <div>
+        <img
+          srcSet="../img/authorization/registration/image@1x.png, ../img/authorization/registration/image@2x.png"
+          src="../img/authorization/registration/image@1x.png"
+          alt="cat"
+          className="registration-img"
+          width="335"
+          height="280"
+        />
         <div>
           <FormLogin />
         </div>
