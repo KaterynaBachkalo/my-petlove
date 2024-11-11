@@ -26,39 +26,25 @@ const Sidebar: FC<IProps> = ({ onClose }) => {
 
         <ul className="">
           <li className="">
-            <NavLink to="/dashboard" className="">
-              <Icon name="dashboard" width={12} height={12} className="" />
+            <NavLink to="/news" className="">
+              <p className="">News</p>
             </NavLink>
           </li>
-
           <li className="">
-            <NavLink to="/orders" className="">
-              <Icon name="busket" width={13} height={13} className="" />
+            <NavLink to="/notices" className="">
+              <p className="">Find pet</p>
             </NavLink>
           </li>
-
           <li className="">
-            <NavLink to="/products" className="">
-              <Icon name="bottle" width={12} height={13} className="" />
-            </NavLink>
-          </li>
-
-          <li className="">
-            <NavLink to="/suppliers" className="">
-              <Icon name="bag" width={12} height={13} className="" />
-            </NavLink>
-          </li>
-
-          <li className="">
-            <NavLink to="/customers" className="">
-              <Icon name="users" width={13} height={10} className="" />
+            <NavLink to="/friends" className="">
+              <p className="">Our friends</p>
             </NavLink>
           </li>
         </ul>
       </nav>
 
       <div className="" onClick={handleLogOut}>
-        <Icon name="phone" width={13} height={14} className="" />
+        <Icon name="" width={13} height={14} className="" />
       </div>
     </div>
   );
