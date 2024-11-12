@@ -1,48 +1,50 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { SharedLayout } from "./components/SharedLayout";
-// import { lazy } from "react";
+import { lazy } from "react";
 
 import RestrictedRoute from "./components/RestrictedRoute";
-// import PrivateRoute from "./components/PrivateRoute";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import HomePage from "./pages/HomePage";
+import PrivateRoute from "./components/PrivateRoute";
 
-// const AllProductsPage = lazy(() => import("./pages/AllProductsPage"));
-// const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
-// const AllOrdersPage = lazy(() => import("./pages/AllOrdersPage"));
-// const AllSuppliersPage = lazy(() => import("./pages/AllSuppliersPage"));
-// const CustomersDataPage = lazy(() => import("./pages/CustomersDataPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const RegisterPage = lazy(() => import("./pages/RegisterPage"));
+const MainPage = lazy(() => import("./pages/MainPage"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const NewsPage = lazy(() => import("./pages/NewsPage"));
+const FriendsPage = lazy(() => import("./pages/FriendsPage"));
+const NoticesPage = lazy(() => import("./pages/NoticesPage"));
 
 function App() {
   return (
     <>
       <Routes>
-        <Route index element={<Navigate to="/home" />}></Route>
-        <Route
-          path="home"
-          element={
-            <RestrictedRoute component={HomePage} redirectTo="/register" />
-          }
-        />
-
         <Route path="/" element={<SharedLayout />}>
+          <Route path="/" element={<MainPage />} />
           <Route
-            path="register"
+            path="/register"
             element={
-              <RestrictedRoute component={RegisterPage} redirectTo="/login" />
+              <RestrictedRoute component={RegisterPage} redirectTo="/home" />
             }
-          ></Route>
-
+          />
           <Route
-            path="login"
+            path="/login"
             element={
               <RestrictedRoute component={LoginPage} redirectTo="/home" />
             }
-          ></Route>
+          />
 
-          <Route path="*" element={<Navigate to="home" />} />
+          <Route path="home" element={<HomePage />} />
+          <Route path="news" element={<NewsPage />} />
+          <Route path="friends" element={<FriendsPage />} />
+          <Route path="notices" element={<NoticesPage />} />
+
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
+        <Route
+          path="/profile"
+          element={<PrivateRoute component={ProfilePage} redirectTo="/" />}
+        />
       </Routes>
     </>
   );
