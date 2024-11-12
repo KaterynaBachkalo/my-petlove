@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Suspense, useState } from "react";
 import { ToastContainer } from "react-toastify";
 
@@ -12,9 +12,11 @@ import ScrollToTopButton from "./ScrollToTopButton/ScrollToTopButton";
 export const SharedLayout = () => {
   const [isOpenMenu, setOpenMenu] = useState(false);
 
+  const location = useLocation();
+
   return (
-    <div className="container">
-      <Header onOpen={setOpenMenu} />
+    <div className={location.pathname !== "/" ? "container" : ""}>
+      {location.pathname !== "/" && <Header onOpen={setOpenMenu} />}
       {isOpenMenu && (
         <div onClick={() => setOpenMenu(false)}>
           <Sidebar onClose={() => setOpenMenu(false)} isOpen={isOpenMenu} />
