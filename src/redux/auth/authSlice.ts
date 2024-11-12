@@ -4,6 +4,7 @@ import {
   logOutThunk,
   refreshTokenThunk,
   refreshUserThunk,
+  registerThunk,
 } from "./operations";
 import { toast } from "react-toastify";
 
@@ -82,6 +83,8 @@ const authSlice = createSlice({
     builder
       .addCase(logInThunk.fulfilled, handleFulfilled)
 
+      .addCase(registerThunk.fulfilled, handleFulfilled)
+
       .addCase(refreshUserThunk.fulfilled, (state: IState, action) => {
         state.isLoading = false;
         state.authenticated = true;
@@ -112,6 +115,7 @@ const authSlice = createSlice({
         isAnyOf(
           logOutThunk.pending,
           logInThunk.pending,
+          registerThunk.pending,
           refreshUserThunk.pending,
           refreshTokenThunk.pending
         ),
@@ -121,6 +125,7 @@ const authSlice = createSlice({
         isAnyOf(
           logOutThunk.rejected,
           logInThunk.rejected,
+          registerThunk.rejected,
           refreshUserThunk.rejected,
           refreshTokenThunk.rejected
         ),

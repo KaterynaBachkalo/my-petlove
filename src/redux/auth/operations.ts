@@ -22,6 +22,22 @@ export const refreshTokensApi = async (oldRefreshToken: string) => {
   return response.data;
 };
 
+export const registerThunk = createAsyncThunk(
+  "auth/register",
+  async (formData: IForms, thunkAPI) => {
+    try {
+      const response = await petInstance.post("/users/register", formData);
+
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.response) {
+        return thunkAPI.rejectWithValue(error.response.status);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
+    }
+  }
+);
+
 export const logInThunk = createAsyncThunk(
   "auth/login",
   async (formData: IForms, thunkAPI) => {
