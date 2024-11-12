@@ -1,3 +1,13 @@
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.header {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
 .header-nav {
   display: flex;
   align-items: center;
@@ -5,4 +15,38 @@
 
 .header-nav-logo {
   margin-right: auto;
+}
+
+.header-logo-text {
+  @extend %logo;
+
+  color: fn.get-color("dark");
+  display: flex;
+  align-items: flex-end;
+}
+
+.logo-heart {
+  fill: fn.get-color("accent");
+}
+
+.logo-image {
+  width: 40px;
+  height: 40px;
+}
+
+.header-wrap {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+  gap: 8px;
+}
+
+.header-name {
+  display: none;
+
+  @extend %header-name;
+
+  @include mx.mq("md") {
+    display: inline;
+  }
 }
