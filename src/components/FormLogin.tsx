@@ -8,6 +8,7 @@ import { logInThunk, registerThunk } from "../redux/auth/operations";
 import { AppDispatch } from "../redux/store";
 import { IForms, IFormsBD } from "../types";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface IFormText {
   formText: string;
@@ -32,8 +33,8 @@ const FormLogin: FC<IFormText> = ({
   const schema = yup
     .object({
       name: yup.string(),
-      email: yup.string().email().required(),
-      password: yup.string().required().min(6),
+      email: yup.string().email().required("Email is required"),
+      password: yup.string().required("Password is required").min(6),
       confirmPassword: yup
         .string()
         .oneOf([yup.ref("password"), undefined], "Passwords must match"),
@@ -50,6 +51,10 @@ const FormLogin: FC<IFormText> = ({
   });
 
   const onSubmit = (data: IForms) => {
+    if (errors) {
+      return toast.error("Something went wrong...");
+    }
+
     if (buttonText === "Registration") {
       const dataBD: IFormsBD = {
         name: data.name,
