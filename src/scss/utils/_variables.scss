@@ -6,9 +6,13 @@ $breakpoints: (
 );
 
 $colors: (
-  "accent": rgb(246, 184, 61),
+  "accent": #f6b83d,
   "light": #fff,
-  "dark": #000,
+  "dark": #262626,
+  "error": #ef2447,
+  "form-dark": #26262680,
+  "background-primary": #f9f9f9,
+
   "side-light-grey": #9197b3,
   "side-dark-grey": #757575,
   "side-grey": #838383,
@@ -16,7 +20,6 @@ $colors: (
   "light-secondary": #404b52,
   "light-active": #16c098,
 
-  "background-primary": #fafbff,
   "background-secondary": #f9fbff,
   "background-active": rgba(22, 192, 152, 0.38),
   "background-inactive": #ffc5c5,
@@ -36,5 +39,3 @@ $colors: (
 );
 
 $shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-$main-font: "Manrope";
