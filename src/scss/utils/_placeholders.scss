@@ -1,34 +1,65 @@
 @use "mixins" as mx;
 @use "variables" as var;
 
-%menu-text {
-  @include mx.font(14, 21, -1, 500);
-}
+%title {
+  @include mx.font(28, 28, -4, 700);
 
-%main-title {
-  @include mx.font(24, 39, 1, 600);
-}
-
-%table-title {
-  @include mx.font(12, 18, -1, 500);
-
-  @include mx.mq("lg") {
-    @include mx.font(14, 21, -1, 500);
+  @include mx.mq("md") {
+    @include mx.font(54, 54, -4, 700);
   }
 }
 
-%table-text {
-  @include mx.font(12, 18, -1, 500);
+%sub-title {
+  @include mx.font(14, 18, -2, 500);
 
-  @include mx.mq("lg") {
-    @include mx.font(14, 21, -1, 500);
+  @include mx.mq("md") {
+    @include mx.font(18, 22, -2, 500);
   }
 }
 
-%pagination-text {
-  @include mx.font(12, 12, -1, 500);
+%logo {
+  @include mx.font(20, 20, -4, 700);
+
+  @include mx.mq("md") {
+    @include mx.font(28, 28, -4, 700);
+  }
 }
 
-%sub-title{
-  @include mx.font(10, 15, -1, 500);
+%header-name {
+  @include mx.mq("md") {
+    @include mx.font(20, 20, -3, 700);
+  }
+}
+
+%error-text {
+  @include mx.font(12, 14, -3, 500);
+}
+
+%input-text {
+  @include mx.font(16, 20, -3, 500);
+}
+
+%form-button-text {
+  @include mx.font(14, 18, -3, 700);
+  text-transform: uppercase;
+
+  @include mx.mq("md") {
+    @include mx.font(14, 21, -1, 700);
+  }
+}
+
+%form-text {
+  @include mx.font(12, 14, -3, 700);
+
+  @include mx.mq("md") {
+    @include mx.font(14, 21, -1, 700);
+  }
+}
+
+%menu-item-text {
+  @include mx.font(14, 18, -3, 500);
+
+  @include mx.mq("md") {
+    @include mx.font(16, 20, -3, 500);
+  }
 }
