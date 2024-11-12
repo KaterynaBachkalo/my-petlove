@@ -1,0 +1,45 @@
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.registration-wrap,
+.login-wrap {
+  padding: 27px 20px;
+  background-color: fn.get-color("light");
+  color: fn.get-color("dark");
+  border-radius: 30px;
+  margin-top: 10px;
+
+  @include mx.mq("md") {
+    padding: 30px 140px;
+  }
+}
+
+.login-wrap {
+  padding: 60px 20px;
+
+  @include mx.mq("md") {
+    padding: 30px 140px;
+  }
+}
+
+.registration-title,
+.login-title {
+  @extend %title;
+  margin-bottom: 12px;
+
+  @include mx.mq("md") {
+    margin-bottom: 16px;
+  }
+}
+
+.registration-subtitle,
+.login-subtitle {
+  @extend %sub-title;
+  margin-bottom: 20px;
+
+  @include mx.mq("md") {
+    margin-bottom: 32px;
+  }
+}
