@@ -31,8 +31,8 @@
   @include mx.mq(
     "md",
     $is-retina: true,
-    $retina-image: "src/img/homeImage_md@2x.png",
-    $default-image: "src/img/homeImage_md@1x.png"
+    $retina-image: "/src/img/homeImage_md@2x.png",
+    $default-image: "/src/img/homeImage_md@1x.png"
   ) {
     min-width: map.get(var.$breakpoints, "md");
     background-size: cover;
@@ -46,8 +46,8 @@
   @include mx.mq(
     "lg",
     $is-retina: true,
-    $retina-image: "src/img/homeImage_lg@2x.png",
-    $default-image: "src/img/homeImage_lg@1x.png"
+    $retina-image: "/src/img/homeImage_lg@2x.png",
+    $default-image: "/src/img/homeImage_lg@1x.png"
   ) {
     min-width: map.get(var.$breakpoints, "lg");
     background-size: cover;
