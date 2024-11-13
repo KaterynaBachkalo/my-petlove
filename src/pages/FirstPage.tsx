@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import Icon from "../components/Icon";
 
-const MainPage = () => {
+const FirstPage = () => {
   return (
     <Link to="/register">
       <div className="background-image">
-        <p className="home-logo">
+        <p className="first-logo">
           petl
           <Icon
-            className="home-icon"
+            className="first-icon"
             name="icon-heart-circle"
             width={44}
             height={44}
@@ -20,4 +20,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default FirstPage;

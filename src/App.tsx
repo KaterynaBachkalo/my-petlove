@@ -7,7 +7,7 @@ import PrivateRoute from "./components/PrivateRoute";
 
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
-const MainPage = lazy(() => import("./pages/MainPage"));
+const FirstPage = lazy(() => import("./pages/FirstPage"));
 const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -20,7 +20,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<FirstPage />} />
           <Route
             path="/register"
             element={

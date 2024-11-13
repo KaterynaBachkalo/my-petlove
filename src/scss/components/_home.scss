@@ -16,8 +16,8 @@
   @include mx.mq(
     "x-sm",
     $is-retina: true,
-    $retina-image: "src/img/homeImage_sm@2x.png",
-    $default-image: "src/img/homeImage_sm@1x.png"
+    $retina-image: "/src/img/homeImage_sm@2x.png",
+    $default-image: "/src/img/homeImage_sm@1x.png"
   ) {
     min-width: map.get(var.$breakpoints, "x-sm");
     max-width: map.get(var.$breakpoints, "sm");
@@ -58,7 +58,7 @@
   }
 }
 
-.home-logo {
+.first-logo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,6 +68,6 @@
   @include mx.font(50, 50, -4, 700);
 }
 
-.home-icon {
+.first-icon {
   fill: fn.get-color("accent");
 }
