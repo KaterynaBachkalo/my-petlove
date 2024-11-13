@@ -10,7 +10,7 @@
 </symbol>
 
 <symbol id="close" viewBox="0 0 32 32">
-<path id="Vector" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1" stroke-width="2" d="M24 8 8 24M8 8l16 16"/>
+<path d="M10 8.586l-7.071-7.071-1.414 1.414 7.071 7.071-7.071 7.071 1.414 1.414 7.071-7.071 7.071 7.071 1.414-1.414-7.071-7.071 7.071-7.071-1.414-1.414-7.071 7.071z"></path>
 </symbol>
 
 <symbol id="dashboard" viewBox="0 0 12 12">
