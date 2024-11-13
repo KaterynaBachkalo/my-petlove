@@ -1,1 +1,0 @@
-import{j as e,L as s,I as a}from"./index-DS27jy19.js";const o=()=>e.jsx(s,{to:"/register",children:e.jsx("div",{className:"background-image",children:e.jsxs("p",{className:"home-logo",children:["petl",e.jsx(a,{className:"home-icon",name:"icon-heart-circle",width:44,height:44}),"ve"]})})});export{o as default};
