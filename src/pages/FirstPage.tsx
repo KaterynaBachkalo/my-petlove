@@ -3,7 +3,7 @@ import Icon from "../components/Icon";
 
 const FirstPage = () => {
   return (
-    <Link to="/register">
+    <Link to="/home">
       <div className="background-image">
         <p className="first-logo">
           petl
