@@ -10,13 +10,14 @@ import MobImage2x from "../img/authorization/login/image@2x.png";
 const LoginPage = () => {
   return (
     <>
-      <div>
+      <div className="auth-wrapper">
         <picture>
           <source
             media="(min-width: 1280px)"
             srcSet={`${DeskImage1x} 1x, ${DeskImage2x} 2x`}
             type="image/png"
             width={592}
+            height={654}
           />
           <source
             media="(min-width: 768px)"
@@ -29,13 +30,7 @@ const LoginPage = () => {
             srcSet={`${MobImage1x} 1x, ${MobImage2x} 2x`}
             type="image/png"
           />
-          <img
-            src={MobImage1x}
-            alt="dog"
-            className="registration-img"
-            width="335"
-            height="280"
-          />
+          <img src={MobImage1x} alt="dog" className="registration-img" />
         </picture>
         <div className="login-wrap">
           <h2 className="login-title">Log in</h2>
