@@ -22,9 +22,6 @@
   @include mx.mq("md") {
     height: 52px;
   }
-  @include mx.mq("lg") {
-    width: 366px;
-  }
 
   &::placeholder {
     color: fn.get-color("form-dark");
@@ -67,6 +64,11 @@
   color: fn.get-color("light");
   margin-top: 24px;
   margin-bottom: 12px;
+
+  @include mx.mq("lg") {
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
 }
 
 .form-text {

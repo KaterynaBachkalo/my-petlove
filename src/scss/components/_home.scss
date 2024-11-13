@@ -1,73 +1,59 @@
-@use "sass:map";
-
 @use "../utils/placeholders";
 @use "../utils/variables" as var;
 @use "../utils/functions" as fn;
 @use "../utils/mixins" as mx;
 
-.background-image {
-  background-size: cover;
+.home-wrap {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: map.get(var.$breakpoints, "x-sm");
-  height: 100vh;
+  flex-direction: column;
+}
 
-  @include mx.mq(
-    "x-sm",
-    $is-retina: true,
-    $retina-image: "/src/img/homeImage_sm@2x.png",
-    $default-image: "/src/img/homeImage_sm@1x.png"
-  ) {
-    min-width: map.get(var.$breakpoints, "x-sm");
-    max-width: map.get(var.$breakpoints, "sm");
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.home-back {
+  position: relative;
+  background-color: fn.get-color("accent");
+  border-radius: 0 0 30px 30px;
+  padding: 60px 20px 50px 20px;
+  border-color: fn.get-color("accent");
+
+  @include mx.mq("md") {
+    border-radius: 0 0 60px 60px;
+    padding: 112px 82px 88px 32px;
   }
 
-  @include mx.mq(
-    "md",
-    $is-retina: true,
-    $retina-image: "/src/img/homeImage_md@2x.png",
-    $default-image: "/src/img/homeImage_md@1x.png"
-  ) {
-    min-width: map.get(var.$breakpoints, "md");
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 100vh;
-  }
-
-  @include mx.mq(
-    "lg",
-    $is-retina: true,
-    $retina-image: "/src/img/homeImage_lg@2x.png",
-    $default-image: "/src/img/homeImage_lg@1x.png"
-  ) {
-    min-width: map.get(var.$breakpoints, "lg");
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  @include mx.mq("lg") {
+    padding: 112px 392px 32px 64px;
   }
 }
 
-.first-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.home-title {
+  @extend %home-title;
+
+  color: fn.get-color("light");
+  margin-bottom: 24px;
+
+  @include mx.mq("md") {
+    margin-bottom: 0;
+  }
+}
+
+.home-span {
+  color: #ffffff66;
+}
+
+.home-text {
+  @extend %home-text;
 
   color: fn.get-color("light");
 
-  @include mx.font(50, 50, -4, 700);
-}
+  @include mx.mq("md") {
+    width: 255px;
+    position: absolute;
+    right: 32px;
+    bottom: 32px;
+  }
 
-.first-icon {
-  fill: fn.get-color("accent");
+  @include mx.mq("lg") {
+    right: 64px;
+    bottom: 10px;
+  }
 }

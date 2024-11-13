@@ -1,0 +1,73 @@
+@use "sass:map";
+
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.background-image {
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: map.get(var.$breakpoints, "x-sm");
+  height: 100vh;
+
+  @include mx.mq(
+    "x-sm",
+    $is-retina: true,
+    $retina-image: "/src/img/homeImage_sm@2x.png",
+    $default-image: "/src/img/homeImage_sm@1x.png"
+  ) {
+    min-width: map.get(var.$breakpoints, "x-sm");
+    max-width: map.get(var.$breakpoints, "sm");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  @include mx.mq(
+    "md",
+    $is-retina: true,
+    $retina-image: "/src/img/homeImage_md@2x.png",
+    $default-image: "/src/img/homeImage_md@1x.png"
+  ) {
+    min-width: map.get(var.$breakpoints, "md");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+  }
+
+  @include mx.mq(
+    "lg",
+    $is-retina: true,
+    $retina-image: "/src/img/homeImage_lg@2x.png",
+    $default-image: "/src/img/homeImage_lg@1x.png"
+  ) {
+    min-width: map.get(var.$breakpoints, "lg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+}
+
+.first-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: fn.get-color("light");
+
+  @include mx.font(50, 50, -4, 700);
+}
+
+.first-icon {
+  fill: fn.get-color("accent");
+}

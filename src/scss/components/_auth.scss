@@ -3,16 +3,35 @@
 @use "../utils/functions" as fn;
 @use "../utils/mixins" as mx;
 
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  @include mx.mq("lg") {
+    flex-direction: row;
+    gap: 32px;
+    align-items: stretch;
+  }
+}
+
 .registration-wrap,
 .login-wrap {
   padding: 27px 20px;
   background-color: fn.get-color("light");
   color: fn.get-color("dark");
   border-radius: 30px;
-  margin-top: 10px;
+  width: 100%;
 
   @include mx.mq("md") {
     padding: 30px 140px;
+  }
+
+  @include mx.mq("lg") {
+    padding: 77px 84px;
+    width: 592px;
   }
 }
 
@@ -21,6 +40,11 @@
 
   @include mx.mq("md") {
     padding: 30px 140px;
+  }
+
+  @include mx.mq("lg") {
+    padding: 118px 84px;
+    width: 592px;
   }
 }
 
@@ -42,4 +66,8 @@
   @include mx.mq("md") {
     margin-bottom: 32px;
   }
+}
+
+.registration-img {
+  width: 100%;
 }

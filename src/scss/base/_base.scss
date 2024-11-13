@@ -6,8 +6,6 @@
 @use "../utils/mixins" as mx;
 
 body {
-  // @extend %table-text;
-
   font-family: "Manrope", sans-serif;
   font-weight: 500;
   color: fn.get-color("light-secondary");
@@ -25,17 +23,22 @@ button {
   min-width: map.get(var.$breakpoints, "x-sm");
   padding: 28px 20px 20px 20px;
   height: 100%;
+  margin: 0 auto;
 
   @include mx.mq("sm") {
     min-width: map.get(var.$breakpoints, "sm");
   }
 
   @include mx.mq("md") {
-    min-width: map.get(var.$breakpoints, "md");
+    width: map.get(var.$breakpoints, "md");
     padding: 32px;
   }
 
   @include mx.mq("lg") {
-    min-width: map.get(var.$breakpoints, "lg");
+    width: map.get(var.$breakpoints, "lg");
+  }
+
+  &.home {
+    padding: 10px;
   }
 }

@@ -36,11 +36,23 @@
   @include mx.mq("md") {
     width: 374px;
   }
+
+  &.home {
+    background-color: fn.get-color("light");
+  }
 }
 
 .menu-close-wrap {
   text-align: end;
   margin-bottom: 176px;
+}
+
+.menu-close {
+  fill: fn.get-color("light");
+
+  &.home {
+    fill: fn.get-color("dark");
+  }
 }
 
 .menu-nav {
@@ -72,7 +84,7 @@
 
   color: fn.get-color("light");
   border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid fn.get-color("border-dark-primary");
   padding: 15px;
   width: 119px;
   height: 48px;
@@ -88,15 +100,37 @@
     width: 178px;
     height: 42px;
     padding: 12px;
+
+    &.home {
+      color: fn.get-color("light");
+      background-color: fn.get-color("accent");
+      border: none;
+    }
   }
 
   &.register,
   &.logout {
     color: fn.get-color("accent");
-    background-color: #fff4df;
+    background-color: fn.get-color("background-secondary");
     width: 178px;
     height: 42px;
     padding: 12px;
+    cursor: pointer;
+
+    &.home {
+      color: fn.get-color("accent");
+      border: none;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: fn.get-color("background-hover");
+    }
+  }
+
+  &.home {
+    color: fn.get-color("dark");
+    border: 1px solid #26262666;
   }
 }
 
