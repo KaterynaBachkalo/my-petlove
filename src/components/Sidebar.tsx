@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Icon from "./Icon";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsAuthenticated } from "../redux/auth/selectors";
 import { useDispatch } from "react-redux";
@@ -14,6 +14,9 @@ interface IProps {
 
 const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
   const isAuthorized = useSelector(selectIsAuthenticated);
+
+  const location = useLocation();
+
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogOut = () => {
@@ -21,25 +24,51 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
   };
 
   return (
-    <div className={`menu ${isOpen ? "open" : ""}`}>
+    <div
+      className={`menu ${isOpen ? "open" : ""} ${
+        location.pathname === "/home" ? "home" : ""
+      }`}
+    >
       <div onClick={onClose} className="menu-close-wrap">
-        <Icon name="close" width={32} height={32} className="menu-close" />
+        <Icon
+          name="close"
+          width={32}
+          height={32}
+          className={`menu-close ${
+            location.pathname === "/home" ? "home" : ""
+          }`}
+        />
       </div>
 
       <nav className="menu-nav">
         <ul className="menu-list">
           <li>
-            <NavLink to="/news" className="menu-link">
+            <NavLink
+              to="/news"
+              className={`menu-link ${
+                location.pathname === "/home" ? "home" : ""
+              }`}
+            >
               <p className="">News</p>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/notices" className="menu-link">
+            <NavLink
+              to="/notices"
+              className={`menu-link ${
+                location.pathname === "/home" ? "home" : ""
+              }`}
+            >
               <p className="">Find pet</p>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/friends" className="menu-link">
+            <NavLink
+              to="/friends"
+              className={`menu-link ${
+                location.pathname === "/home" ? "home" : ""
+              }`}
+            >
               <p className="">Our friends</p>
             </NavLink>
           </li>
@@ -48,20 +77,33 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
 
       {isAuthorized ? (
         <div className="menu-auth-list">
-          <div onClick={handleLogOut} className="menu-link register">
+          <div
+            onClick={handleLogOut}
+            className={`menu-link register ${
+              location.pathname === "/home" ? "home" : ""
+            }`}
+          >
             <p className="menu-logout">Logout</p>
           </div>
         </div>
       ) : (
         <ul className="menu-auth-list">
-          <li className="menu-link login">
-            <NavLink to="/login" className="">
+          <li
+            className={`menu-link login ${
+              location.pathname === "/home" ? "home" : ""
+            }`}
+          >
+            <NavLink to="/login">
               <p className="menu-login">Log in</p>
             </NavLink>
           </li>
 
-          <li className="menu-link register">
-            <NavLink to="/register" className="">
+          <li
+            className={`menu-link register ${
+              location.pathname === "/home" ? "home" : ""
+            }`}
+          >
+            <NavLink to="/register">
               <p className="menu-register">Registration</p>
             </NavLink>
           </li>
