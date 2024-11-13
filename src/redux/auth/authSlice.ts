@@ -41,6 +41,32 @@ const handleRejected = (state: IState, action: PayloadAction<unknown>) => {
       theme: "colored",
     });
   }
+
+  if (state.error === 409) {
+    toast.error("This email is exist", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  }
+
+  if (state.error === 500) {
+    toast.error("Something went wrong...", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  }
 };
 
 const handleFulfilled = (state: IState, action: PayloadAction<IState>) => {
