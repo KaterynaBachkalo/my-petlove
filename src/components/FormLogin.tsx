@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { logInThunk, registerThunk } from "../redux/auth/operations";
 import { AppDispatch } from "../redux/store";
 import { IForms, IFormsBD } from "../types";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
 interface IFormText {
@@ -30,6 +30,8 @@ const FormLogin: FC<IFormText> = ({
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const location = useLocation();
+
   const schema = yup
     .object({
       name: yup.string(),
@@ -50,25 +52,34 @@ const FormLogin: FC<IFormText> = ({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: IForms) => {
-    if (errors) {
-      return toast.error("Something went wrong...");
-    }
+  const onSubmit = async (data: IForms) => {
+    try {
+      if (location.pathname === "/register") {
+        const dataBD: IFormsBD = {
+          name: data.name!,
+          email: data.email,
+          password: data.password,
+        };
+        await dispatch(registerThunk(dataBD));
 
-    if (buttonText === "Registration") {
-      const dataBD: IFormsBD = {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      };
+        if (errors) {
+          return toast.error("Something went wrong...");
+        }
 
-      dispatch(registerThunk(dataBD));
-    } else {
-      const dataBD: IFormsBD = {
-        email: data.email,
-        password: data.password,
-      };
-      dispatch(logInThunk(dataBD));
+        toast.success("Registration successful!");
+      } else {
+        const dataBD: IFormsBD = {
+          email: data.email,
+          password: data.password,
+        };
+        await dispatch(logInThunk(dataBD));
+
+        if (errors) {
+          return toast.error("Something went wrong...");
+        }
+      }
+    } catch {
+      toast.error("Something went wrong, please try again.");
     }
   };
 
