@@ -20,7 +20,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route path="/" element={<FirstPage />} />
+          <Route path="/" index element={<FirstPage />} />
           <Route
             path="/register"
             element={
