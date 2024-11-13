@@ -1,1 +1,0 @@
-import{j as e}from"./index-B-bFYn5i.js";const r=()=>e.jsx("div",{children:"NewsPage"});export{r as default};
