@@ -15,7 +15,13 @@ export const SharedLayout = () => {
   const location = useLocation();
 
   return (
-    <div className={location.pathname !== "/" ? "container" : ""}>
+    <div
+      className={
+        location.pathname !== "/"
+          ? `container ${location.pathname !== "/home" ? "" : "home"}`
+          : ""
+      }
+    >
       {location.pathname !== "/" && <Header onOpen={setOpenMenu} />}
       {isOpenMenu && (
         <div onClick={() => setOpenMenu(false)}>
