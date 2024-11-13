@@ -10,13 +10,14 @@ import MobImage2x from "../img/authorization/registration/image@2x.png";
 const RegisterPage = () => {
   return (
     <>
-      <div>
+      <div className="auth-wrapper">
         <picture>
           <source
             media="(min-width: 1280px)"
             srcSet={`${DeskImage1x} 1x, ${DeskImage2x} 2x`}
             type="image/png"
             width={592}
+            height={654}
           />
           <source
             media="(min-width: 768px)"
@@ -29,13 +30,7 @@ const RegisterPage = () => {
             srcSet={`${MobImage1x} 1x, ${MobImage2x} 2x`}
             type="image/png"
           />
-          <img
-            src={MobImage1x}
-            alt="cat"
-            className="registration-img"
-            width="335"
-            height="280"
-          />
+          <img src={MobImage1x} alt="cat" className="registration-img" />
         </picture>
 
         <div className="registration-wrap">
