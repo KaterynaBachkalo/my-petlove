@@ -1,69 +1,74 @@
-export interface ICustomers {
-  photo?: string;
-  image?: string;
-  name: string;
+export interface IUser {
+  name?: string;
+  password: string;
   email: string;
-  spent: string;
+  accessToken?: string;
+  refreshToken?: string;
+  checkPassword(
+    candidatePassword: string,
+    userPassword: string
+  ): Promise<boolean>;
+  phone?: string;
+  avatar?: string;
+}
+
+export interface INotice {
+  name: string;
+  title: string;
+  imageURL: string;
+  species: string;
+  birthday: string;
+  sex: string;
+  category: string;
+  price: number;
+  comment: string;
+  locationId: string;
+  user: IUser;
+  popularity: number;
+}
+
+export interface IPet {
+  name: string;
+  title: string;
+  imageURL: string;
+  species: string;
+  birthday: string;
+  sex: string;
+}
+
+export interface ICity {
+  _id: string;
+  useCounty: string;
+  stateEn: string;
+  cityEn: string;
+  countyEn: string;
+}
+
+export interface IFriend {
+  _id: string;
+  title: string;
+  url: string;
+  addressURL: string;
+  imageURL: string;
+  address: string;
+  workDays: Array<{
+    _id: string;
+    isOpen: boolean;
+    from: string;
+    to: string;
+  }>;
   phone: string;
-  address: string;
-  register_date: string;
+  email: string;
 }
 
-export interface IProducts {
+export interface INew {
   _id: string;
-  id: number;
-  photo: string;
-  name: string;
-  suppliers: string;
-  stock: string;
-  price: string;
-  category: string;
-}
-
-export interface IProductsToBD {
-  id: number;
-  name: string;
-  category: string;
-  suppliers: string;
-  stock: string;
-  price: string;
-}
-
-export interface ISuppliers {
-  _id: string;
-  id: number;
-  name: string;
-  suppliers: string;
-  address: string;
+  imageURL: string;
+  title: string;
+  text: string;
   date: string;
-  amount: string;
-  status: string;
-}
-
-export interface ISuppliersToBD {
-  id: number;
-  name: string;
-  address: string;
-  suppliers: string;
-  date: string;
-  amount: string;
-  status: string;
-}
-
-export interface IIncomeExpenses {
-  name: string;
-  amount: string;
-  type: string;
-}
-
-export interface IOrders {
-  photo: string;
-  name: string;
-  address: string;
-  products: string;
-  price: string;
-  status: string;
-  order_date: string;
+  url: string;
+  id: string;
 }
 
 export interface IForms {
@@ -77,4 +82,10 @@ export interface IFormsBD {
   name?: string;
   email: string;
   password: string;
+}
+
+export interface FetchParams {
+  page: number;
+  limit: number;
+  title?: string | null;
 }
