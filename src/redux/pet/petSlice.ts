@@ -1,50 +1,32 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import {
-  addProduct,
-  addSupplier,
-  deleteProduct,
-  editProduct,
-  editSupplier,
-  fetchCustomers,
-  fetchData,
-  fetchOrders,
-  fetchProducts,
-  fetchSuppliers,
-} from "./operations";
-import {
-  ICustomers,
-  IIncomeExpenses,
-  IOrders,
-  IProducts,
-  ISuppliers,
-} from "../../types";
+import { fetchCities, fetchNews, fetchNotices } from "./operations";
+import { ICity, IFriend, INew, INotice, IPet } from "../../types";
 import { toast } from "react-toastify";
 
 export interface IState {
-  products: IProducts[];
-  suppliers: ISuppliers[];
-  customers: ICustomers[];
-  incomeExpenses: IIncomeExpenses[];
-  orders: IOrders[];
-  totalCustomers: number;
-  totalProducts: number;
-  totalSuppliers: number;
-  totalOrders: number;
+  news: INew[];
+  friends: IFriend[];
+  notices: INotice[];
+  pets: IPet[];
+  cities: ICity[];
+
+  totalNews: number;
+  totalNotices: number;
+
   isLoading: boolean;
   error: unknown | null;
   currentPage: number;
 }
 
 interface Payload {
-  products: IProducts[];
-  suppliers: ISuppliers[];
-  customers: ICustomers[];
-  incomeExpenses: IIncomeExpenses[];
-  orders: IOrders[];
-  totalCustomers: number;
-  totalProducts: number;
-  totalSuppliers: number;
-  total: number;
+  news: INew[];
+  friends: IFriend[];
+  notices: INotice[];
+  pets: IPet[];
+  cities: ICity[];
+
+  totalNews: number;
+  totalNotices: number;
 }
 
 export const handlePending = (state: IState): void => {
@@ -74,34 +56,31 @@ export const handleRejected = (
 };
 
 const INITIAL_STATE = {
-  products: [],
-  suppliers: [],
-  customers: [],
-  incomeExpenses: [],
-  orders: [],
-  totalCustomers: 0,
-  totalProducts: 0,
-  totalSuppliers: 0,
-  totalOrders: 0,
+  news: [],
+  friends: [],
+  notices: [],
+  pets: [],
+  cities: [],
+  totalNews: 0,
+  totalNotices: 0,
   isLoading: false,
   error: null,
   currentPage: 1,
 };
 
 const petSlice = createSlice({
-  name: "admin",
+  name: "pet",
   initialState: INITIAL_STATE,
 
   reducers: {
     clearState(state: IState) {
-      state.products = [];
-      state.suppliers = [];
-      state.customers = [];
-      state.incomeExpenses = [];
-      state.orders = [];
-      state.totalCustomers = 0;
-      state.totalProducts = 0;
-      state.totalSuppliers = 0;
+      state.news = [];
+      state.friends = [];
+      state.notices = [];
+      state.pets = [];
+      state.cities = [];
+      state.totalNews = 0;
+      state.totalNotices = 0;
     },
     setCurrentPage(state: IState, action: PayloadAction<number>) {
       state.currentPage = action.payload;
@@ -110,159 +89,129 @@ const petSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(fetchData.pending, handlePending)
+      .addCase(fetchNews.pending, handlePending)
       .addCase(
-        fetchData.fulfilled,
+        fetchNews.fulfilled,
         (state: IState, action: PayloadAction<Payload>) => {
-          state.products = action.payload.products;
-          state.suppliers = action.payload.suppliers;
-          state.customers = action.payload.customers;
-          state.incomeExpenses = action.payload.incomeExpenses;
-          state.totalCustomers = action.payload.totalCustomers;
-          state.totalProducts = action.payload.totalProducts;
-          state.totalSuppliers = action.payload.totalSuppliers;
+          state.news = action.payload.news;
+          state.totalNews = action.payload.totalNews;
           state.isLoading = false;
           state.error = null;
         }
       )
-      .addCase(fetchData.rejected, handleRejected)
+      .addCase(fetchNews.rejected, handleRejected)
 
-      .addCase(fetchOrders.pending, handlePending)
+      .addCase(fetchCities.pending, handlePending)
       .addCase(
-        fetchOrders.fulfilled,
+        fetchCities.fulfilled,
         (state: IState, action: PayloadAction<Payload>) => {
-          state.orders = action.payload.orders;
-          state.totalOrders = action.payload.total;
+          state.cities = action.payload.cities;
           state.isLoading = false;
           state.error = null;
         }
       )
-      .addCase(fetchOrders.rejected, handleRejected)
+      .addCase(fetchCities.rejected, handleRejected)
 
-      .addCase(fetchProducts.pending, handlePending)
+      .addCase(fetchNotices.pending, handlePending)
       .addCase(
-        fetchProducts.fulfilled,
+        fetchNotices.fulfilled,
         (state: IState, action: PayloadAction<Payload>) => {
-          state.products = action.payload.products;
-          state.totalProducts = action.payload.total;
+          state.notices = action.payload.notices;
+          state.totalNotices = action.payload.totalNotices;
           state.isLoading = false;
           state.error = null;
         }
       )
-      .addCase(fetchProducts.rejected, handleRejected)
+      .addCase(fetchNotices.rejected, handleRejected);
 
-      .addCase(fetchCustomers.pending, handlePending)
-      .addCase(
-        fetchCustomers.fulfilled,
-        (state: IState, action: PayloadAction<Payload>) => {
-          state.customers = action.payload.customers;
-          state.totalCustomers = action.payload.total;
-          state.isLoading = false;
-          state.error = null;
-        }
-      )
-      .addCase(fetchCustomers.rejected, handleRejected)
+    // .addCase(addProduct.pending, handlePending)
+    // .addCase(
+    //   addProduct.fulfilled,
+    //   (state: IState, action: PayloadAction<IProducts>) => {
+    //     state.isLoading = false;
+    //     state.products.unshift(action.payload);
+    //     state.error = null;
+    //     toast.success("New product was successfully added");
+    //   }
+    // )
+    // .addCase(
+    //   addProduct.rejected,
+    //   (state: IState, action: PayloadAction<unknown>): void => {
+    //     state.isLoading = false;
+    //     state.error = action.payload;
 
-      .addCase(fetchSuppliers.pending, handlePending)
-      .addCase(
-        fetchSuppliers.fulfilled,
-        (state: IState, action: PayloadAction<Payload>) => {
-          state.suppliers = action.payload.suppliers;
-          state.totalSuppliers = action.payload.total;
-          state.isLoading = false;
-          state.error = null;
-        }
-      )
-      .addCase(fetchSuppliers.rejected, handleRejected)
+    //     if (state.error === "Request failed with status code 409") {
+    //       toast.error("The product exists with this name");
+    //     }
+    //   }
+    // )
 
-      .addCase(addProduct.pending, handlePending)
-      .addCase(
-        addProduct.fulfilled,
-        (state: IState, action: PayloadAction<IProducts>) => {
-          state.isLoading = false;
-          state.products.unshift(action.payload);
-          state.error = null;
-          toast.success("New product was successfully added");
-        }
-      )
-      .addCase(
-        addProduct.rejected,
-        (state: IState, action: PayloadAction<unknown>): void => {
-          state.isLoading = false;
-          state.error = action.payload;
+    // .addCase(deleteProduct.pending, handlePending)
+    // .addCase(
+    //   deleteProduct.fulfilled,
+    //   (state: IState, action: PayloadAction<{ productId: string }>) => {
+    //     state.isLoading = false;
+    //     state.products = state.products.filter(
+    //       (product) => product._id !== action.payload.productId
+    //     );
+    //     state.error = null;
+    //   }
+    // )
+    // .addCase(deleteProduct.rejected, handleRejected)
 
-          if (state.error === "Request failed with status code 409") {
-            toast.error("The product exists with this name");
-          }
-        }
-      )
+    // .addCase(editProduct.pending, handlePending)
+    // .addCase(
+    //   editProduct.fulfilled,
+    //   (state: IState, action: PayloadAction<IProducts>) => {
+    //     state.isLoading = false;
+    //     const index = state.products.findIndex(
+    //       (product) => product._id === action.payload._id
+    //     );
+    //     if (index !== -1) {
+    //       state.products[index] = action.payload;
+    //     }
+    //     state.error = null;
+    //   }
+    // )
+    // .addCase(editProduct.rejected, handleRejected)
 
-      .addCase(deleteProduct.pending, handlePending)
-      .addCase(
-        deleteProduct.fulfilled,
-        (state: IState, action: PayloadAction<{ productId: string }>) => {
-          state.isLoading = false;
-          state.products = state.products.filter(
-            (product) => product._id !== action.payload.productId
-          );
-          state.error = null;
-        }
-      )
-      .addCase(deleteProduct.rejected, handleRejected)
+    // .addCase(addSupplier.pending, handlePending)
+    // .addCase(
+    //   addSupplier.fulfilled,
+    //   (state: IState, action: PayloadAction<ISuppliers>) => {
+    //     state.isLoading = false;
+    //     state.suppliers.push(action.payload);
+    //     state.error = null;
+    //     toast.success("New product was successfully added");
+    //   }
+    // )
+    // .addCase(
+    //   addSupplier.rejected,
+    //   (state: IState, action: PayloadAction<unknown>): void => {
+    //     state.isLoading = false;
+    //     state.error = action.payload;
 
-      .addCase(editProduct.pending, handlePending)
-      .addCase(
-        editProduct.fulfilled,
-        (state: IState, action: PayloadAction<IProducts>) => {
-          state.isLoading = false;
-          const index = state.products.findIndex(
-            (product) => product._id === action.payload._id
-          );
-          if (index !== -1) {
-            state.products[index] = action.payload;
-          }
-          state.error = null;
-        }
-      )
-      .addCase(editProduct.rejected, handleRejected)
+    //     if (state.error === "Request failed with status code 409") {
+    //       toast.error("The product exists with this name");
+    //     }
+    //   }
+    // )
 
-      .addCase(addSupplier.pending, handlePending)
-      .addCase(
-        addSupplier.fulfilled,
-        (state: IState, action: PayloadAction<ISuppliers>) => {
-          state.isLoading = false;
-          state.suppliers.push(action.payload);
-          state.error = null;
-          toast.success("New product was successfully added");
-        }
-      )
-      .addCase(
-        addSupplier.rejected,
-        (state: IState, action: PayloadAction<unknown>): void => {
-          state.isLoading = false;
-          state.error = action.payload;
-
-          if (state.error === "Request failed with status code 409") {
-            toast.error("The product exists with this name");
-          }
-        }
-      )
-
-      .addCase(editSupplier.pending, handlePending)
-      .addCase(
-        editSupplier.fulfilled,
-        (state: IState, action: PayloadAction<ISuppliers>) => {
-          state.isLoading = false;
-          const index = state.suppliers.findIndex(
-            (supplier) => supplier._id === action.payload._id
-          );
-          if (index !== -1) {
-            state.suppliers[index] = action.payload;
-          }
-          state.error = null;
-        }
-      )
-      .addCase(editSupplier.rejected, handleRejected);
+    // .addCase(editSupplier.pending, handlePending)
+    // .addCase(
+    //   editSupplier.fulfilled,
+    //   (state: IState, action: PayloadAction<ISuppliers>) => {
+    //     state.isLoading = false;
+    //     const index = state.suppliers.findIndex(
+    //       (supplier) => supplier._id === action.payload._id
+    //     );
+    //     if (index !== -1) {
+    //       state.suppliers[index] = action.payload;
+    //     }
+    //     state.error = null;
+    //   }
+    // )
+    // .addCase(editSupplier.rejected, handleRejected);
   },
 });
 
