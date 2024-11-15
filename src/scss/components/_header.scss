@@ -51,6 +51,13 @@
 
 .logo-heart {
   fill: fn.get-color("accent");
+  width: 17px;
+  height: 17px;
+
+  @include mx.mq("lg") {
+    width: 23px;
+    height: 23px;
+  }
 
   &.home {
     fill: fn.get-color("light");
@@ -178,8 +185,12 @@
 
   &:hover,
   &:focus {
-    color: fn.get-color("accent");
-    background-color: fn.get-color("background-secondary");
-    border: none;
+    background-color: fn.get-color("transparent");
+    border-color: fn.get-color("accent");
+  }
+
+  &[aria-current="page"] {
+    background-color: fn.get-color("transparent");
+    border-color: fn.get-color("accent");
   }
 }
