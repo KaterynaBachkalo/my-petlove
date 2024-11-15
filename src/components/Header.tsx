@@ -37,8 +37,6 @@ const Header: FC<IProps> = ({ onOpen }) => {
             petl
             <Icon
               name="icon-heart-circle"
-              width={17}
-              height={17}
               className={`logo-heart ${
                 location.pathname !== "/home" ? "" : "home"
               }`}
