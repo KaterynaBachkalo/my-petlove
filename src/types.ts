@@ -15,7 +15,7 @@ export interface IUser {
 export interface INotice {
   name: string;
   title: string;
-  imageURL: string;
+  imgURL: string;
   species: string;
   birthday: string;
   sex: string;
