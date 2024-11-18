@@ -1,24 +1,22 @@
 import { IState } from "./petSlice";
 import { IFilter } from "../filterSlice";
 
-export const selectNews = (state: { admin: IState }) => state.admin.news;
+export const selectNews = (state: { pet: IState }) => state.pet.news;
 
-export const selectFriends = (state: { admin: IState }) => state.admin.friends;
+export const selectFriends = (state: { pet: IState }) => state.pet.friends;
 
-export const selectNotices = (state: { admin: IState }) => state.admin.notices;
+export const selectNotices = (state: { pet: IState }) => state.pet.notices;
 
-export const selectIsLoading = (state: { admin: IState }) =>
-  state.admin.isLoading;
+export const selectIsLoading = (state: { pet: IState }) => state.pet.isLoading;
 
-export const selectError = (state: { admin: IState }) => state.admin.error;
+export const selectError = (state: { pet: IState }) => state.pet.error;
 
 export const selectFilter = (state: IFilter) => state.filter;
 
-export const selectCurrentPage = (state: { admin: IState }) =>
-  state.admin.currentPage;
+export const selectCurrentPage = (state: { pet: IState }) =>
+  state.pet.currentPage;
 
-export const selectTotalNews = (state: { admin: IState }) =>
-  state.admin.totalNews;
+export const selectTotalNews = (state: { pet: IState }) => state.pet.totalNews;
 
-export const selectTotalNotices = (state: { admin: IState }) =>
-  state.admin.totalNotices;
+export const selectTotalNotices = (state: { pet: IState }) =>
+  state.pet.totalNotices;
