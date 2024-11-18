@@ -28,7 +28,12 @@ const Header: FC<IProps> = ({ onOpen }) => {
   return (
     <header className={`header ${location.pathname !== "/home" ? "" : "home"}`}>
       <nav className="header-nav">
-        <Link to={isAuthorized ? "/home" : "/"} className="header-nav-logo">
+        <Link
+          to={isAuthorized ? "/home" : "/"}
+          className={`header-nav-logo ${
+            location.pathname !== "/home" ? "" : "home"
+          }`}
+        >
           <p
             className={`header-logo-text ${
               location.pathname !== "/home" ? "" : "home"
