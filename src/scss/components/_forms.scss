@@ -26,6 +26,13 @@
   &::placeholder {
     color: fn.get-color("form-dark");
   }
+
+  &.find-input {
+    @include mx.mq("md") {
+      height: 48px;
+      width: 230px;
+    }
+  }
 }
 
 .form-errors {
