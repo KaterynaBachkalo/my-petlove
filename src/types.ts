@@ -48,22 +48,24 @@ export interface IFriend {
   _id: string;
   title: string;
   url: string;
-  addressURL: string;
-  imageURL: string;
+  addressUrl: string;
+  imageUrl: string;
   address: string;
-  workDays: Array<{
-    _id: string;
-    isOpen: boolean;
-    from: string;
-    to: string;
-  }>;
+  workDays: IWorkDays[];
   phone: string;
   email: string;
 }
 
+export interface IWorkDays {
+  _id: string;
+  isOpen: boolean;
+  from: string;
+  to: string;
+}
+
 export interface INew {
   _id: string;
-  imageURL: string;
+  imgUrl: string;
   title: string;
   text: string;
   date: string;
