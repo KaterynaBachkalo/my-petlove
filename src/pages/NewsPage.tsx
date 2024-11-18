@@ -6,7 +6,7 @@ import { AppDispatch } from "../redux/store";
 import { fetchNews } from "../redux/pet/operations";
 import { FetchParams } from "../types";
 import FindForm from "../components/FindForm";
-import { formatData } from "../utils/formatData";
+import { formatDate } from "../utils/formatDate";
 
 const NewsPage = () => {
   const news = useSelector(selectNews);
@@ -32,7 +32,7 @@ const NewsPage = () => {
     <div className="news-container">
       <div className="news-main-wrap">
         <h2 className="news-main-title">News</h2>
-        <FindForm setSearchQuery={setSearchQuery} />
+        <FindForm setSearchQuery={setSearchQuery} placeholder="Search" />
       </div>
       <div className="news-cards">
         {news && news.length > 0 ? (
@@ -44,7 +44,7 @@ const NewsPage = () => {
                 <p className="news-text">{text}</p>
               </div>
               <div className="news-wrap">
-                <p className="news-date">{formatData(date)}</p>
+                <p className="news-date">{formatDate(date)}</p>
                 <Link to={url} className="news-link">
                   Read more
                 </Link>
