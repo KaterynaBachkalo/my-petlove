@@ -1,0 +1,43 @@
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.notices-container {
+  padding: 30px 0 80px 0;
+
+  @include mx.mq("md") {
+  }
+}
+
+.notices-form-wrap {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 30px;
+
+  background-color: fn.get-color("background-secondary");
+}
+
+.wrap-form-lists {
+  display: flex;
+  gap: 12px;
+}
+
+.notices-form-top {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notices-stroke {
+  border: 1px solid fn.get-color("border-dark-secondary");
+  margin-bottom: 20px;
+}
+
+.sort-button-wrap {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
