@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { fetchCities, fetchNews, fetchNotices } from "./operations";
+import { fetchFriends, fetchNews, fetchNotices } from "./operations";
 import { ICity, IFriend, INew, INotice, IPet } from "../../types";
 import { toast } from "react-toastify";
 
@@ -101,16 +101,16 @@ const petSlice = createSlice({
       )
       .addCase(fetchNews.rejected, handleRejected)
 
-      .addCase(fetchCities.pending, handlePending)
+      .addCase(fetchFriends.pending, handlePending)
       .addCase(
-        fetchCities.fulfilled,
+        fetchFriends.fulfilled,
         (state: IState, action: PayloadAction<Payload>) => {
-          state.cities = action.payload.cities;
+          state.friends = action.payload.friends;
           state.isLoading = false;
           state.error = null;
         }
       )
-      .addCase(fetchCities.rejected, handleRejected)
+      .addCase(fetchFriends.rejected, handleRejected)
 
       .addCase(fetchNotices.pending, handlePending)
       .addCase(
