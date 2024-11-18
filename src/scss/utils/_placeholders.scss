@@ -99,3 +99,11 @@
     @include mx.font(16, 20, -2, 500);
   }
 }
+
+%friends-title {
+  @include mx.font(16, 20, -4, 700);
+
+  @include mx.mq("md") {
+    @include mx.font(20, 26, -4, 700);
+  }
+}
