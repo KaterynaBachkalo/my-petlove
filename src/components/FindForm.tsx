@@ -9,9 +9,10 @@ interface IForms {
 
 interface IProps {
   setSearchQuery: (value: string) => void;
+  placeholder: string;
 }
 
-const FindForm: FC<IProps> = ({ setSearchQuery }) => {
+const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
   const { register, handleSubmit } = useForm<IForms>();
 
   const onSubmit = (data: IForms) => {
@@ -28,7 +29,7 @@ const FindForm: FC<IProps> = ({ setSearchQuery }) => {
         <input
           {...register("title")}
           className="input find-input"
-          placeholder="Search"
+          placeholder={placeholder}
           onBlur={handleBlur}
         />
 
