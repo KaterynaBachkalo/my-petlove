@@ -33,7 +33,13 @@
   margin-right: auto;
 
   @include mx.mq("lg") {
-    margin-left: 64px;
+    margin-left: 32px;
+  }
+
+  &.home {
+    @include mx.mq("lg") {
+      margin-left: 0;
+    }
   }
 }
 
@@ -117,6 +123,7 @@
   &.register {
     color: fn.get-color("accent");
     background-color: fn.get-color("background-secondary");
+    transition: all 0.5s ease-in;
 
     &:hover,
     &:focus {
@@ -127,6 +134,7 @@
   &.login {
     color: fn.get-color("light");
     background-color: fn.get-color("accent");
+    transition: all 0.5s ease-in;
 
     &:hover,
     &:focus {
@@ -182,6 +190,7 @@
   height: 48px;
 
   color: fn.get-color("dark");
+  transition: all 0.5s ease-in;
 
   &:hover,
   &:focus {
