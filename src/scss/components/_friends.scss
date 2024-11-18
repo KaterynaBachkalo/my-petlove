@@ -1,0 +1,89 @@
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.friends-main-title {
+  margin-bottom: 40px;
+
+  @include mx.mq("md") {
+    margin-bottom: 0;
+  }
+}
+
+.friends-cards {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  justify-content: center;
+
+  @include mx.mq("md") {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @include mx.mq("lg") {
+    gap: 24px 20px;
+  }
+}
+
+.friends-card {
+  width: 100%;
+  padding: 12px 12px 40px 20px;
+  border-radius: 15px;
+
+  background: fn.get-color("light");
+
+  @include mx.mq("md") {
+    width: 342px;
+  }
+
+  @include mx.mq("lg") {
+    width: 371px;
+  }
+}
+
+.working-hours-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.working-hours {
+  @extend %news-subtitle;
+
+  border-radius: 30px;
+  background: fn.get-color("background-secondary");
+  color: fn.get-color("accent");
+  padding: 8px;
+}
+
+.friends-card-wrap {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.friends-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.friends-title {
+  @extend %friends-title;
+  margin-bottom: 14px;
+
+  color: fn.get-color("dark");
+}
+
+.friends-text {
+  @extend %news-subtitle;
+  margin-bottom: 8px;
+
+  color: fn.get-color("form-dark");
+}
+
+.friends-span {
+  color: fn.get-color("dark");
+}
