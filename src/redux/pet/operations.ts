@@ -20,11 +20,12 @@ export const fetchNews = createAsyncThunk(
     }
   }
 );
-export const fetchCities = createAsyncThunk(
-  "/cities/fetchCities",
+
+export const fetchFriends = createAsyncThunk(
+  "/friends/fetchFriends",
   async (_, thunkAPI) => {
     try {
-      const response = await petInstance.get("/cities");
+      const response = await petInstance.get("/friends");
       return response.data;
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.message) {
@@ -36,7 +37,7 @@ export const fetchCities = createAsyncThunk(
 );
 
 export const fetchNotices = createAsyncThunk(
-  "/notices/fetchProducts",
+  "/notices/fetchNotices",
   async ({ page, limit, title }: FetchParams, thunkAPI) => {
     try {
       const response = await petInstance.get("/notices", {
