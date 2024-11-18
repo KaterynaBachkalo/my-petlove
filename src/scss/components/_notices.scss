@@ -41,3 +41,39 @@
   gap: 10px;
   flex-wrap: wrap;
 }
+
+.notices-img {
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.notices-title-wrap,
+.notices-icon-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notices-icon-wrap {
+  gap: 4px;
+}
+
+.notices-title-wrap {
+  margin-bottom: 8px;
+}
+
+.icon-star {
+  fill: fn.get-color("accent");
+  width: 16px;
+  height: 16px;
+}
+
+.notices-text-wrapper {
+  display: flex;
+  gap: 14px;
+}
+
+.notices-text-wrap {
+  display: flex;
+  flex-direction: column;
+}

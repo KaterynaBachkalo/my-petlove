@@ -74,29 +74,31 @@ const NoticesPage = () => {
               <div key={title} className="notices-card">
                 <img src={imgURL} alt={title} className="notices-img" />
 
-                <h3 className="notices-title">{title}</h3>
-                <div>
-                  <Icon className="star" name="icon-star" />
-                  <p>{popularity}</p>
+                <div className="notices-title-wrap">
+                  <h3 className="notices-title">{title}</h3>
+                  <div className="notices-icon-wrap">
+                    <Icon className="icon-star" name="star" />
+                    <p>{popularity}</p>
+                  </div>
                 </div>
-                <div>
-                  <div>
+                <div className="notices-text-wrapper">
+                  <div className="notices-text-wrap">
                     <p>Name</p>
                     <p>{name}</p>
                   </div>
-                  <div>
+                  <div className="notices-text-wrap">
                     <p>Birthday</p>
                     <p>{birthday}</p>
                   </div>
-                  <div>
+                  <div className="notices-text-wrap">
                     <p>Sex</p>
                     <p>{sex}</p>
                   </div>
-                  <div>
+                  <div className="notices-text-wrap">
                     <p>Species</p>
                     <p>{species}</p>
                   </div>
-                  <div>
+                  <div className="notices-text-wrap">
                     <p>Category</p>
                     <p>{category}</p>
                   </div>
