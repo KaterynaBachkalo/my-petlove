@@ -25,7 +25,7 @@ const authConfig = {
 
 const rootReducer = combineReducers({
   auth: persistReducer(authConfig, authReducer),
-  admin: petReducer,
+  pet: petReducer,
   filter: filterReducer,
 });
 
