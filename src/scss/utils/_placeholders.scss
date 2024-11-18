@@ -83,3 +83,19 @@
     @include mx.font(18, 22, -1, 500);
   }
 }
+
+%news-title {
+  @include mx.font(16, 20, -3, 700);
+
+  @include mx.mq("md") {
+    @include mx.font(20, 26, -3, 700);
+  }
+}
+
+%news-subtitle {
+  @include mx.font(14, 18, -2, 500);
+
+  @include mx.mq("md") {
+    @include mx.font(16, 20, -2, 500);
+  }
+}
