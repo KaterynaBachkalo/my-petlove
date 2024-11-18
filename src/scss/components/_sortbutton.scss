@@ -1,0 +1,31 @@
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.sort-button {
+  display: inline-flex; /* Inline-flex ensures proper alignment for button content */
+  gap: 6px; /* Space between text and icon */
+  align-items: center; /* Vertically center items */
+  justify-content: center; /* Horizontally center items */
+
+  border-radius: 30px;
+  background-color: fn.get-color("light");
+  border: none;
+  padding: 12px; /* Add horizontal padding for better spacing */
+  font-size: 16px; /* Adjust font size */
+  cursor: pointer; /* Pointer cursor for hover effect */
+}
+
+.button-wrap {
+  display: inline-block; /* Wrapping behavior for the button */
+}
+
+.icon-cross {
+  display: flex; /* Ensure icon stays aligned */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; /* Pointer cursor for better UX */
+  width: 18px;
+  height: 18px;
+}
