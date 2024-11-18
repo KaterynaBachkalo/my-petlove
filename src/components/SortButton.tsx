@@ -25,7 +25,7 @@ const SortButton: FC<IProps> = ({ setSearchQuery, text }) => {
     <div className="button-wrap">
       <button
         type="submit"
-        className={`sort-button ${addCross} ? "cross" : ""`}
+        className={`sort-button ${addCross ? "cross" : ""}`}
         onClick={handleClick}
       >
         {text}
