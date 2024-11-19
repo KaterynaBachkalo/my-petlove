@@ -58,15 +58,20 @@ const FriendsPage = () => {
                           Email: <span className="friends-span">{email}</span>
                         </p>
                       </Link>
-                      <Link to={addressUrl} target="blank">
+                      <Link to={addressUrl ? addressUrl : url} target="blank">
                         <p className="friends-text">
                           Address:{" "}
-                          <span className="friends-span">{address}</span>
+                          <span className="friends-span">
+                            {address ? address : "website only"}
+                          </span>
                         </p>
                       </Link>
                       <Link to={`tel:${phone}`}>
                         <p className="friends-text">
-                          Phone: <span className="friends-span">{phone}</span>
+                          Phone:{" "}
+                          <span className="friends-span">
+                            {phone ? phone : "email only"}
+                          </span>
                         </p>
                       </Link>
                     </div>
