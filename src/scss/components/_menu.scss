@@ -112,6 +112,7 @@
   &.logout {
     color: fn.get-color("accent");
     background-color: fn.get-color("background-secondary");
+    border: none;
     width: 178px;
     height: 42px;
     padding: 12px;
