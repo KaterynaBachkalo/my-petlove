@@ -21,21 +21,22 @@ button {
 
 .container {
   min-width: map.get(var.$breakpoints, "x-sm");
+  max-width: map.get(var.$breakpoints, "sm");
   padding: 28px 20px 20px 20px;
   height: 100%;
   margin: 0 auto;
 
   @include mx.mq("sm") {
-    min-width: map.get(var.$breakpoints, "sm");
+    max-width: map.get(var.$breakpoints, "sm");
   }
 
   @include mx.mq("md") {
-    width: map.get(var.$breakpoints, "md");
+    max-width: map.get(var.$breakpoints, "md");
     padding: 32px;
   }
 
   @include mx.mq("lg") {
-    width: map.get(var.$breakpoints, "lg");
+    max-width: map.get(var.$breakpoints, "lg");
   }
 
   &.home {
