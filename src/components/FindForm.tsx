@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 
 import { FC } from "react";
 import Icon from "./Icon";
+import { useLocation } from "react-router-dom";
 
 interface IForms {
   title: string;
@@ -15,6 +16,8 @@ interface IProps {
 const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
   const { register, handleSubmit } = useForm<IForms>();
 
+  const location = useLocation();
+
   const onSubmit = (data: IForms) => {
     setSearchQuery(data.title);
   };
@@ -25,10 +28,20 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="find-form-wrap">
+      <div
+        className={`find-form-wrap ${
+          placeholder === "Category" || placeholder === "By gender"
+            ? "category"
+            : placeholder === "By type"
+            ? "type"
+            : ""
+        }`}
+      >
         <input
           {...register("title")}
-          className="input find-input"
+          className={`input find-input ${
+            location.pathname === "/notices" ? "notices" : ""
+          }`}
           placeholder={placeholder}
           onBlur={handleBlur}
         />
