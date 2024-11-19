@@ -91,23 +91,6 @@
     fill: fn.get-color("accent");
   }
 }
-.find-form-wrap {
-  position: relative;
-
-  @include mx.mq("md") {
-    margin-bottom: 0;
-  }
-}
-
-.find-form-button {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-
-  background-color: transparent;
-  border: none;
-}
 
 .news-img {
   width: 100%;
