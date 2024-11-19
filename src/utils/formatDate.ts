@@ -8,3 +8,16 @@ export function formatDate(inputDate: string) {
     date.getFullYear(), // Year (YYYY)
   ].join("/");
 }
+
+//2020-08-10 -> 10.08.2020
+export function fixDate(inputDate: string): string {
+  if (!inputDate) return "Unknown";
+  const date = new Date(inputDate);
+  if (isNaN(date.getTime())) return "Invalid date";
+
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+
+  return `${day}.${month}.${year}`; // Format as dd.mm.yyyy
+}
