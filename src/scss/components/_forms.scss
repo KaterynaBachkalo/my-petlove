@@ -28,11 +28,74 @@
   }
 
   &.find-input {
+    &.notices {
+      width: 240px;
+    }
+
+    @include mx.mq("sm") {
+      &.notices {
+        width: 295px;
+      }
+    }
+
     @include mx.mq("md") {
       height: 48px;
-      width: 230px;
+      width: 100%;
+
+      &.notices {
+        width: 265px;
+      }
     }
   }
+}
+
+.find-form-wrap {
+  position: relative;
+
+  &.category {
+    width: 240px;
+  }
+
+  &.type {
+    width: 240px;
+  }
+
+  @include mx.mq("sm") {
+    margin-bottom: 0;
+
+    &.category {
+      width: 141px;
+    }
+
+    &.type {
+      width: 295px;
+    }
+  }
+
+  @include mx.mq("md") {
+    &.category {
+      width: 170px;
+    }
+
+    &.type {
+      width: 190px;
+    }
+  }
+}
+
+.find-form-button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background-color: transparent;
+  border: none;
+}
+
+.find-form-icon {
+  width: 18px;
+  height: 18px;
 }
 
 .form-errors {
