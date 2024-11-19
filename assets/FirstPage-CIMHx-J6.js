@@ -1,0 +1,1 @@
+import{j as s,L as e,I as a}from"./index-vrzHi_GF.js";const r=()=>s.jsx(e,{to:"/home",children:s.jsx("div",{className:"background-image",children:s.jsxs("p",{className:"first-logo",children:["petl",s.jsx(a,{className:"first-icon",name:"icon-heart-circle",width:44,height:44}),"ve"]})})});export{r as default};
