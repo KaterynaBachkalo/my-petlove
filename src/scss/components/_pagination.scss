@@ -1,0 +1,128 @@
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination > li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: fn.get-color("dark");
+  background: transparent;
+  border-radius: 50%;
+  border: 1px solid rgba(38, 38, 38, 0.2);
+  width: 44px;
+  height: 44px;
+  margin: 0 5px;
+  list-style: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: fn.get-color("accent");
+    color: fn.get-color("light");
+    border: none;
+  }
+}
+
+.pagination > li > a,
+.pagination > li > span {
+  text-decoration: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in;
+  width: 44px;
+  height: 44px;
+}
+
+.pagination > li.active {
+  border: none;
+}
+
+.pagination > li.active > a {
+  background-color: fn.get-color("accent");
+  color: fn.get-color("light");
+
+  transition: all 0.5s ease-in;
+
+  &:hover {
+    cursor: pointer;
+    background-color: fn.get-color("accent");
+    color: fn.get-color("light");
+    border: none;
+  }
+}
+
+.previous {
+  &.disabled {
+    border: 1px solid rgba(38, 38, 38, 0.05);
+    color: fn.get-color("form-dark");
+    background: transparent;
+
+    a {
+      &:hover {
+        cursor: auto;
+      }
+    }
+  }
+}
+.next {
+  &.disabled {
+    border: 1px solid rgba(38, 38, 38, 0.05);
+    color: fn.get-color("form-dark");
+    background: transparent;
+
+    a {
+      &:hover {
+        cursor: auto;
+      }
+    }
+  }
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 44px;
+
+  @include mx.mq("md") {
+    margin-top: 88px;
+  }
+
+  @include mx.mq("lg") {
+    margin-top: 60px;
+  }
+
+  .first-page,
+  .last-page {
+    color: fn.get-color("dark");
+    background: transparent;
+    border-radius: 50%;
+    border: 1px solid rgba(38, 38, 38, 0.2);
+    width: 44px;
+    height: 44px;
+
+    transition: all 0.5s ease-in;
+    cursor: pointer;
+
+    &:hover {
+      background-color: fn.get-color("accent");
+      color: fn.get-color("light");
+      border: none;
+    }
+    &:disabled {
+      background: transparent;
+      border: 1px solid rgba(38, 38, 38, 0.05);
+      color: fn.get-color("form-dark");
+      cursor: auto;
+    }
+  }
+}
