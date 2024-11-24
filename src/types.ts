@@ -20,10 +20,10 @@ export interface INotice {
   birthday: string;
   sex: string;
   category: string;
-  price: number;
+  price?: number;
   comment: string;
-  locationId: string;
-  user: IUser;
+  locationId?: string;
+  user?: IUser;
   popularity: number;
 }
 
