@@ -22,7 +22,7 @@
   margin: 0 5px;
   list-style: none;
 
-  &:hover {
+  &:not(.disabled):hover {
     cursor: pointer;
     background-color: fn.get-color("accent");
     color: fn.get-color("light");
@@ -60,30 +60,13 @@
   }
 }
 
-.previous {
-  &.disabled {
-    border: 1px solid rgba(38, 38, 38, 0.05);
-    color: fn.get-color("form-dark");
-    background: transparent;
-
-    a {
-      &:hover {
-        cursor: auto;
-      }
-    }
-  }
-}
+.previous,
 .next {
   &.disabled {
     border: 1px solid rgba(38, 38, 38, 0.05);
     color: fn.get-color("form-dark");
     background: transparent;
-
-    a {
-      &:hover {
-        cursor: auto;
-      }
-    }
+    cursor: auto;
   }
 }
 

@@ -45,8 +45,6 @@
   display: flex;
   gap: 24px;
   flex-direction: column;
-
-  justify-content: center;
   margin-top: 20px;
 
   @include mx.mq("md") {
