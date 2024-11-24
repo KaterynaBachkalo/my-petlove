@@ -12,7 +12,6 @@ import { FetchParams } from "../types";
 import FindForm from "../components/FindForm";
 import { formatDate } from "../utils/formatDate";
 import Pagination from "../components/Pagination";
-import { setCurrentPage } from "../redux/pet/petSlice";
 
 const NewsPage = () => {
   const news = useSelector(selectNews);
@@ -21,7 +20,6 @@ const NewsPage = () => {
 
   const currentPage = useSelector(selectCurrentPage);
   const totalNews = useSelector(selectTotalNews);
-  const totalPages = Math.ceil(totalNews / limit);
 
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -29,17 +27,12 @@ const NewsPage = () => {
 
   useEffect(() => {
     const queryParams: FetchParams = {
-      page: currentPage + 1,
+      page: currentPage,
       limit,
       title: searchQuery ? searchQuery : null,
     };
     dispatch(fetchNews(queryParams));
   }, [currentPage, dispatch, searchQuery]);
-
-  // Handler to change the current page
-  const handlePageChange = (newPage: number) => {
-    dispatch(setCurrentPage(newPage)); // Example action to update the Redux state
-  };
 
   return (
     <div className="news-container">
@@ -68,12 +61,7 @@ const NewsPage = () => {
           <p>There are news yet</p>
         )}
       </div>
-      <Pagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-        totalItems={totalNews}
-      />
+      <Pagination totalItems={totalNews} />
     </div>
   );
 };
