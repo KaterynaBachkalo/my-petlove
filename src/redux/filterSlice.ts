@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface IFilter {
-  filter: string;
+  category: string;
+  gender: string;
+  type: string;
 }
 
 const INITIAL_STATE: IFilter = {
-  filter: "",
+  category: "",
+  gender: "",
+  type: "",
 };
 
 const filterSlice = createSlice({
@@ -13,8 +17,8 @@ const filterSlice = createSlice({
   initialState: INITIAL_STATE,
 
   reducers: {
-    setFilter(_, action) {
-      return action.payload;
+    setFilter(state, action) {
+      return { ...state, ...action.payload };
     },
     resetFilter() {
       return INITIAL_STATE;
