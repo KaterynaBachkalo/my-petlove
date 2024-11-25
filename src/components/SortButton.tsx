@@ -1,35 +1,44 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import Icon from "./Icon";
 
 interface IProps {
-  setSearchQuery: (value: string) => void;
+  setSearchQuery: React.Dispatch<
+    React.SetStateAction<{
+      title: string | null;
+      category: string | null;
+      gender: string | null;
+      type: string | null;
+      location: string | null;
+    }>
+  >;
   text: string;
+  isActive: boolean;
+  onClick: () => void;
 }
 
-const SortButton: FC<IProps> = ({ setSearchQuery, text }) => {
-  const [addCross, setAddCross] = useState(false);
-
+const SortButton: FC<IProps> = ({
+  setSearchQuery,
+  text,
+  isActive,
+  onClick,
+}) => {
   const handleClick = () => {
-    if (addCross) {
-      // Clear the filter if it's already active
-      setSearchQuery("");
-      setAddCross(false);
-    } else {
-      // Apply the filter
-      setSearchQuery(text);
-      setAddCross(true);
-    }
+    setSearchQuery((prev) => ({
+      ...prev,
+      title: isActive ? "" : text, // Змінюємо тільки поле `title`
+    }));
+    onClick();
   };
 
   return (
     <div className="button-wrap">
       <button
         type="submit"
-        className={`sort-button ${addCross ? "cross" : ""}`}
+        className={`sort-button ${isActive ? "cross" : ""}`}
         onClick={handleClick}
       >
         {text}
-        {addCross && <Icon className="icon-cross" name="close" />}
+        {isActive && <Icon className="icon-cross" name="close" />}
       </button>
     </div>
   );
