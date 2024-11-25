@@ -7,12 +7,10 @@ import {
 import { useEffect, useState } from "react";
 import { AppDispatch } from "../redux/store";
 import { fetchNotices } from "../redux/pet/operations";
-import { FetchParams } from "../types";
-import FindForm from "../components/FindForm";
-import FindFormList from "../components/FindFormList";
-import SortButton from "../components/SortButton";
+import { FetchParams, ISearchQuery } from "../types";
 import Pagination from "../components/Pagination";
 import NoticeCard from "../components/NoticeCard";
+import FilterForms from "../components/FilterForms";
 
 const NoticesPage = () => {
   const notices = useSelector(selectNotices);
@@ -22,7 +20,13 @@ const NoticesPage = () => {
   const currentPage = useSelector(selectCurrentPage);
   const totalNotices = useSelector(selectTotalNotices);
 
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<ISearchQuery>({
+    title: null,
+    category: null,
+    gender: null,
+    type: null,
+    location: null,
+  });
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -30,7 +34,11 @@ const NoticesPage = () => {
     const queryParams: FetchParams = {
       page: currentPage,
       limit,
-      title: searchQuery ? searchQuery : null,
+      title: searchQuery?.title ? searchQuery.title : null,
+      category: searchQuery?.category ? searchQuery.category : null,
+      gender: searchQuery?.gender ? searchQuery.gender : null,
+      type: searchQuery?.type ? searchQuery.type : null,
+      location: searchQuery?.location ? searchQuery.location : null,
     };
     dispatch(fetchNotices(queryParams));
   }, [currentPage, dispatch, searchQuery]);
@@ -39,33 +47,7 @@ const NoticesPage = () => {
     <div className="notices-container">
       <div className="notices-main-wrap">
         <h2 className="notices-main-title">Find your favorite pet</h2>
-        <div className="notices-form-wrap">
-          <div className="notices-form-top">
-            <FindForm setSearchQuery={setSearchQuery} placeholder="Search" />
-
-            <FindFormList
-              setSearchQuery={setSearchQuery}
-              placeholder="Category"
-            />
-            <FindFormList
-              setSearchQuery={setSearchQuery}
-              placeholder="By gender"
-            />
-            <FindFormList
-              setSearchQuery={setSearchQuery}
-              placeholder="By type"
-            />
-
-            <FindForm setSearchQuery={setSearchQuery} placeholder="Location" />
-          </div>
-          <div className="notices-stroke"></div>
-          <div className="sort-button-wrap">
-            <SortButton setSearchQuery={setSearchQuery} text="Popular" />
-            <SortButton setSearchQuery={setSearchQuery} text="Unpopular" />
-            <SortButton setSearchQuery={setSearchQuery} text="Cheap" />
-            <SortButton setSearchQuery={setSearchQuery} text="Expensive" />
-          </div>
-        </div>
+        <FilterForms setSearchQuery={setSearchQuery} />
       </div>
       <div className="news-cards notices-cards">
         {notices && notices.length > 0 ? (
