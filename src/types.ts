@@ -89,5 +89,17 @@ export interface IFormsBD {
 export interface FetchParams {
   page: number;
   limit: number;
-  title?: string | null;
+  title: string | null;
+  category: string | null;
+  gender: string | null;
+  type: string | null;
+  location: string | null;
+}
+
+export interface ISearchQuery {
+  title: string | null;
+  category: string | null;
+  gender: string | null;
+  type: string | null;
+  location: string | null;
 }
