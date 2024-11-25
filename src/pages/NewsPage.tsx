@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { AppDispatch } from "../redux/store";
 import { fetchNews } from "../redux/pet/operations";
-import { FetchParams } from "../types";
+import { FetchParams, ISearchQuery } from "../types";
 import FindForm from "../components/FindForm";
 import { formatDate } from "../utils/formatDate";
 import Pagination from "../components/Pagination";
@@ -21,7 +21,13 @@ const NewsPage = () => {
   const currentPage = useSelector(selectCurrentPage);
   const totalNews = useSelector(selectTotalNews);
 
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<ISearchQuery>({
+    title: null,
+    category: null,
+    gender: null,
+    type: null,
+    location: null,
+  });
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -29,7 +35,11 @@ const NewsPage = () => {
     const queryParams: FetchParams = {
       page: currentPage,
       limit,
-      title: searchQuery ? searchQuery : null,
+      title: searchQuery?.title ? searchQuery?.title : null,
+      category: null,
+      gender: null,
+      type: null,
+      location: null,
     };
     dispatch(fetchNews(queryParams));
   }, [currentPage, dispatch, searchQuery]);
