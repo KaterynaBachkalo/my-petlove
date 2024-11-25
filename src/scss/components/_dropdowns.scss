@@ -1,0 +1,14 @@
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.menu-categories-list {
+  display: block;
+  position: absolute;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  list-style: none;
+}
