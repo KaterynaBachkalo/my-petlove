@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
-
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import Icon from "./Icon";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { ISearchQuery } from "../types";
 
 interface IForms {
   title: string;
 }
 
 interface IProps {
-  setSearchQuery: (value: string) => void;
+  setSearchQuery: React.Dispatch<React.SetStateAction<ISearchQuery>>;
   placeholder: string;
 }
 
@@ -18,12 +18,40 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
 
   const location = useLocation();
 
-  const onSubmit = (data: IForms) => {
-    setSearchQuery(data.title);
+  const onSubmit = (data: Partial<IForms>) => {
+    setSearchQuery((prev) => ({
+      ...prev,
+      ...data,
+    }));
+    handleSearch(data);
   };
 
   const handleBlur = () => {
     handleSubmit(onSubmit)();
+  };
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [, setTitle] = useState(searchParams.get("title") ?? "");
+
+  useEffect(() => {
+    setTitle(searchParams.get("title") ?? "");
+  }, [searchParams]);
+
+  const handleSearch = (newParams: Partial<IForms>) => {
+    const updatedParams = new URLSearchParams(searchParams);
+
+    // Додаємо або оновлюємо параметри
+    Object.entries(newParams).forEach(([key, value]) => {
+      if (value) {
+        updatedParams.set(key, value);
+      } else {
+        updatedParams.delete(key); // Видаляємо параметр, якщо значення порожнє
+      }
+    });
+
+    // Оновлюємо URL з новими параметрами
+    setSearchParams(updatedParams);
   };
 
   return (
@@ -46,7 +74,7 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
           onBlur={handleBlur}
         />
 
-        <button type="submit" className="find-form-button">
+        <button type="button" className="find-form-button">
           <div className="find-form-icon">
             <Icon name="search" className="icon-search" />
           </div>
