@@ -23,7 +23,7 @@
     $default-image: "/src/img/homeImage_sm@1x.png"
   ) {
     min-width: map.get(var.$breakpoints, "x-sm");
-    // max-width: map.get(var.$breakpoints, "sm");
+    max-width: map.get(var.$breakpoints, "sm");
   }
 
   @include mx.mq(
