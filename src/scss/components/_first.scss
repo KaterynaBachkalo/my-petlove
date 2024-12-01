@@ -6,12 +6,15 @@
 @use "../utils/mixins" as mx;
 
 .background-image {
-  background-size: cover;
+  background-size: cover; /* Покриває весь контейнер */
+  background-position: center; /* Центрує зображення */
+  background-repeat: no-repeat; /* Забороняє повторення */
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: map.get(var.$breakpoints, "x-sm");
   height: 100vh;
+  width: 100vw;
 
   @include mx.mq(
     "x-sm",
@@ -20,12 +23,7 @@
     $default-image: "/src/img/homeImage_sm@1x.png"
   ) {
     min-width: map.get(var.$breakpoints, "x-sm");
-    max-width: map.get(var.$breakpoints, "sm");
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    // max-width: map.get(var.$breakpoints, "sm");
   }
 
   @include mx.mq(
@@ -35,12 +33,6 @@
     $default-image: "/src/img/homeImage_md@1x.png"
   ) {
     min-width: map.get(var.$breakpoints, "md");
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 100vh;
   }
 
   @include mx.mq(
@@ -50,11 +42,6 @@
     $default-image: "/src/img/homeImage_lg@1x.png"
   ) {
     min-width: map.get(var.$breakpoints, "lg");
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
   }
 }
 
