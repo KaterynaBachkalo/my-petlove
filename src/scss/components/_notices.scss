@@ -4,7 +4,7 @@
 @use "../utils/mixins" as mx;
 
 .notices-container {
-  padding: 30px 0 80px 0;
+  padding: 10px 0 80px 0;
 }
 
 .notices-main-title {
@@ -12,7 +12,7 @@
   margin-bottom: 40px;
 
   @include mx.mq("md") {
-    margin-bottom: 44px;
+    margin-bottom: 30px;
   }
 }
 
