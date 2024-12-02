@@ -1,10 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import {
-  selectNews,
-  selectCurrentPage,
-  selectTotalNews,
-} from "../redux/pet/selectors";
+import { Link, useSearchParams } from "react-router-dom";
+import { selectNews, selectTotalNews } from "../redux/pet/selectors";
 import { useEffect, useState } from "react";
 import { AppDispatch } from "../redux/store";
 import { fetchNews } from "../redux/pet/operations";
@@ -18,7 +14,16 @@ const NewsPage = () => {
 
   const limit = 6;
 
-  const currentPage = useSelector(selectCurrentPage);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (!searchParams.has("page")) {
+      setSearchParams({ page: "1" });
+    }
+  }, [searchParams, setSearchParams]);
+
+  const currentPage = Number(searchParams.get("page")) || 1;
+
   const totalNews = useSelector(selectTotalNews);
 
   const [searchQuery, setSearchQuery] = useState<ISearchQuery>({
@@ -43,6 +48,10 @@ const NewsPage = () => {
     };
     dispatch(fetchNews(queryParams));
   }, [currentPage, dispatch, searchQuery]);
+
+  const handlePageChange = (newPage: number) => {
+    setSearchParams({ page: String(newPage) });
+  };
 
   return (
     <div className="news-container">
@@ -71,7 +80,11 @@ const NewsPage = () => {
           <p>There are news yet</p>
         )}
       </div>
-      <Pagination totalItems={totalNews} />
+      <Pagination
+        totalItems={totalNews}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
