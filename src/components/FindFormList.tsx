@@ -6,12 +6,13 @@ import { useSearchParams } from "react-router-dom";
 import MenuDropdown from "./MenuDropdown";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import { useDispatch } from "react-redux";
-// import { AppDispatch } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/store";
 import { categories } from "../data/categories";
 import { gender } from "../data/gender";
 import { types } from "../data/types";
 import { ISearchQuery } from "../types";
+import { setCurrentPage } from "../redux/pet/petSlice";
 
 interface IForms {
   category?: string;
@@ -36,7 +37,12 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
     resolver: yupResolver(schema),
   });
 
-  // const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const buttonRef = useRef(null);
+  const itemCategoriesRef = useRef(null);
+  const itemGenderRef = useRef(null);
+  const itemTypeRef = useRef(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -62,11 +68,6 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
   //   setSelectedType("");
   // };
 
-  const buttonRef = useRef(null);
-  const itemCategoriesRef = useRef(null);
-  const itemGenderRef = useRef(null);
-  const itemTypeRef = useRef(null);
-
   const [isMenuCategories, setMenuCategories] = useState(false);
   const [isMenuGenders, setMenuGenders] = useState(false);
   const [isMenuTypes, setMenuTypes] = useState(false);
@@ -78,26 +79,8 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
     }));
 
     handleSearch(data);
+    dispatch(setCurrentPage(1));
   };
-
-  // const onSubmit = (data: IForms) => {
-  //   const { category, gender, type } = data;
-  //   if (!category && !gender && !type) {
-  //     return;
-  //   }
-
-  //   dispatch(
-  //     setFilter({
-  //       category,
-  //       gender,
-  //       type,
-  //     })
-  //   );
-
-  //   handleSearch();
-
-  //   dispatch(clearState());
-  // };
 
   const handleBlur = () => {
     handleSubmit(onSubmit)();
@@ -126,10 +109,6 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
     setMenuTypes(false);
   };
 
-  // useEffect(() => {
-  //   handleSearch();
-  // }, [selectedCategory, selectedGender, selectedType, handleSearch]);
-
   const handleSearch = (data: Partial<IForms>) => {
     const params = new URLSearchParams(searchParams);
 
@@ -140,10 +119,6 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
         params.delete(key);
       }
     });
-
-    // updateParam("category", selectedCategory);
-    // updateParam("gender", selectedGender);
-    // updateParam("type", selectedType);
 
     setSearchParams(params); // Оновлюємо пошукові параметри в URL
   };
@@ -192,7 +167,7 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
         />
 
         <button
-          type="submit"
+          type="button"
           className="find-form-button"
           onClick={toggleMenu}
           ref={buttonRef}
