@@ -19,7 +19,7 @@ const FirstPage = () => {
   };
 
   return (
-    <>
+    <section>
       {loading && <ProgressBar onComplete={handleProgressComplete} />}
 
       <Link to="/home" className="first-link" onClick={handleClick}>
@@ -38,7 +38,7 @@ const FirstPage = () => {
           )}
         </div>
       </Link>
-    </>
+    </section>
   );
 };
 
