@@ -2,15 +2,23 @@ import { Vortex } from "react-loader-spinner";
 
 const Loader = () => {
   return (
-    <Vortex
-      visible={true}
-      height="80"
-      width="80"
-      ariaLabel="vortex-loading"
-      wrapperStyle={{}}
-      wrapperClass="vortex-wrapper"
-      colors={["red", "green", "blue", "yellow", "orange", "purple"]}
-    />
+    <div className="loader-backdrop">
+      <div className="loader-wrapper">
+        <Vortex
+          visible={true}
+          height="150"
+          width="150"
+          ariaLabel="vortex-loading"
+          wrapperStyle={{
+            left: "50%",
+            top: "50%",
+            position: "absolute",
+          }}
+          wrapperClass="vortex-wrapper"
+          colors={["red", "green", "blue", "yellow", "orange", "purple"]}
+        />
+      </div>
+    </div>
   );
 };
 
