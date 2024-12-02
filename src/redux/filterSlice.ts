@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface IFilter {
+  title: string;
   category: string;
   gender: string;
   type: string;
+  location: string;
 }
 
 const INITIAL_STATE: IFilter = {
+  title: "",
   category: "",
   gender: "",
   type: "",
+  location: "",
 };
 
 const filterSlice = createSlice({
