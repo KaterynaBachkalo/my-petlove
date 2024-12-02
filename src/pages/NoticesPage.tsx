@@ -1,9 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectCurrentPage,
-  selectNotices,
-  selectTotalNotices,
-} from "../redux/pet/selectors";
+import { selectNotices, selectTotalNotices } from "../redux/pet/selectors";
 import { useEffect, useState } from "react";
 import { AppDispatch } from "../redux/store";
 import { fetchNotices } from "../redux/pet/operations";
@@ -11,13 +7,23 @@ import { FetchParams, ISearchQuery } from "../types";
 import Pagination from "../components/Pagination";
 import NoticeCard from "../components/NoticeCard";
 import FilterForms from "../components/FilterForms";
+import { useSearchParams } from "react-router-dom";
 
 const NoticesPage = () => {
   const notices = useSelector(selectNotices);
 
   const limit = 6;
 
-  const currentPage = useSelector(selectCurrentPage);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (!searchParams.has("page")) {
+      setSearchParams({ page: "1" });
+    }
+  }, [searchParams, setSearchParams]);
+
+  const currentPage = Number(searchParams.get("page")) || 1;
+
   const totalNotices = useSelector(selectTotalNotices);
 
   const [searchQuery, setSearchQuery] = useState<ISearchQuery>({
@@ -42,6 +48,10 @@ const NoticesPage = () => {
     };
     dispatch(fetchNotices(queryParams));
   }, [currentPage, dispatch, searchQuery]);
+
+  const handlePageChange = (newPage: number) => {
+    setSearchParams({ page: String(newPage) });
+  };
 
   return (
     <div className="notices-container">
@@ -82,7 +92,11 @@ const NoticesPage = () => {
         )}
       </div>
 
-      <Pagination totalItems={totalNotices} />
+      <Pagination
+        totalItems={totalNotices}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
