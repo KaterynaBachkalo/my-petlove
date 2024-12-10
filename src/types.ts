@@ -103,3 +103,11 @@ export interface ISearchQuery {
   type: string | null;
   location: string | null;
 }
+
+export interface IFilter {
+  title: string | null;
+  category: string | null;
+  gender: string | null;
+  type: string | null;
+  location: string | null;
+}
