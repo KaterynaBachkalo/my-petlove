@@ -37,7 +37,9 @@ const FilterForms: FC<IProps> = ({ setSearchQuery }) => {
 
           <FindForm setSearchQuery={setSearchQuery} placeholder="Location" />
         </div>
+
         <div className="notices-stroke"></div>
+
         <div className="sort-button-wrap">
           <SortButton
             setSearchQuery={setSearchQuery}
