@@ -14,6 +14,11 @@ const MenuDropdown: FC<IProps> = React.forwardRef(
       onSelect(selectedCategory);
     };
 
+    const handleClickShowAll = () => {
+      const selectedCategory = "Show all";
+      onSelect(selectedCategory);
+    };
+
     const inputRef = useRef(null);
 
     useCloseDropdown(onClose, inputRef, ref as RefObject<HTMLDivElement>);
@@ -22,10 +27,13 @@ const MenuDropdown: FC<IProps> = React.forwardRef(
       <div ref={inputRef}>
         <div>
           <ul className="menu-categories-list">
+            <li className="menu-categories-item" onClick={handleClickShowAll}>
+              Show all
+            </li>
             {data &&
               data.map((item) => (
                 <li
-                  className=""
+                  className="menu-categories-item"
                   key={item}
                   onClick={() => handleItemClick(item)}
                 >
