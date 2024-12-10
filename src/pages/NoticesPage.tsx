@@ -8,6 +8,7 @@ import Pagination from "../components/Pagination";
 import NoticeCard from "../components/NoticeCard";
 import FilterForms from "../components/FilterForms";
 import { useSearchParams } from "react-router-dom";
+import { setFilter } from "../redux/filterSlice";
 
 const NoticesPage = () => {
   const notices = useSelector(selectNotices);
@@ -15,6 +16,8 @@ const NoticesPage = () => {
   const limit = 6;
 
   const [searchParams, setSearchParams] = useSearchParams();
+
+  console.log("searchParams", searchParams.get("title"));
 
   useEffect(() => {
     if (!searchParams.has("page")) {
@@ -27,12 +30,14 @@ const NoticesPage = () => {
   const totalNotices = useSelector(selectTotalNotices);
 
   const [searchQuery, setSearchQuery] = useState<ISearchQuery>({
-    title: null,
-    category: null,
-    gender: null,
-    type: null,
-    location: null,
+    title: searchParams.get("title") || null,
+    category: searchParams.get("category") || null,
+    gender: searchParams.get("gender") || null,
+    type: searchParams.get("type") || null,
+    location: searchParams.get("location") || null,
   });
+
+  console.log("searchQuery", searchQuery);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -47,6 +52,8 @@ const NoticesPage = () => {
       location: searchQuery?.location ? searchQuery.location : null,
     };
     dispatch(fetchNotices(queryParams));
+
+    dispatch(setFilter(searchQuery));
   }, [currentPage, dispatch, searchQuery]);
 
   const handlePageChange = (newPage: number) => {
