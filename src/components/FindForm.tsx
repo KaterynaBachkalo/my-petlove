@@ -6,6 +6,7 @@ import { ISearchQuery } from "../types";
 
 interface IForms {
   title: string;
+  location: string;
 }
 
 interface IProps {
@@ -16,13 +17,14 @@ interface IProps {
 const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
   const { register, handleSubmit } = useForm<IForms>();
 
-  const location = useLocation();
+  const mylocation = useLocation();
 
   const onSubmit = (data: Partial<IForms>) => {
     setSearchQuery((prev) => ({
       ...prev,
       ...data,
     }));
+
     handleSearch(data);
   };
 
@@ -32,7 +34,9 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [, setTitle] = useState(searchParams.get("title") ?? "");
+  const [_, setTitle] = useState(searchParams.get("title") ?? "");
+
+  // const [location, setLocation] = useState(searchParams.get("location") ?? "");
 
   useEffect(() => {
     setTitle(searchParams.get("title") ?? "");
@@ -41,16 +45,14 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
   const handleSearch = (newParams: Partial<IForms>) => {
     const updatedParams = new URLSearchParams(searchParams);
 
-    // Додаємо або оновлюємо параметри
     Object.entries(newParams).forEach(([key, value]) => {
       if (value) {
         updatedParams.set(key, value);
       } else {
-        updatedParams.delete(key); // Видаляємо параметр, якщо значення порожнє
+        updatedParams.delete(key);
       }
     });
 
-    // Оновлюємо URL з новими параметрами
     setSearchParams(updatedParams);
   };
 
@@ -66,9 +68,9 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
         }`}
       >
         <input
-          {...register("title")}
+          {...register(placeholder === "Search" ? "title" : "location")}
           className={`input find-input ${
-            location.pathname === "/notices" ? "notices" : ""
+            mylocation.pathname === "/notices" ? "notices" : ""
           }`}
           placeholder={placeholder}
           onBlur={handleBlur}
