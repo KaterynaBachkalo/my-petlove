@@ -1,5 +1,5 @@
+import { IFilter } from "../../types";
 import { IState } from "./petSlice";
-// import { IFilter } from "../filterSlice";
 
 export const selectNews = (state: { pet: IState }) => state.pet.news;
 
@@ -11,7 +11,7 @@ export const selectIsLoading = (state: { pet: IState }) => state.pet.isLoading;
 
 export const selectError = (state: { pet: IState }) => state.pet.error;
 
-// export const selectFilter = (state: IFilter) => state.filter;
+export const selectFilter = (state: { filter: IFilter }) => state.filter;
 
 export const selectCurrentPage = (state: { pet: IState }) =>
   state.pet.currentPage;
