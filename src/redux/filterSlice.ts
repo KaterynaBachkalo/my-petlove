@@ -1,12 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-export interface IFilter {
-  title: string;
-  category: string;
-  gender: string;
-  type: string;
-  location: string;
-}
+import { IFilter } from "../types";
 
 const INITIAL_STATE: IFilter = {
   title: "",
