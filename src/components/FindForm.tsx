@@ -34,7 +34,7 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [_, setTitle] = useState(searchParams.get("title") ?? "");
+  const [, setTitle] = useState(searchParams.get("title") ?? "");
 
   // const [location, setLocation] = useState(searchParams.get("location") ?? "");
 
