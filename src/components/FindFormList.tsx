@@ -39,7 +39,7 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const buttonRef = useRef(null);
+  const menuRef = useRef(null);
   const itemCategoriesRef = useRef(null);
   const itemGenderRef = useRef(null);
   const itemTypeRef = useRef(null);
@@ -130,7 +130,7 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
   }, [selectedCategory, setValue, selectedGender, selectedType]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} ref={menuRef}>
       <div
         className={`find-form-wrap ${
           placeholder === "Category" || placeholder === "By gender"
@@ -170,7 +170,13 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
           type="button"
           className="find-form-button"
           onClick={toggleMenu}
-          ref={buttonRef}
+          ref={
+            placeholder === "Category"
+              ? itemCategoriesRef
+              : placeholder === "By gender"
+              ? itemGenderRef
+              : itemTypeRef
+          }
         >
           <div className="find-form-icon">
             <Icon name="chevron-down" className="icon-search" />
