@@ -24,9 +24,9 @@ const MenuDropdown: FC<IProps> = React.forwardRef(
     useCloseDropdown(onClose, inputRef, ref as RefObject<HTMLDivElement>);
 
     return (
-      <div ref={inputRef}>
-        <div>
-          <ul className="menu-categories-list">
+      <div className="menu-modal">
+        <div className="menu-modal-container">
+          <ul className="menu-categories-list" ref={inputRef}>
             <li className="menu-categories-item" onClick={handleClickShowAll}>
               Show all
             </li>
