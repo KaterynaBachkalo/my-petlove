@@ -17,8 +17,6 @@ const NoticesPage = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log("searchParams", searchParams.get("title"));
-
   useEffect(() => {
     if (!searchParams.has("page")) {
       setSearchParams({ page: "1" });
@@ -36,8 +34,6 @@ const NoticesPage = () => {
     type: searchParams.get("type") || null,
     location: searchParams.get("location") || null,
   });
-
-  console.log("searchQuery", searchQuery);
 
   const dispatch = useDispatch<AppDispatch>();
 
