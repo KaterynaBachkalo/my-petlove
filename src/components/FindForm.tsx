@@ -19,7 +19,10 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
 
   const mylocation = useLocation();
 
-  const onSubmit = (data: Partial<IForms>) => {
+  const onSubmit = () => {
+    const data: Partial<IForms> =
+      placeholder === "Search" ? { title } : { location };
+
     setSearchQuery((prev) => ({
       ...prev,
       ...data,
@@ -34,12 +37,13 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [, setTitle] = useState(searchParams.get("title") ?? "");
+  const [title, setTitle] = useState(searchParams.get("title") ?? "");
 
-  // const [location, setLocation] = useState(searchParams.get("location") ?? "");
+  const [location, setLocation] = useState(searchParams.get("location") ?? "");
 
   useEffect(() => {
     setTitle(searchParams.get("title") ?? "");
+    setLocation(searchParams.get("location") ?? "");
   }, [searchParams]);
 
   const handleSearch = (newParams: Partial<IForms>) => {
@@ -73,6 +77,14 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
             mylocation.pathname === "/notices" ? "notices" : ""
           }`}
           placeholder={placeholder}
+          value={placeholder === "Search" ? title : location}
+          onChange={(e) => {
+            if (placeholder === "Search") {
+              setTitle(e.target.value);
+            } else {
+              setLocation(e.target.value);
+            }
+          }}
           onBlur={handleBlur}
         />
 
