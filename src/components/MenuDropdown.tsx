@@ -15,8 +15,7 @@ const MenuDropdown: FC<IProps> = React.forwardRef(
     };
 
     const handleClickShowAll = () => {
-      const selectedCategory = "Show all";
-      onSelect(selectedCategory);
+      onSelect("");
     };
 
     const inputRef = useRef(null);
