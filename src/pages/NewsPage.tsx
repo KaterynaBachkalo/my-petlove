@@ -29,8 +29,8 @@ const NewsPage = () => {
   const [searchQuery, setSearchQuery] = useState<ISearchQuery>({
     title: null,
     category: null,
-    gender: null,
-    type: null,
+    sex: null,
+    species: null,
     location: null,
   });
 
@@ -42,8 +42,8 @@ const NewsPage = () => {
       limit,
       title: searchQuery?.title ? searchQuery?.title : null,
       category: null,
-      gender: null,
-      type: null,
+      sex: null,
+      species: null,
       location: null,
     };
     dispatch(fetchNews(queryParams));
