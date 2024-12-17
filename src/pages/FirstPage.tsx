@@ -15,7 +15,7 @@ const FirstPage = () => {
 
   const handleProgressComplete = () => {
     setLoading(false);
-    navigate("/home"); // Перехід на сторінку home.
+    navigate("/home");
   };
 
   return (
