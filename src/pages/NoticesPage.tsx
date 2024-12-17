@@ -30,8 +30,8 @@ const NoticesPage = () => {
   const [searchQuery, setSearchQuery] = useState<ISearchQuery>({
     title: searchParams.get("title") || null,
     category: searchParams.get("category") || null,
-    gender: searchParams.get("gender") || null,
-    type: searchParams.get("type") || null,
+    sex: searchParams.get("sex") || null,
+    species: searchParams.get("species") || null,
     location: searchParams.get("location") || null,
   });
 
@@ -43,8 +43,8 @@ const NoticesPage = () => {
       limit,
       title: searchQuery?.title ? searchQuery.title : null,
       category: searchQuery?.category ? searchQuery.category : null,
-      gender: searchQuery?.gender ? searchQuery.gender : null,
-      type: searchQuery?.type ? searchQuery.type : null,
+      sex: searchQuery?.sex ? searchQuery.sex : null,
+      species: searchQuery?.species ? searchQuery.species : null,
       location: searchQuery?.location ? searchQuery.location : null,
     };
     dispatch(fetchNotices(queryParams));
