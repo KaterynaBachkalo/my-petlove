@@ -34,8 +34,6 @@ const FilterForms: FC<IProps> = ({ setSearchQuery }) => {
             placeholder="By gender"
           />
           <FindFormList setSearchQuery={setSearchQuery} placeholder="By type" />
-
-          <FindForm setSearchQuery={setSearchQuery} placeholder="Location" />
         </div>
 
         <div className="notices-stroke"></div>
