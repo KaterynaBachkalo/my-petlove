@@ -75,11 +75,21 @@
 
   @include mx.mq("md") {
     &.category {
-      width: 170px;
+      width: 265px;
     }
 
     &.type {
-      width: 190px;
+      width: 265px;
+    }
+  }
+
+  @include mx.mq("lg") {
+    &.category {
+      width: 275px;
+    }
+
+    &.type {
+      width: 275px;
     }
   }
 }
