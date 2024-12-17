@@ -91,23 +91,23 @@ export interface FetchParams {
   limit: number;
   title: string | null;
   category: string | null;
-  gender: string | null;
-  type: string | null;
+  sex: string | null;
+  species: string | null;
   location: string | null;
 }
 
 export interface ISearchQuery {
   title: string | null;
   category: string | null;
-  gender: string | null;
-  type: string | null;
+  sex: string | null;
+  species: string | null;
   location: string | null;
 }
 
 export interface IFilter {
   title: string | null;
   category: string | null;
-  gender: string | null;
-  type: string | null;
+  sex: string | null;
+  species: string | null;
   location: string | null;
 }
