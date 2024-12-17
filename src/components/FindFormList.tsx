@@ -16,8 +16,8 @@ import { setCurrentPage } from "../redux/pet/petSlice";
 
 interface IForms {
   category?: string;
-  gender?: string;
-  type?: string;
+  sex?: string;
+  species?: string;
 }
 interface IProps {
   setSearchQuery: React.Dispatch<React.SetStateAction<ISearchQuery>>;
@@ -28,8 +28,8 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
   const schema = yup
     .object({
       category: yup.string(),
-      gender: yup.string(),
-      type: yup.string(),
+      sex: yup.string(),
+      species: yup.string(),
     })
     .required();
 
@@ -50,29 +50,17 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
     searchParams.get("category") ?? ""
   );
   const [selectedGender, setSelectedGender] = useState(
-    searchParams.get("gender") ?? ""
+    searchParams.get("sex") ?? ""
   );
   const [selectedType, setSelectedType] = useState(
-    searchParams.get("type") ?? ""
+    searchParams.get("species") ?? ""
   );
-
-  useEffect(() => {
-    setSelectedCategory(searchParams.get("category") ?? "");
-    setSelectedGender(searchParams.get("gender") ?? "");
-    setSelectedType(searchParams.get("type") ?? "");
-  }, [searchParams]);
-
-  // const reset = () => {
-  //   setSelectedCategory("");
-  //   setSelectedGender("");
-  //   setSelectedType("");
-  // };
 
   const [isMenuCategories, setMenuCategories] = useState(false);
   const [isMenuGenders, setMenuGenders] = useState(false);
   const [isMenuTypes, setMenuTypes] = useState(false);
 
-  const onSubmit = (data: Partial<IForms>) => {
+  const onSubmit = (data: IForms) => {
     setSearchQuery((prev) => ({
       ...prev,
       ...data,
@@ -80,10 +68,6 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
 
     handleSearch(data);
     dispatch(setCurrentPage(1));
-  };
-
-  const handleBlur = () => {
-    handleSubmit(onSubmit)();
   };
 
   const toggleMenu = () => {
@@ -97,37 +81,52 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
   };
 
   const handleSelectMenu = (selected: string) => {
+    const data: Partial<IForms> = {};
+
     if (placeholder === "Category") {
       setSelectedCategory(selected);
+      data.category = selected || undefined;
     } else if (placeholder === "By gender") {
       setSelectedGender(selected);
+      data.sex = selected || undefined;
     } else {
       setSelectedType(selected);
+      data.species = selected || undefined;
     }
+
     setMenuCategories(false);
     setMenuGenders(false);
     setMenuTypes(false);
+
+    handleSearch(data);
+    handleSubmit(onSubmit)();
   };
 
-  const handleSearch = (data: Partial<IForms>) => {
-    const params = new URLSearchParams(searchParams);
+  const handleSearch = (newParams: Partial<IForms>) => {
+    const updatedParams = new URLSearchParams(searchParams);
 
-    Object.entries(data).forEach(([key, value]) => {
+    Object.entries(newParams).forEach(([key, value]) => {
       if (value) {
-        params.set(key, value);
+        updatedParams.set(key, value);
       } else {
-        params.delete(key);
+        updatedParams.delete(key);
       }
     });
 
-    setSearchParams(params); // Оновлюємо пошукові параметри в URL
+    setSearchParams(updatedParams);
   };
 
   useEffect(() => {
-    setValue("category", selectedCategory);
-    setValue("gender", selectedGender);
-    setValue("type", selectedType);
-  }, [selectedCategory, setValue, selectedGender, selectedType]);
+    setSelectedCategory(searchParams.get("category") ?? "");
+    setSelectedGender(searchParams.get("sex") ?? "");
+    setSelectedType(searchParams.get("type") ?? "");
+  }, [searchParams]);
+
+  useEffect(() => {
+    setValue("category", selectedCategory || "");
+    setValue("sex", selectedGender || "");
+    setValue("species", selectedType || "");
+  }, [selectedCategory, selectedGender, selectedType, setValue]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} ref={menuRef}>
@@ -145,8 +144,8 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
             placeholder === "Category"
               ? "category"
               : placeholder === "By gender"
-              ? "gender"
-              : "type"
+              ? "sex"
+              : "species"
           }
           control={control}
           render={({ field }) => (
@@ -161,7 +160,6 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
                   ? selectedGender
                   : selectedType
               }
-              onBlur={handleBlur}
             />
           )}
         />
