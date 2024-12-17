@@ -6,8 +6,8 @@ interface IProps {
     React.SetStateAction<{
       title: string | null;
       category: string | null;
-      gender: string | null;
-      type: string | null;
+      sex: string | null;
+      species: string | null;
       location: string | null;
     }>
   >;
