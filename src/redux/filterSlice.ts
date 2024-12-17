@@ -4,8 +4,8 @@ import { IFilter } from "../types";
 const INITIAL_STATE: IFilter = {
   title: "",
   category: "",
-  gender: "",
-  type: "",
+  sex: "",
+  species: "",
   location: "",
 };
 
