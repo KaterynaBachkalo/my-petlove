@@ -25,7 +25,7 @@ const NoticesPage = () => {
       const sortedNotices = [...notices].sort(
         (a, b) => b.popularity - a.popularity
       );
-      setSortedNotices(sortedNotices); // використовуйте локальний `useState` для відображення
+      setSortedNotices(sortedNotices);
     }
   }, [notices, filter]);
 
