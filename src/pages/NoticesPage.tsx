@@ -18,13 +18,29 @@ const NoticesPage = () => {
 
   const filter = useSelector(selectFilter);
 
-  const [sortedNotices, setSortedNotices] = useState<INotice[]>([]);
+  const [sortedNotices, setSortedNotices] = useState<INotice[]>(notices);
 
   useEffect(() => {
-    if (notices.length > 0 && filter === "Popular") {
-      const sortedNotices = [...notices].sort(
-        (a, b) => b.popularity - a.popularity
-      );
+    if (notices.length > 0) {
+      let sortedNotices = [...notices];
+
+      switch (filter) {
+        case "Popular":
+          sortedNotices.sort((a, b) => b.popularity - a.popularity);
+          break;
+        case "Unpopular":
+          sortedNotices.sort((a, b) => a.popularity - b.popularity);
+          break;
+        case "Cheap":
+          sortedNotices.sort((a, b) => (a.price || 0) - (b.price || 0));
+          break;
+        case "Expensive":
+          sortedNotices.sort((a, b) => (b.price || 0) - (a.price || 0));
+          break;
+        default:
+          sortedNotices = notices;
+      }
+
       setSortedNotices(sortedNotices);
     }
   }, [notices, filter]);
@@ -93,6 +109,7 @@ const NoticesPage = () => {
               category,
               comment,
               popularity,
+              price,
             }) => (
               <NoticeCard
                 key={title}
@@ -105,6 +122,7 @@ const NoticesPage = () => {
                 category={category}
                 comment={comment}
                 popularity={popularity}
+                price={price}
               />
             )
           )
