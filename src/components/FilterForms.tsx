@@ -5,7 +5,7 @@ import SortButton from "./SortButton";
 import { ISearchQuery } from "../types";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
-import { setFilter } from "../redux/filterSlice";
+import { resetFilter, setFilter } from "../redux/filterSlice";
 
 interface IProps {
   setSearchQuery: React.Dispatch<React.SetStateAction<ISearchQuery>>;
@@ -14,16 +14,16 @@ interface IProps {
 const FilterForms: FC<IProps> = ({ setSearchQuery }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [activeSort, setActiveSort] = useState<string | null>(null);
+  const [activeSort, setActiveSort] = useState<string>("");
 
   const handleSortClick = (sortType: string) => {
     if (activeSort === sortType) {
-      setActiveSort(null);
+      setActiveSort("");
+      dispatch(resetFilter());
     } else {
       setActiveSort(sortType);
+      dispatch(setFilter(sortType));
     }
-
-    dispatch(setFilter(sortType));
   };
 
   return (
@@ -46,30 +46,15 @@ const FilterForms: FC<IProps> = ({ setSearchQuery }) => {
         <div className="notices-stroke"></div>
 
         <div className="sort-button-wrap">
-          <SortButton
-            setSearchQuery={setSearchQuery}
-            text="Popular"
-            isActive={activeSort === "Popular"}
-            onClick={() => handleSortClick("Popular")}
-          />
-          <SortButton
-            setSearchQuery={setSearchQuery}
-            text="Unpopular"
-            isActive={activeSort === "Unpopular"}
-            onClick={() => handleSortClick("Unpopular")}
-          />
-          <SortButton
-            setSearchQuery={setSearchQuery}
-            text="Cheap"
-            isActive={activeSort === "Cheap"}
-            onClick={() => handleSortClick("Cheap")}
-          />
-          <SortButton
-            setSearchQuery={setSearchQuery}
-            text="Expensive"
-            isActive={activeSort === "Expensive"}
-            onClick={() => handleSortClick("Expensive")}
-          />
+          {["Popular", "Unpopular", "Cheap", "Expensive"].map((sortType) => (
+            <SortButton
+              key={sortType}
+              setSearchQuery={setSearchQuery}
+              text={sortType}
+              isActive={activeSort === sortType}
+              onClick={() => handleSortClick(sortType)}
+            />
+          ))}
         </div>
       </div>
     </>
