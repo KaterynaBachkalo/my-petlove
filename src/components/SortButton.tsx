@@ -8,7 +8,6 @@ interface IProps {
       category: string | null;
       sex: string | null;
       species: string | null;
-      location: string | null;
     }>
   >;
   text: string;
@@ -25,7 +24,7 @@ const SortButton: FC<IProps> = ({
   const handleClick = () => {
     setSearchQuery((prev) => ({
       ...prev,
-      title: isActive ? "" : text, // Змінюємо тільки поле `title`
+      title: isActive ? "" : text,
     }));
     onClick();
   };
