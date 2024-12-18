@@ -3,12 +3,17 @@ import FindForm from "./FindForm";
 import FindFormList from "./FindFormList";
 import SortButton from "./SortButton";
 import { ISearchQuery } from "../types";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/store";
+import { setFilter } from "../redux/filterSlice";
 
 interface IProps {
   setSearchQuery: React.Dispatch<React.SetStateAction<ISearchQuery>>;
 }
 
 const FilterForms: FC<IProps> = ({ setSearchQuery }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const [activeSort, setActiveSort] = useState<string | null>(null);
 
   const handleSortClick = (sortType: string) => {
@@ -17,6 +22,8 @@ const FilterForms: FC<IProps> = ({ setSearchQuery }) => {
     } else {
       setActiveSort(sortType);
     }
+
+    dispatch(setFilter(sortType));
   };
 
   return (
