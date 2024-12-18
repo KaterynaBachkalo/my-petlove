@@ -1,17 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectNotices, selectTotalNotices } from "../redux/pet/selectors";
+import {
+  selectFilter,
+  selectNotices,
+  selectTotalNotices,
+} from "../redux/pet/selectors";
 import { useEffect, useState } from "react";
 import { AppDispatch } from "../redux/store";
 import { fetchNotices } from "../redux/pet/operations";
-import { FetchParams, ISearchQuery } from "../types";
+import { FetchParams, INotice, ISearchQuery } from "../types";
 import Pagination from "../components/Pagination";
 import NoticeCard from "../components/NoticeCard";
 import FilterForms from "../components/FilterForms";
 import { useSearchParams } from "react-router-dom";
-import { setFilter } from "../redux/filterSlice";
 
 const NoticesPage = () => {
   const notices = useSelector(selectNotices);
+
+  const filter = useSelector(selectFilter);
+
+  const [sortedNotices, setSortedNotices] = useState<INotice[]>([]);
+
+  useEffect(() => {
+    if (notices.length > 0 && filter === "Popular") {
+      const sortedNotices = [...notices].sort(
+        (a, b) => b.popularity - a.popularity
+      );
+      setSortedNotices(sortedNotices); // використовуйте локальний `useState` для відображення
+    }
+  }, [notices, filter]);
 
   const limit = 6;
 
@@ -32,7 +48,6 @@ const NoticesPage = () => {
     category: searchParams.get("category") || null,
     sex: searchParams.get("sex") || null,
     species: searchParams.get("species") || null,
-    location: searchParams.get("location") || null,
   });
 
   const dispatch = useDispatch<AppDispatch>();
@@ -45,15 +60,18 @@ const NoticesPage = () => {
       category: searchQuery?.category ? searchQuery.category : null,
       sex: searchQuery?.sex ? searchQuery.sex : null,
       species: searchQuery?.species ? searchQuery.species : null,
-      location: searchQuery?.location ? searchQuery.location : null,
     };
     dispatch(fetchNotices(queryParams));
-
-    dispatch(setFilter(searchQuery));
   }, [currentPage, dispatch, searchQuery]);
 
   const handlePageChange = (newPage: number) => {
-    setSearchParams({ page: String(newPage) });
+    setSearchParams({
+      page: String(newPage),
+      ...(searchQuery.title && { title: String(searchQuery.title) }),
+      ...(searchQuery.category && { category: String(searchQuery.category) }),
+      ...(searchQuery.sex && { sex: String(searchQuery.sex) }),
+      ...(searchQuery.species && { species: String(searchQuery.species) }),
+    });
   };
 
   return (
@@ -63,8 +81,8 @@ const NoticesPage = () => {
         <FilterForms setSearchQuery={setSearchQuery} />
       </div>
       <div className="news-cards notices-cards">
-        {notices && notices.length > 0 ? (
-          notices.map(
+        {sortedNotices && sortedNotices.length > 0 ? (
+          sortedNotices.map(
             ({
               name,
               title,
