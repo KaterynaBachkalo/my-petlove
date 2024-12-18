@@ -6,7 +6,6 @@ import { ISearchQuery } from "../types";
 
 interface IForms {
   title: string;
-  location: string;
 }
 
 interface IProps {
@@ -19,10 +18,7 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
 
   const mylocation = useLocation();
 
-  const onSubmit = () => {
-    const data: Partial<IForms> =
-      placeholder === "Search" ? { title } : { location };
-
+  const onSubmit = (data: Partial<IForms>) => {
     setSearchQuery((prev) => ({
       ...prev,
       ...data,
@@ -37,13 +33,10 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [title, setTitle] = useState(searchParams.get("title") ?? "");
-
-  const [location, setLocation] = useState(searchParams.get("location") ?? "");
+  const [, setTitle] = useState(searchParams.get("title") ?? "");
 
   useEffect(() => {
     setTitle(searchParams.get("title") ?? "");
-    setLocation(searchParams.get("location") ?? "");
   }, [searchParams]);
 
   const handleSearch = (newParams: Partial<IForms>) => {
@@ -72,19 +65,11 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
         }`}
       >
         <input
-          {...register(placeholder === "Search" ? "title" : "location")}
+          {...register("title")}
           className={`input find-input ${
             mylocation.pathname === "/notices" ? "notices" : ""
           }`}
           placeholder={placeholder}
-          value={placeholder === "Search" ? title : location}
-          onChange={(e) => {
-            if (placeholder === "Search") {
-              setTitle(e.target.value);
-            } else {
-              setLocation(e.target.value);
-            }
-          }}
           onBlur={handleBlur}
         />
 
