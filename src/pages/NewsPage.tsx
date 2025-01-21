@@ -31,6 +31,7 @@ const NewsPage = () => {
     category: null,
     sex: null,
     species: null,
+    sort: null,
   });
 
   const dispatch = useDispatch<AppDispatch>();
@@ -43,6 +44,7 @@ const NewsPage = () => {
       category: null,
       sex: null,
       species: null,
+      sort: null,
     };
     dispatch(fetchNews(queryParams));
   }, [currentPage, dispatch, searchQuery]);
