@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import Icon from "./Icon";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { ISearchQuery } from "../types";
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
-  const { register, handleSubmit } = useForm<IForms>();
+  const { handleSubmit, register, setValue, watch } = useForm<IForms>();
 
   const mylocation = useLocation();
 
@@ -33,11 +33,12 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [, setTitle] = useState(searchParams.get("title") ?? "");
+  watch("title");
 
   useEffect(() => {
-    setTitle(searchParams.get("title") ?? "");
-  }, [searchParams]);
+    const currentTitle = searchParams.get("title") ?? "";
+    setValue("title", currentTitle);
+  }, [searchParams, setValue]);
 
   const handleSearch = (newParams: Partial<IForms>) => {
     const updatedParams = new URLSearchParams(searchParams);
@@ -72,7 +73,6 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
           placeholder={placeholder}
           onBlur={handleBlur}
         />
-
         <button type="button" className="find-form-button">
           <div className="find-form-icon">
             <Icon name="search" className="icon-search" />
