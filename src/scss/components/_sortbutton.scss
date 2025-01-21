@@ -21,6 +21,14 @@
     background-color: fn.get-color("accent");
     color: fn.get-color("light");
     fill: fn.get-color("light");
+    transition: all 0.5s ease-in;
+  }
+
+  &.cross:hover,
+  &.cross:focus {
+    background-color: fn.get-color("background-hover");
+    color: fn.get-color("accent");
+    fill: fn.get-color("accent");
   }
 }
 
