@@ -119,7 +119,7 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
   useEffect(() => {
     setSelectedCategory(searchParams.get("category") ?? "");
     setSelectedGender(searchParams.get("sex") ?? "");
-    setSelectedType(searchParams.get("type") ?? "");
+    setSelectedType(searchParams.get("species") ?? "");
   }, [searchParams]);
 
   useEffect(() => {
