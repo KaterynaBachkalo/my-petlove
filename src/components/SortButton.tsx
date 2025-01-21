@@ -8,6 +8,7 @@ interface IProps {
       category: string | null;
       sex: string | null;
       species: string | null;
+      sort: string | null;
     }>
   >;
   text: string;
@@ -24,7 +25,7 @@ const SortButton: FC<IProps> = ({
   const handleClick = () => {
     setSearchQuery((prev) => ({
       ...prev,
-      title: isActive ? "" : text,
+      sort: isActive ? "" : text,
     }));
     onClick();
   };
