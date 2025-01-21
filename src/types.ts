@@ -93,6 +93,7 @@ export interface FetchParams {
   category: string | null;
   sex: string | null;
   species: string | null;
+  sort: string | null;
 }
 
 export interface ISearchQuery {
@@ -100,6 +101,7 @@ export interface ISearchQuery {
   category: string | null;
   sex: string | null;
   species: string | null;
+  sort: string | null;
 }
 
 export interface IFilter {
