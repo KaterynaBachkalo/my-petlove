@@ -39,12 +39,12 @@ export const fetchFriends = createAsyncThunk(
 export const fetchNotices = createAsyncThunk(
   "/notices/fetchNotices",
   async (
-    { page, limit, title, category, sex, species }: FetchParams,
+    { page, limit, title, category, sex, species, sort }: FetchParams,
     thunkAPI
   ) => {
     try {
       const response = await petInstance.get("/notices", {
-        params: { page, limit, title, category, sex, species },
+        params: { page, limit, title, category, sex, species, sort },
       });
 
       return response.data;
