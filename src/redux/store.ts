@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { petReducer } from "./pet/petSlice";
-import { filterReducer } from "./filterSlice";
+// import { filterReducer } from "./filterSlice";
 
 import {
   persistStore,
@@ -26,7 +26,7 @@ const authConfig = {
 const rootReducer = combineReducers({
   auth: persistReducer(authConfig, authReducer),
   pet: petReducer,
-  filter: filterReducer,
+  // filter: filterReducer,
 });
 
 export const store = configureStore({
