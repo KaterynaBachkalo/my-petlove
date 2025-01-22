@@ -102,11 +102,13 @@ const NoticesPage = () => {
         )}
       </div>
 
-      <Pagination
-        totalItems={totalNotices}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+      {totalNotices && (
+        <Pagination
+          totalItems={totalNotices}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 };
