@@ -3,10 +3,6 @@ import FindForm from "./FindForm";
 import FindFormList from "./FindFormList";
 import SortButton from "./SortButton";
 import { ISearchQuery } from "../types";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../redux/store";
-import { resetFilter, setFilter } from "../redux/filterSlice";
-import { selectFilter } from "../redux/pet/selectors";
 import { useSearchParams } from "react-router-dom";
 
 interface IProps {
@@ -14,10 +10,6 @@ interface IProps {
 }
 
 const FilterForms: FC<IProps> = ({ setSearchQuery }) => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  const filter = useSelector(selectFilter);
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortFromParams = searchParams.get("sort");
@@ -37,12 +29,6 @@ const FilterForms: FC<IProps> = ({ setSearchQuery }) => {
       newSearchParams.delete("sort");
     }
     setSearchParams(newSearchParams);
-
-    if (filter === sortType) {
-      dispatch(resetFilter());
-    } else {
-      dispatch(setFilter(sortType));
-    }
   };
 
   return (
