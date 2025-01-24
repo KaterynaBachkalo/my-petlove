@@ -1,6 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { petReducer } from "./pet/petSlice";
-// import { filterReducer } from "./filterSlice";
 
 import {
   persistStore,
@@ -23,10 +22,15 @@ const authConfig = {
   whitelist: ["accessToken", "refreshToken"],
 };
 
+const petConfig = {
+  key: "favorites",
+  storage,
+  whitelist: ["favorites"],
+};
+
 const rootReducer = combineReducers({
   auth: persistReducer(authConfig, authReducer),
-  pet: petReducer,
-  // filter: filterReducer,
+  pet: persistReducer(petConfig, petReducer),
 });
 
 export const store = configureStore({
