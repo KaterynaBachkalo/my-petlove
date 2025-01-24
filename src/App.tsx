@@ -1,9 +1,12 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { SharedLayout } from "./components/SharedLayout";
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 
 import RestrictedRoute from "./components/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "./redux/store";
+import { refreshUserThunk } from "./redux/auth/operations";
 
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -16,6 +19,12 @@ const FriendsPage = lazy(() => import("./pages/FriendsPage"));
 const NoticesPage = lazy(() => import("./pages/NoticesPage"));
 
 function App() {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(refreshUserThunk());
+  }, [dispatch]);
+
   return (
     <>
       <Routes>
