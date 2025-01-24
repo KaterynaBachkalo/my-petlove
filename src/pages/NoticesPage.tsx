@@ -81,9 +81,10 @@ const NoticesPage = () => {
               comment,
               popularity,
               price,
+              _id,
             }) => (
               <NoticeCard
-                key={title}
+                key={_id}
                 name={name}
                 title={title}
                 imgURL={imgURL}
@@ -94,6 +95,7 @@ const NoticesPage = () => {
                 comment={comment}
                 popularity={popularity}
                 price={price}
+                _id={_id}
               />
             )
           )
