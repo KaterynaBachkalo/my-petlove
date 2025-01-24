@@ -20,3 +20,6 @@ export const selectTotalNews = (state: { pet: IState }) => state.pet.totalNews;
 
 export const selectTotalNotices = (state: { pet: IState }) =>
   state.pet.totalNotices;
+
+export const selectFavoritesNotices = (state: { pet: IState }) =>
+  state.pet.favorites;
