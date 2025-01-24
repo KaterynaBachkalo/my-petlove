@@ -9,6 +9,7 @@ export interface IState {
   notices: INotice[];
   pets: IPet[];
   cities: ICity[];
+  favorites: string[];
 
   totalNews: number;
   totalNotices: number;
@@ -24,6 +25,7 @@ interface Payload {
   notices: INotice[];
   pets: IPet[];
   cities: ICity[];
+  favorites: string[];
 
   totalNews: number;
   totalNotices: number;
@@ -66,6 +68,7 @@ const INITIAL_STATE = {
   isLoading: false,
   error: null,
   currentPage: 1,
+  favorites: [],
 };
 
 const petSlice = createSlice({
@@ -81,9 +84,18 @@ const petSlice = createSlice({
       state.cities = [];
       state.totalNews = 0;
       state.totalNotices = 0;
+      state.favorites = [];
     },
     setCurrentPage(state: IState, action: PayloadAction<number>) {
       state.currentPage = action.payload;
+    },
+    addFavorites(state: IState, action: PayloadAction<string>) {
+      state.favorites.push(action.payload);
+    },
+    deleteFavorites(state: IState, action: PayloadAction<string>) {
+      state.favorites = state.favorites.filter(
+        (favorite) => favorite !== action.payload
+      );
     },
   },
 
