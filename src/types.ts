@@ -13,6 +13,7 @@ export interface IUser {
 }
 
 export interface INotice {
+  _id?: string;
   name: string;
   title: string;
   imgURL: string;
