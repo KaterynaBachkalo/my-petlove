@@ -45,6 +45,7 @@ export const logInThunk = createAsyncThunk(
       const response = await petInstance.post("/users/login", formData);
       setAccessToken(response.data.accessToken);
       setRefreshToken(response.data.refreshToken);
+
       return response.data;
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
@@ -80,7 +81,8 @@ export const refreshUserThunk = createAsyncThunk(
     try {
       if (accessToken) setAccessToken(accessToken);
       if (refreshToken) setRefreshToken(refreshToken);
-      const response = await petInstance.get("/users/user-info");
+      const response = await petInstance.get("/users/current");
+      console.log(response.data);
       return response.data;
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.message) {
