@@ -1,7 +1,9 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { INotice } from "../types";
 import Icon from "./Icon";
 import { fixDate } from "../utils/formatDate";
+import CardInfoModal from "./Modals/CardInfoModal";
+import Modal from "./Modals/Modal";
 
 const NoticeCard: FC<INotice> = ({
   title,
@@ -13,7 +15,9 @@ const NoticeCard: FC<INotice> = ({
   species,
   category,
   comment,
+  _id,
 }) => {
+  const [openCardInfo, setOpenCardInfo] = useState(false);
   return (
     <>
       <div className="notices-card">
@@ -53,7 +57,11 @@ const NoticeCard: FC<INotice> = ({
         </div>
 
         <div className="notices-button-wrap">
-          <button type="button" className="notices-button">
+          <button
+            type="button"
+            className="notices-button"
+            onClick={() => setOpenCardInfo(true)}
+          >
             Read more
           </button>
           <div className="notices-add-favorite">
@@ -61,6 +69,23 @@ const NoticeCard: FC<INotice> = ({
           </div>
         </div>
       </div>
+      {openCardInfo && (
+        <Modal onClose={() => setOpenCardInfo(false)}>
+          <CardInfoModal
+            key={_id}
+            title={title}
+            imgURL={imgURL}
+            category={category}
+            popularity={popularity}
+            name={name}
+            birthday={birthday}
+            sex={sex}
+            species={species}
+            comment={comment}
+            _id={_id}
+          />
+        </Modal>
+      )}
     </>
   );
 };
