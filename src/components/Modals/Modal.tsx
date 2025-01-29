@@ -28,8 +28,8 @@ const Modal: FC<IProps> = ({ onClose, children }) => {
               <Icon
                 className="modal-icon"
                 name="close"
-                width={20}
-                height={20}
+                width={18}
+                height={18}
               />
             </button>
             <div>{children}</div>
