@@ -43,9 +43,5 @@
 .menu-modal-container {
   overflow-y: auto;
   padding: 0;
-  width: 260px;
-
-  @include mx.mq("md", max) {
-    width: 275px;
-  }
+  width: 300px;
 }
