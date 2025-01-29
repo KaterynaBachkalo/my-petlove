@@ -48,6 +48,8 @@
   @include mx.mq("md") {
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+
     gap: 16px;
   }
 
