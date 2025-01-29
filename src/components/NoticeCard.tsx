@@ -1,23 +1,63 @@
 import { FC, useState } from "react";
-import { INotice } from "../types";
+import { INoticeDate } from "../types";
 import Icon from "./Icon";
 import { fixDate } from "../utils/formatDate";
 import CardInfoModal from "./Modals/CardInfoModal";
 import Modal from "./Modals/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFavoritesNotices } from "../redux/pet/selectors";
+import { AppDispatch } from "../redux/store";
+import { addFavorites, deleteFavorites } from "../redux/pet/petSlice";
+import { selectCurrentUser } from "../redux/auth/selectors";
+import { toast } from "react-toastify";
 
-const NoticeCard: FC<INotice> = ({
-  title,
-  imgURL,
-  popularity,
-  name,
-  birthday,
-  sex,
-  species,
-  category,
-  comment,
-  _id,
-}) => {
+const NoticeCard: FC<INoticeDate> = ({ data }) => {
+  const {
+    title,
+    imgURL,
+    popularity,
+    name,
+    birthday,
+    sex,
+    species,
+    category,
+    comment,
+    _id,
+  } = data;
   const [openCardInfo, setOpenCardInfo] = useState(false);
+
+  const favorites = useSelector(selectFavoritesNotices);
+
+  const currentUser = useSelector(selectCurrentUser);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const openModal = () => {
+    setOpenCardInfo(true);
+    document.body.classList.add("body-scroll-lock");
+  };
+
+  const closeModal = () => {
+    setOpenCardInfo(false);
+    document.body.classList.remove("body-scroll-lock");
+  };
+
+  const addToFavorite = () => {
+    if (currentUser && _id) {
+      dispatch(addFavorites(_id));
+    } else {
+      toast.warning("This feature is only available to authorized users");
+    }
+  };
+
+  const deleteFavorite = () => {
+    if (currentUser && _id) {
+      dispatch(deleteFavorites(_id));
+    } else {
+      toast.warning("This feature is only available to authorized users");
+    }
+  };
+
   return (
     <>
       <div className="notices-card">
@@ -57,33 +97,23 @@ const NoticeCard: FC<INotice> = ({
         </div>
 
         <div className="notices-button-wrap">
-          <button
-            type="button"
-            className="notices-button"
-            onClick={() => setOpenCardInfo(true)}
-          >
+          <button type="button" className="notices-button" onClick={openModal}>
             Read more
           </button>
-          <div className="notices-add-favorite">
-            <Icon className="icon-heart" name="heart" />
-          </div>
+          {_id && favorites.includes(_id) ? (
+            <div className="notices-add-favorite" onClick={deleteFavorite}>
+              <Icon className="icon-heart" name="icon-heart-circle" />
+            </div>
+          ) : (
+            <div className="notices-add-favorite" onClick={addToFavorite}>
+              <Icon className="icon-heart" name="heart" />
+            </div>
+          )}
         </div>
       </div>
       {openCardInfo && (
-        <Modal onClose={() => setOpenCardInfo(false)}>
-          <CardInfoModal
-            key={_id}
-            title={title}
-            imgURL={imgURL}
-            category={category}
-            popularity={popularity}
-            name={name}
-            birthday={birthday}
-            sex={sex}
-            species={species}
-            comment={comment}
-            _id={_id}
-          />
+        <Modal onClose={closeModal}>
+          <CardInfoModal key={_id} data={data} />
         </Modal>
       )}
     </>
