@@ -14,7 +14,7 @@
 
   width: 100%;
   height: 42px;
-  border: none;
+  border: 1px solid fn.get-color("border-dark-primary");
   border-radius: 30px;
   color: fn.get-color("dark");
   padding: 16px;
@@ -35,7 +35,6 @@
     @include mx.mq("sm") {
       &.notices {
         width: 295px;
-        border: none;
       }
     }
 
@@ -44,7 +43,7 @@
       width: 100%;
 
       &.notices {
-        width: 265px;
+        width: 100%;
       }
     }
   }
@@ -75,21 +74,11 @@
 
   @include mx.mq("md") {
     &.category {
-      width: 265px;
+      width: 100%;
     }
 
     &.type {
-      width: 265px;
-    }
-  }
-
-  @include mx.mq("lg") {
-    &.category {
-      width: 275px;
-    }
-
-    &.type {
-      width: 275px;
+      width: 100%;
     }
   }
 }
@@ -163,4 +152,14 @@
   @extend %form-text;
   color: fn.get-color("accent");
   text-decoration: underline;
+}
+
+form {
+  @include mx.mq("md") {
+    width: calc((100% - 16px) / 2);
+  }
+
+  @include mx.mq("lg") {
+    width: calc((100% - 16px * 3) / 4);
+  }
 }
