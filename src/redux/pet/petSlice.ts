@@ -227,7 +227,8 @@ const petSlice = createSlice({
   },
 });
 
-export const { clearState, setCurrentPage } = petSlice.actions;
+export const { clearState, setCurrentPage, addFavorites, deleteFavorites } =
+  petSlice.actions;
 
 // Редюсер слайсу
 export const petReducer = petSlice.reducer;
