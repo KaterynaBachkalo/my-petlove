@@ -1,0 +1,136 @@
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.img-wrap.card-info-modal {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.card-info-modal-img {
+  width: 120px;
+  border-radius: 50%;
+
+  @include mx.mq("md") {
+    width: 150px;
+  }
+}
+
+.card-info-modal-category {
+  position: absolute;
+  left: calc(50% - 60px);
+  top: 0;
+  display: block;
+  padding: 8px 14px;
+  color: fn.get-color("accent");
+  background-color: fn.get-color("background-secondary");
+  border-radius: 30px;
+
+  @include mx.font(12, 16, -2, 500);
+
+  @include mx.mq("md") {
+    @include mx.font(14, 18, -2, 500);
+    left: calc(50% - 75px);
+  }
+}
+
+.notices-title.card-info-modal {
+  text-align: center;
+  margin-bottom: 10px;
+
+  @include mx.mq("md") {
+    @include mx.font(18, 24, 0, 700);
+  }
+}
+
+.notices-icon-wrap.card-info-modal {
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.notices-text-wrapper.card-info-modal {
+  justify-content: center;
+  gap: 27px;
+}
+
+.notices-text-wrap.card-info-modal {
+  margin-bottom: 18px;
+}
+
+.notices-text.card-info-modal {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.card-info-modal-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.5s ease-in;
+
+  @include mx.font(16, 20, -3, 500);
+}
+
+.notices-button.card-info-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  width: calc((100% - 10px) / 2);
+
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: fn.get-color("accent");
+    background-color: fn.get-color("background-secondary");
+    border-radius: 30px;
+
+    .icon-heart {
+      fill: fn.get-color("accent");
+    }
+  }
+}
+
+.card-info-modal-add-to {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  background: transparent;
+  border: none;
+
+  @include mx.font(16, 20, -3, 500);
+}
+
+.card-info-modal-contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  padding: 14px;
+
+  width: calc((100% - 10px) / 2);
+
+  color: fn.get-color("accent");
+  background-color: fn.get-color("background-secondary");
+  transition: all 0.5s ease-in;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: fn.get-color("light");
+    background-color: fn.get-color("accent");
+  }
+}
+
+.icon-heart.card-info-modal {
+  fill: fn.get-color("light");
+}
