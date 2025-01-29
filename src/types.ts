@@ -108,3 +108,7 @@ export interface ISearchQuery {
 export interface IFilter {
   filter: string;
 }
+
+export interface INoticeDate {
+  data: INotice;
+}
