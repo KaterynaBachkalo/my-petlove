@@ -23,7 +23,7 @@ const authConfig = {
 };
 
 const petConfig = {
-  key: "favorites",
+  key: "pet",
   storage,
   whitelist: ["favorites"],
 };
