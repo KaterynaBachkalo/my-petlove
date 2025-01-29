@@ -69,36 +69,7 @@ const NoticesPage = () => {
       </div>
       <div className="news-cards notices-cards">
         {notices && notices.length > 0 ? (
-          notices.map(
-            ({
-              name,
-              title,
-              imgURL,
-              species,
-              birthday,
-              sex,
-              category,
-              comment,
-              popularity,
-              price,
-              _id,
-            }) => (
-              <NoticeCard
-                key={_id}
-                name={name}
-                title={title}
-                imgURL={imgURL}
-                species={species}
-                birthday={birthday}
-                sex={sex}
-                category={category}
-                comment={comment}
-                popularity={popularity}
-                price={price}
-                _id={_id}
-              />
-            )
-          )
+          notices.map((notice) => <NoticeCard key={notice._id} data={notice} />)
         ) : (
           <p>There are news yet</p>
         )}
