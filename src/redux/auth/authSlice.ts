@@ -1,5 +1,7 @@
 import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
+  addFavorites,
+  deleteFavorites,
   logInThunk,
   logOutThunk,
   refreshTokenThunk,
@@ -14,6 +16,7 @@ export interface IState {
   user: {
     email: string | null;
     name: string | null;
+    favorites: string[];
   };
   authenticated: boolean;
   isLoading: boolean;
@@ -84,6 +87,7 @@ const INITIAL_STATE: IState = {
   user: {
     email: null,
     name: null,
+    favorites: [],
   },
   authenticated: false,
   isLoading: false,
@@ -129,21 +133,40 @@ const authSlice = createSlice({
           state.error = null;
         }
       )
-      .addCase(logOutThunk.fulfilled, (state: IState) => {
-        state.accessToken = "";
-        state.refreshToken = "";
-        state.user = { email: null, name: null };
-        state.isLoading = false;
-        state.authenticated = false;
-        state.error = null;
+      .addCase(logOutThunk.fulfilled, () => {
+        return INITIAL_STATE;
       })
+
+      .addCase(
+        addFavorites.fulfilled,
+        (state: IState, action: PayloadAction<string[]>) => {
+          state.isLoading = false;
+          state.user.favorites = action.payload;
+          state.error = null;
+          toast.success("New product was successfully added");
+        }
+      )
+
+      .addCase(
+        deleteFavorites.fulfilled,
+        (state: IState, action: PayloadAction<{ favoriteId: string }>) => {
+          state.isLoading = false;
+          state.user.favorites = state.user.favorites.filter(
+            (favorite) => favorite !== action.payload.favoriteId
+          );
+          state.error = null;
+        }
+      )
+
       .addMatcher(
         isAnyOf(
           logOutThunk.pending,
           logInThunk.pending,
           registerThunk.pending,
           refreshUserThunk.pending,
-          refreshTokenThunk.pending
+          refreshTokenThunk.pending,
+          addFavorites.pending,
+          deleteFavorites.pending
         ),
         handlePending
       )
@@ -153,7 +176,9 @@ const authSlice = createSlice({
           logInThunk.rejected,
           registerThunk.rejected,
           refreshUserThunk.rejected,
-          refreshTokenThunk.rejected
+          refreshTokenThunk.rejected,
+          addFavorites.rejected,
+          deleteFavorites.rejected
         ),
         handleRejected
       );
