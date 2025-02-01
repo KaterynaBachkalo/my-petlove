@@ -10,6 +10,7 @@ export interface IUser {
   ): Promise<boolean>;
   phone?: string;
   avatar?: string;
+  favorites: string[];
 }
 
 export interface INotice {
