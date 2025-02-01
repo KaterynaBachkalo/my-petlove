@@ -5,11 +5,11 @@ import { fixDate } from "../utils/formatDate";
 import CardInfoModal from "./Modals/CardInfoModal";
 import Modal from "./Modals/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFavoritesNotices } from "../redux/pet/selectors";
 import { AppDispatch } from "../redux/store";
-import { addFavorites, deleteFavorites } from "../redux/pet/petSlice";
 import { selectCurrentUser } from "../redux/auth/selectors";
 import { toast } from "react-toastify";
+import { addFavorites, deleteFavorites } from "../redux/auth/operations";
+// import { addToFavorites, deleteFromFavorites } from "../redux/pet/petSlice";
 
 const NoticeCard: FC<INoticeDate> = ({ data }) => {
   const {
@@ -26,9 +26,9 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
   } = data;
   const [openCardInfo, setOpenCardInfo] = useState(false);
 
-  const favorites = useSelector(selectFavoritesNotices);
-
   const currentUser = useSelector(selectCurrentUser);
+
+  const favorites = currentUser.favorites;
 
   const dispatch = useDispatch<AppDispatch>();
 
