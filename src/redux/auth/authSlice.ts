@@ -143,7 +143,7 @@ const authSlice = createSlice({
           state.isLoading = false;
           state.user.favorites = action.payload;
           state.error = null;
-          toast.success("New product was successfully added");
+          toast.success("New favorite pet was successfully added");
         }
       )
 
@@ -155,6 +155,7 @@ const authSlice = createSlice({
             (favorite) => favorite !== action.payload.favoriteId
           );
           state.error = null;
+          toast.success("New favorite pet was successfully removed");
         }
       )
 
