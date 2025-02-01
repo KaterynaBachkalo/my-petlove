@@ -9,7 +9,6 @@ export interface IState {
   notices: INotice[];
   pets: IPet[];
   cities: ICity[];
-  favorites: string[];
 
   totalNews: number;
   totalNotices: number;
@@ -25,7 +24,6 @@ interface Payload {
   notices: INotice[];
   pets: IPet[];
   cities: ICity[];
-  favorites: string[];
 
   totalNews: number;
   totalNotices: number;
@@ -68,7 +66,6 @@ const INITIAL_STATE = {
   isLoading: false,
   error: null,
   currentPage: 1,
-  favorites: [],
 };
 
 const petSlice = createSlice({
@@ -82,21 +79,21 @@ const petSlice = createSlice({
       state.notices = [];
       state.pets = [];
       state.cities = [];
+      // state.favorites = [];
       state.totalNews = 0;
       state.totalNotices = 0;
-      state.favorites = [];
     },
     setCurrentPage(state: IState, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
-    addFavorites(state: IState, action: PayloadAction<string>) {
-      state.favorites.push(action.payload);
-    },
-    deleteFavorites(state: IState, action: PayloadAction<string>) {
-      state.favorites = state.favorites.filter(
-        (favorite) => favorite !== action.payload
-      );
-    },
+    // addToFavorites(state: IState, action: PayloadAction<string>) {
+    //   state.favorites.push(action.payload);
+    // },
+    // deleteFromFavorites(state: IState, action: PayloadAction<string>) {
+    //   state.favorites = state.favorites.filter(
+    //     (favorite) => favorite !== action.payload
+    //   );
+    // },
   },
 
   extraReducers: (builder) => {
@@ -227,8 +224,12 @@ const petSlice = createSlice({
   },
 });
 
-export const { clearState, setCurrentPage, addFavorites, deleteFavorites } =
-  petSlice.actions;
+export const {
+  clearState,
+  setCurrentPage,
+  // addToFavorites,
+  // deleteFromFavorites,
+} = petSlice.actions;
 
 // Редюсер слайсу
 export const petReducer = petSlice.reducer;
