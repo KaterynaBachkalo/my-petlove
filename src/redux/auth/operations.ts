@@ -82,7 +82,7 @@ export const refreshUserThunk = createAsyncThunk(
       if (accessToken) setAccessToken(accessToken);
       if (refreshToken) setRefreshToken(refreshToken);
       const response = await petInstance.get("/users/current");
-      console.log(response.data);
+
       return response.data;
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.message) {
@@ -121,6 +121,38 @@ export const refreshTokenThunk = createAsyncThunk(
       } else {
         throw new Error("Refresh token is missing");
       }
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.message) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
+    }
+  }
+);
+
+export const addFavorites = createAsyncThunk(
+  "favorites/addFavorites",
+  async (favoriteId: string, thunkAPI) => {
+    try {
+      const response = await petInstance.post(
+        `notices/favorites/add/${favoriteId}`
+      );
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.message) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
+    }
+  }
+);
+
+export const deleteFavorites = createAsyncThunk(
+  "favorites/deleteFavorites",
+  async (favoriteId: string, thunkAPI) => {
+    try {
+      await petInstance.delete(`notices/favorites/remove/${favoriteId}`);
+      return { favoriteId };
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.message) {
         return thunkAPI.rejectWithValue(error.message);
