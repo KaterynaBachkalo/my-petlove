@@ -22,15 +22,9 @@ const authConfig = {
   whitelist: ["accessToken", "refreshToken"],
 };
 
-const petConfig = {
-  key: "pet",
-  storage,
-  whitelist: ["favorites"],
-};
-
 const rootReducer = combineReducers({
   auth: persistReducer(authConfig, authReducer),
-  pet: persistReducer(petConfig, petReducer),
+  pet: petReducer,
 });
 
 export const store = configureStore({
