@@ -129,7 +129,7 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
   }, [selectedCategory, selectedGender, selectedType, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} ref={menuRef}>
+    <form onSubmit={handleSubmit(onSubmit)} ref={menuRef} className="form">
       <div
         className={`find-form-wrap ${
           placeholder === "Category" || placeholder === "By gender"
