@@ -154,7 +154,7 @@
   text-decoration: underline;
 }
 
-form {
+.form {
   @include mx.mq("md") {
     width: calc((100% - 16px) / 2);
   }
