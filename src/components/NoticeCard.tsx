@@ -7,9 +7,8 @@ import Modal from "./Modals/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { selectCurrentUser } from "../redux/auth/selectors";
-import { toast } from "react-toastify";
 import { addFavorites, deleteFavorites } from "../redux/auth/operations";
-// import { addToFavorites, deleteFromFavorites } from "../redux/pet/petSlice";
+import UnathorizedInfoModal from "./Modals/UnathorizedInfoModal";
 
 const NoticeCard: FC<INoticeDate> = ({ data }) => {
   const {
@@ -26,6 +25,8 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
   } = data;
   const [openCardInfo, setOpenCardInfo] = useState(false);
 
+  const [openUnauthModal, setOpenUnauthModal] = useState(false);
+
   const currentUser = useSelector(selectCurrentUser);
 
   const favorites = currentUser.favorites;
@@ -39,22 +40,25 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
 
   const closeModal = () => {
     setOpenCardInfo(false);
+    setOpenUnauthModal(false);
     document.body.classList.remove("body-scroll-lock");
   };
 
   const addToFavorite = () => {
-    if (currentUser && _id) {
+    if (currentUser.email && _id) {
       dispatch(addFavorites(_id));
     } else {
-      toast.warning("This feature is only available to authorized users");
+      setOpenUnauthModal(true);
+      document.body.classList.add("body-scroll-lock");
     }
   };
 
   const deleteFavorite = () => {
-    if (currentUser && _id) {
+    if (currentUser.email && _id) {
       dispatch(deleteFavorites(_id));
     } else {
-      toast.warning("This feature is only available to authorized users");
+      setOpenUnauthModal(true);
+      document.body.classList.add("body-scroll-lock");
     }
   };
 
@@ -114,6 +118,11 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
       {openCardInfo && (
         <Modal onClose={closeModal}>
           <CardInfoModal key={_id} data={data} />
+        </Modal>
+      )}
+      {openUnauthModal && (
+        <Modal onClose={closeModal}>
+          <UnathorizedInfoModal key={_id} data={data} />
         </Modal>
       )}
     </>
