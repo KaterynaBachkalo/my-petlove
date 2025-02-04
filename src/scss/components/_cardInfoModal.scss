@@ -54,7 +54,11 @@
 
 .notices-text-wrapper.card-info-modal {
   justify-content: center;
-  gap: 27px;
+  gap: 10px;
+
+  @include mx.mq("md") {
+    gap: 27px;
+  }
 }
 
 .notices-text-wrap.card-info-modal {
@@ -80,7 +84,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
 
   width: calc((100% - 10px) / 2);
 
