@@ -112,4 +112,6 @@ export interface IFilter {
 
 export interface INoticeDate {
   data: INotice;
+  addToFavorite?: () => void;
+  deleteFavorite?: () => void;
 }
