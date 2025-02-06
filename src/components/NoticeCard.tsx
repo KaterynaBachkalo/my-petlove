@@ -117,7 +117,12 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
       </div>
       {openCardInfo && (
         <Modal onClose={closeModal}>
-          <CardInfoModal key={_id} data={data} />
+          <CardInfoModal
+            key={_id}
+            data={data}
+            addToFavorite={addToFavorite}
+            deleteFavorite={deleteFavorite}
+          />
         </Modal>
       )}
       {openUnauthModal && (
