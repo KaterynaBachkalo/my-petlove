@@ -1,10 +1,16 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { INoticeDate } from "../../types";
 import Icon from "../Icon";
 import { fixDate } from "../../utils/formatDate";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/auth/selectors";
 
-const CardInfoModal: FC<INoticeDate> = ({ data }) => {
+const CardInfoModal: FC<INoticeDate> = ({
+  data,
+  addToFavorite,
+  deleteFavorite,
+}) => {
   const {
     title,
     imgURL,
@@ -15,8 +21,13 @@ const CardInfoModal: FC<INoticeDate> = ({ data }) => {
     species,
     category,
     comment,
+    _id,
   } = data;
-  const [, setAddToFavorites] = useState(false);
+
+  const currentUser = useSelector(selectCurrentUser);
+
+  const favorites = currentUser.favorites;
+
   return (
     <>
       <div className="notices-card-top">
@@ -55,16 +66,30 @@ const CardInfoModal: FC<INoticeDate> = ({ data }) => {
       </div>
 
       <div className="card-info-modal-wrap">
-        <div className="notices-button card-info-modal">
-          <button
-            type="button"
-            className="card-info-modal-add-to"
-            onClick={() => setAddToFavorites(true)}
+        {_id && favorites.includes(_id) ? (
+          <div
+            className="notices-button card-info-modal"
+            onClick={deleteFavorite}
           >
-            Add to
-          </button>
-          <Icon className="icon-heart card-info-modal" name="heart" />
-        </div>
+            <button type="button" className="card-info-modal-add-to">
+              Delete
+            </button>
+            <Icon
+              className="icon-heart card-info-modal"
+              name="icon-heart-circle"
+            />
+          </div>
+        ) : (
+          <div
+            className="notices-button card-info-modal"
+            onClick={addToFavorite}
+          >
+            <button type="button" className="card-info-modal-add-to">
+              Add to
+            </button>
+            <Icon className="icon-heart card-info-modal" name="heart" />
+          </div>
+        )}
 
         <Link to="" className="card-info-modal-contact">
           Contact
