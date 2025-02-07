@@ -5,7 +5,7 @@ type CloseFunction = (value: boolean) => void;
 const useCloseModals = (
   func: CloseFunction,
   myRef: RefObject<HTMLElement>,
-  ref?: RefObject<HTMLElement>
+  backdropRef: RefObject<HTMLElement>
 ) => {
   useEffect(() => {
     const handleKeyDown = (event: globalThis.KeyboardEvent) => {
@@ -15,7 +15,12 @@ const useCloseModals = (
     };
 
     const handleClose = (event: MouseEvent) => {
-      if (myRef.current && !myRef.current.contains(event.target as Node)) {
+      if (
+        myRef.current &&
+        backdropRef.current &&
+        !myRef.current.contains(event.target as Node) &&
+        backdropRef.current.contains(event.target as Node)
+      ) {
         func(false);
       }
     };
@@ -28,7 +33,7 @@ const useCloseModals = (
       document.removeEventListener("mousedown", handleClose);
       document.body.classList.remove("body-scroll-lock");
     };
-  }, [func, myRef, ref]);
+  }, [func, myRef, backdropRef]);
 };
 
 export default useCloseModals;
