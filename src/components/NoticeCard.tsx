@@ -23,6 +23,7 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
     comment,
     _id,
   } = data;
+
   const [openCardInfo, setOpenCardInfo] = useState(false);
 
   const [openUnauthModal, setOpenUnauthModal] = useState(false);
@@ -38,10 +39,16 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
     document.body.classList.add("body-scroll-lock");
   };
 
-  const closeModal = () => {
+  const closeCardInfoModal = () => {
     setOpenCardInfo(false);
-    setOpenUnauthModal(false);
     document.body.classList.remove("body-scroll-lock");
+  };
+
+  const closeUnauthModal = () => {
+    setOpenUnauthModal(false);
+    if (!openCardInfo) {
+      document.body.classList.remove("body-scroll-lock");
+    }
   };
 
   const addToFavorite = () => {
@@ -49,7 +56,6 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
       dispatch(addFavorites(_id));
     } else {
       setOpenUnauthModal(true);
-      document.body.classList.add("body-scroll-lock");
     }
   };
 
@@ -58,7 +64,6 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
       dispatch(deleteFavorites(_id));
     } else {
       setOpenUnauthModal(true);
-      document.body.classList.add("body-scroll-lock");
     }
   };
 
@@ -116,7 +121,7 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
         </div>
       </div>
       {openCardInfo && (
-        <Modal onClose={closeModal}>
+        <Modal onClose={closeCardInfoModal} isSecondary={false}>
           <CardInfoModal
             key={_id}
             data={data}
@@ -126,7 +131,7 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
         </Modal>
       )}
       {openUnauthModal && (
-        <Modal onClose={closeModal}>
+        <Modal onClose={closeUnauthModal} isSecondary={false}>
           <UnathorizedInfoModal key={_id} data={data} />
         </Modal>
       )}
