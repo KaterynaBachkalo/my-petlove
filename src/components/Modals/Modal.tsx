@@ -8,16 +8,18 @@ const modalRoot: Element | null = document.querySelector("#root-modal");
 interface IProps {
   onClose: (value: boolean) => void;
   children: ReactNode;
+  isSecondary?: boolean;
 }
 
 const Modal: FC<IProps> = ({ onClose, children }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
-  useCloseModals(onClose, modalRef);
+  const backdropRef = useRef<HTMLDivElement | null>(null);
+  useCloseModals(onClose, modalRef, backdropRef);
 
   return (
     modalRoot &&
     createPortal(
-      <div className="modal-backdrop">
+      <div className="modal-backdrop" ref={backdropRef}>
         <div className="modal-container">
           <div
             className="modal"
