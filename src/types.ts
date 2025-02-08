@@ -1,10 +1,10 @@
 export interface IUser {
-  name?: string;
-  password: string;
-  email: string;
+  name?: string | null;
+  password?: string;
+  email: string | null;
   accessToken?: string;
   refreshToken?: string;
-  checkPassword(
+  checkPassword?(
     candidatePassword: string,
     userPassword: string
   ): Promise<boolean>;
