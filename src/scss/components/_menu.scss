@@ -121,6 +121,7 @@
     &.home {
       color: fn.get-color("accent");
       border: none;
+      background-color: fn.get-color("background-secondary");
     }
 
     &:hover,
