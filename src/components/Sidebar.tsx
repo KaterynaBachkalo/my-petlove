@@ -1,11 +1,13 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Icon from "./Icon";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectIsAuthenticated } from "../redux/auth/selectors";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../redux/store";
-import { logOutThunk } from "../redux/auth/operations";
+import {
+  selectCurrentUser,
+  selectIsAuthenticated,
+} from "../redux/auth/selectors";
+import LogoutModal from "./Modals/LogoutModal";
+import Modal from "./Modals/Modal";
 
 interface IProps {
   onClose: () => void;
@@ -13,14 +15,22 @@ interface IProps {
 }
 
 const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
+  const [openModal, setOpenModal] = useState(false);
+
   const isAuthorized = useSelector(selectIsAuthenticated);
 
   const location = useLocation();
 
-  const dispatch = useDispatch<AppDispatch>();
+  const currentUser = useSelector(selectCurrentUser);
 
-  const handleLogOut = () => {
-    dispatch(logOutThunk());
+  const openLogoutModal = () => {
+    setOpenModal(true);
+    document.body.classList.add("body-scroll-lock");
+  };
+
+  const closeLogoutModal = () => {
+    setOpenModal(false);
+    document.body.classList.remove("body-scroll-lock");
   };
 
   return (
@@ -78,7 +88,7 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
       {isAuthorized ? (
         <div className="menu-auth-list">
           <div
-            onClick={handleLogOut}
+            onClick={openLogoutModal}
             className={`menu-link register ${
               location.pathname === "/home" ? "home" : ""
             }`}
@@ -108,6 +118,11 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
             </NavLink>
           </li>
         </ul>
+      )}
+      {openModal && (
+        <Modal onClose={closeLogoutModal}>
+          <LogoutModal userData={currentUser} onClose={closeLogoutModal} />
+        </Modal>
       )}
     </div>
   );
