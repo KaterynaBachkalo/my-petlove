@@ -61,3 +61,66 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+.card-info-modal-img.logout {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+}
+
+.unauth-info-modal-title.logout {
+  color: fn.get-color("dark");
+  margin-bottom: 28px;
+
+  @include mx.font(20, 20, -3, 700);
+
+  @include mx.mq("md") {
+    @include mx.font(24, 28, -3, 700);
+  }
+}
+
+.logout-btn-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.logout-btn {
+  border-radius: 30px;
+  border: none;
+  padding: 12px 37px;
+
+  @include mx.font(14, 18, -3, 700);
+
+  @include mx.mq("sm") {
+    padding: 12px 44px;
+  }
+
+  @include mx.mq("md") {
+    padding: 14px 44px;
+    @include mx.font(16, 20, -3, 700);
+  }
+
+  &.yes {
+    color: fn.get-color("light");
+    background-color: fn.get-color("accent");
+    transition: all 0.5s ease-in;
+
+    &:hover {
+      color: fn.get-color("accent");
+      background-color: fn.get-color("background-hover");
+    }
+  }
+
+  &.cancel {
+    color: fn.get-color("dark");
+    background-color: fn.get-color("background-btn");
+    transition: all 0.5s ease-in;
+
+    &:hover {
+      color: fn.get-color("light");
+      background-color: fn.get-color("accent");
+    }
+  }
+}
