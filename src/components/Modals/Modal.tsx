@@ -8,7 +8,6 @@ const modalRoot: Element | null = document.querySelector("#root-modal");
 interface IProps {
   onClose: (value: boolean) => void;
   children: ReactNode;
-  isSecondary?: boolean;
 }
 
 const Modal: FC<IProps> = ({ onClose, children }) => {
