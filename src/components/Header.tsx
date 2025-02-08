@@ -1,14 +1,14 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import LogoAuthImage from "../img/logoAuth.png";
 import Icon from "./Icon";
-import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   selectCurrentUser,
   selectIsAuthenticated,
 } from "../redux/auth/selectors";
-import { AppDispatch } from "../redux/store";
-import { logOutThunk } from "../redux/auth/operations";
+import Modal from "./Modals/Modal";
+import LogoutModal from "./Modals/LogoutModal";
 
 interface IProps {
   onOpen: (value: boolean) => void;
@@ -19,10 +19,16 @@ const Header: FC<IProps> = ({ onOpen }) => {
   const currentUser = useSelector(selectCurrentUser);
   const location = useLocation();
 
-  const dispatch = useDispatch<AppDispatch>();
+  const [openModal, setOpenModal] = useState(false);
 
-  const handleLogOut = () => {
-    dispatch(logOutThunk());
+  const openLogoutModal = () => {
+    setOpenModal(true);
+    document.body.classList.add("body-scroll-lock");
+  };
+
+  const closeLogoutModal = () => {
+    setOpenModal(false);
+    document.body.classList.remove("body-scroll-lock");
   };
 
   return (
@@ -89,7 +95,7 @@ const Header: FC<IProps> = ({ onOpen }) => {
         {isAuthorized && (
           <div className="header-auth-list">
             <div
-              onClick={handleLogOut}
+              onClick={openLogoutModal}
               className={`menu-link register ${
                 location.pathname === "/home" ? "home" : ""
               }`}
@@ -97,6 +103,12 @@ const Header: FC<IProps> = ({ onOpen }) => {
               <p className="menu-logout">Logout</p>
             </div>
           </div>
+        )}
+
+        {openModal && (
+          <Modal onClose={closeLogoutModal}>
+            <LogoutModal userData={currentUser} onClose={closeLogoutModal} />
+          </Modal>
         )}
 
         {currentUser && isAuthorized && (
