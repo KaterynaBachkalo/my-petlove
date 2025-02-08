@@ -121,7 +121,7 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
         </div>
       </div>
       {openCardInfo && (
-        <Modal onClose={closeCardInfoModal} isSecondary={false}>
+        <Modal onClose={closeCardInfoModal}>
           <CardInfoModal
             key={_id}
             data={data}
@@ -131,7 +131,7 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
         </Modal>
       )}
       {openUnauthModal && (
-        <Modal onClose={closeUnauthModal} isSecondary={false}>
+        <Modal onClose={closeUnauthModal}>
           <UnathorizedInfoModal key={_id} data={data} />
         </Modal>
       )}
