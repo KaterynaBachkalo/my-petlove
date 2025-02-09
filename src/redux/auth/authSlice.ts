@@ -18,6 +18,7 @@ export interface IState {
     name: string | null;
     favorites: string[];
     avatar: string;
+    phone: number | null;
   };
   authenticated: boolean;
   isLoading: boolean;
@@ -90,6 +91,7 @@ const INITIAL_STATE: IState = {
     name: null,
     favorites: [],
     avatar: "",
+    phone: null,
   },
   authenticated: false,
   isLoading: false,
