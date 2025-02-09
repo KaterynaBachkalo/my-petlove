@@ -101,7 +101,7 @@ const Header: FC<IProps> = ({ onOpen }) => {
                 location.pathname === "/home" ? "home" : ""
               }`}
             >
-              <p className="menu-logout">Logout</p>
+              <p className="menu-logout">Log out</p>
             </button>
           </div>
         )}
