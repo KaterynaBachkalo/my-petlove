@@ -11,7 +11,7 @@ import Modal from "./Modals/Modal";
 import LogoutModal from "./Modals/LogoutModal";
 
 interface IProps {
-  onOpen: (value: boolean) => void;
+  onOpen: () => void;
 }
 
 const Header: FC<IProps> = ({ onOpen }) => {
@@ -94,14 +94,15 @@ const Header: FC<IProps> = ({ onOpen }) => {
 
         {isAuthorized && (
           <div className="header-auth-list">
-            <div
+            <button
+              type="button"
               onClick={openLogoutModal}
               className={`menu-link register ${
                 location.pathname === "/home" ? "home" : ""
               }`}
             >
               <p className="menu-logout">Logout</p>
-            </div>
+            </button>
           </div>
         )}
 
@@ -112,7 +113,7 @@ const Header: FC<IProps> = ({ onOpen }) => {
         )}
 
         {currentUser && isAuthorized && (
-          <div className="header-wrap">
+          <Link to="/profile" className="header-wrap">
             <img src={LogoAuthImage} alt="logo" className="logo-image" />
             <p
               className={`header-name ${
@@ -121,10 +122,10 @@ const Header: FC<IProps> = ({ onOpen }) => {
             >
               {currentUser.name}
             </p>
-          </div>
+          </Link>
         )}
 
-        <div onClick={() => onOpen(true)} className="menu-burger-wrap">
+        <div onClick={onOpen} className="menu-burger-wrap">
           <Icon
             name="menu-burger"
             width={32}
