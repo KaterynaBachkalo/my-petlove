@@ -12,6 +12,14 @@ import ScrollToTopButton from "./ScrollToTopButton/ScrollToTopButton";
 export const SharedLayout = () => {
   const [isOpenMenu, setOpenMenu] = useState(false);
 
+  const openSidebar = () => {
+    setOpenMenu(true);
+  };
+
+  const closeSidebar = () => {
+    setOpenMenu(false);
+  };
+
   const location = useLocation();
 
   return (
@@ -22,10 +30,10 @@ export const SharedLayout = () => {
           : ""
       }
     >
-      {location.pathname !== "/" && <Header onOpen={setOpenMenu} />}
+      {location.pathname !== "/" && <Header onOpen={openSidebar} />}
       {isOpenMenu && (
-        <div onClick={() => setOpenMenu(false)}>
-          <Sidebar onClose={() => setOpenMenu(false)} isOpen={isOpenMenu} />
+        <div onClick={closeSidebar}>
+          <Sidebar onClose={closeSidebar} isOpen={isOpenMenu} />
         </div>
       )}
       <ScrollToTopButton />
