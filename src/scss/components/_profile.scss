@@ -7,7 +7,12 @@
   background-color: fn.get-color("light");
   border-radius: 30px;
   padding: 18px 20px;
+
+  &.my {
+    margin-bottom: 40px;
+  }
 }
+
 .profile-user-wrapper {
   display: flex;
 
@@ -29,6 +34,10 @@
   color: fn.get-color("light");
   border-radius: 30px;
   padding: 10px;
+
+  &.my-pets {
+    width: 123px;
+  }
 }
 
 .profile-name {
@@ -49,6 +58,13 @@
 
   background-color: fn.get-color("background-secondary");
   border-radius: 50%;
+  border: none;
+  transition: all 0.5s ease-in;
+
+  &:hover,
+  &:focus {
+    background-color: fn.get-color("background-hover");
+  }
 }
 
 .profile-edit-icon {
@@ -85,4 +101,16 @@
 .wrap-input.profile {
   gap: 10px;
   margin-bottom: 40px;
+}
+
+//***** MY PETS *****//
+.my-pets-list {
+  margin-bottom: 20px;
+}
+
+//***** FAVORITE PETS *****//
+
+.favorites-no-pets {
+  text-align: center;
+  margin: 40px auto;
 }
