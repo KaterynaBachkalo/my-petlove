@@ -49,11 +49,11 @@ function App() {
           <Route path="notices" element={<NoticesPage />} />
 
           <Route path="*" element={<Navigate to="/" />} />
+          <Route
+            path="/profile"
+            element={<PrivateRoute component={ProfilePage} redirectTo="/" />}
+          />
         </Route>
-        <Route
-          path="/profile"
-          element={<PrivateRoute component={ProfilePage} redirectTo="/" />}
-        />
       </Routes>
     </>
   );
