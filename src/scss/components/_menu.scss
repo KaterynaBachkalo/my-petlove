@@ -20,7 +20,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 1000;
+  z-index: 100;
   padding: 28px 20px 40px 20px;
 
   display: flex;
@@ -52,6 +52,7 @@
 
   &.home {
     fill: fn.get-color("dark");
+    cursor: pointer;
   }
 }
 
@@ -133,6 +134,12 @@
   &.home {
     color: fn.get-color("dark");
     border: 1px solid #26262666;
+    transition: all 0.5s ease-in;
+
+    &:hover,
+    &:focus {
+      border: 1px solid fn.get-color("accent");
+    }
   }
 }
 
