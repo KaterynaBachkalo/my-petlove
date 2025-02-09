@@ -49,10 +49,10 @@
 
 .menu-close {
   fill: fn.get-color("light");
+  cursor: pointer;
 
   &.home {
     fill: fn.get-color("dark");
-    cursor: pointer;
   }
 }
 
