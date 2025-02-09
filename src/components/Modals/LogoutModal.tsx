@@ -45,7 +45,9 @@ const LogoutModal: FC<IUserDate> = ({ userData, onClose }) => {
           </li>
 
           <li>
-            <button className="logout-btn cancel">Cancel</button>
+            <button className="logout-btn cancel" onClick={onClose}>
+              Cancel
+            </button>
           </li>
         </ul>
       </div>
