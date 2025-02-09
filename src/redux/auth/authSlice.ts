@@ -2,11 +2,13 @@ import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   addFavorites,
   deleteFavorites,
+  editThunk,
   logInThunk,
   logOutThunk,
   refreshTokenThunk,
   refreshUserThunk,
   registerThunk,
+  updateAvatarThunk,
 } from "./operations";
 import { toast } from "react-toastify";
 
@@ -163,6 +165,14 @@ const authSlice = createSlice({
         }
       )
 
+      .addCase(updateAvatarThunk.fulfilled, (state, action) => {
+        state.user.avatar = action.payload;
+      })
+
+      .addCase(editThunk.fulfilled, (state, action) => {
+        state.user.avatar = action.payload;
+      })
+
       .addMatcher(
         isAnyOf(
           logOutThunk.pending,
@@ -171,7 +181,9 @@ const authSlice = createSlice({
           refreshUserThunk.pending,
           refreshTokenThunk.pending,
           addFavorites.pending,
-          deleteFavorites.pending
+          deleteFavorites.pending,
+          updateAvatarThunk.pending,
+          editThunk.pending
         ),
         handlePending
       )
@@ -183,7 +195,9 @@ const authSlice = createSlice({
           refreshUserThunk.rejected,
           refreshTokenThunk.rejected,
           addFavorites.rejected,
-          deleteFavorites.rejected
+          deleteFavorites.rejected,
+          updateAvatarThunk.rejected,
+          editThunk.rejected
         ),
         handleRejected
       );
