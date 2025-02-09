@@ -1,102 +1,105 @@
-// import { FC } from "react";
-// import { useForm } from "react-hook-form";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import * as yup from "yup";
-// import Icon from "./Icon";
-// import { useDispatch } from "react-redux";
-// import { logInThunk, registerThunk } from "../redux/auth/operations";
-// import { AppDispatch } from "../redux/store";
-// import { IForms, IFormsBD } from "../types";
-// import { Link, useLocation } from "react-router-dom";
-// import { toast } from "react-toastify";
+import { FC, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/store";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { IFormInputs, IUser } from "../types";
+import { editThunk } from "../redux/auth/operations";
 
-// interface IFormText {
-//   formText: string;
-//   link: string;
-//   textLink: string;
-//   buttonText: string;
-//   isInput: boolean;
-// }
+interface IFormProfile {
+  onClose: () => void;
+  userData: IUser;
+}
 
-const FormProfile = () => {
-  // const dispatch = useDispatch<AppDispatch>();
+const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
+  const dispatch = useDispatch<AppDispatch>();
 
-  // const location = useLocation();
+  const navigate = useNavigate();
 
-  // const schema = yup
-  //   .object({
-  //     name: yup.string(),
-  //     email: yup.string().email().required("Email is required"),
-  //     tel: yup.number(),
-  //   })
-  //   .required();
+  const schema = yup
+    .object({
+      name: yup.string(),
+      email: yup.string().email().required("Email is required"),
+      phone: yup.number(),
+    })
+    .required();
 
-  // const {
-  //   register,
-  //   handleSubmit,
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<IFormInputs>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      name: userData.name || "",
+      email: userData.email || "",
+      phone: userData.phone || 0,
+    },
+  });
 
-  //   formState: { errors },
-  // } = useForm<IFormsProfile>({
-  //   resolver: yupResolver(schema),
-  // });
+  useEffect(() => {
+    setValue("name", userData.name || "");
+    setValue("email", userData.email || "");
+    setValue("phone", userData.phone || 0);
+  }, [userData, setValue]);
 
-  // const onSubmit = async (data: IForms) => {
-  //   try {
-  //     if (location.pathname === "/register") {
-  //       const dataBD: IFormsBD = {
-  //         name: data.name!,
-  //         email: data.email,
-  //         password: data.password,
-  //       };
-  //       await dispatch(registerThunk(dataBD));
+  const onSubmit = async (data: IFormInputs) => {
+    try {
+      await dispatch(editThunk(data));
+      navigate("/profile");
+      onClose();
 
-  //       if (errors) {
-  //         return toast.error("Something went wrong...");
-  //       }
-
-  //       toast.success("Registration successful!");
-  //     } else {
-  //       const dataBD: IFormsBD = {
-  //         email: data.email,
-  //         password: data.password,
-  //       };
-  //       await dispatch(logInThunk(dataBD));
-
-  //       if (errors) {
-  //         return toast.error("Something went wrong...");
-  //       }
-  //     }
-  //   } catch {
-  //     toast.error("Something went wrong, please try again.");
-  //   }
-  // };
+      if (errors) {
+        return toast.error("Something went wrong...");
+      }
+    } catch {
+      toast.error("Something went wrong, please try again.");
+    }
+  };
 
   return (
-    <>FormProfile</>
-    // <form onSubmit={handleSubmit(onSubmit)}>
-    //   <div className="wrap-input">
-    //     {isInput && (
-    //       <div>
-    //         <input {...register("name")} className="input" />
-    //         <p className="form-errors">{errors.name?.message}</p>
-    //       </div>
-    //     )}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="wrap-input">
+        <div>
+          <input
+            {...register("name")}
+            className="input"
+            value={watch("name")}
+            onChange={(e) => setValue("name", e.target.value)}
+          />
+          <p className="form-errors">{errors.name?.message}</p>
+        </div>
 
-    //     <div>
-    //       <input {...register("email")} className="input" />
-    //       <p className="form-errors">{errors.email?.message}</p>
-    //     </div>
+        <div>
+          <input
+            {...register("email")}
+            className="input"
+            value={watch("email")}
+            onChange={(e) => setValue("email", e.target.value)}
+          />
+          <p className="form-errors">{errors.email?.message}</p>
+        </div>
 
-    //     <div>
-    //       <input {...register("tel")} className="input" />
-    //       <p className="form-errors">{errors.email?.message}</p>
-    //     </div>
-    //   </div>
+        <div>
+          <input
+            {...register("phone")}
+            className="input"
+            value={watch("phone")}
+            onChange={(e) => setValue("phone", Number(e.target.value))}
+          />
+          <p className="form-errors">{errors.phone?.message}</p>
+        </div>
+      </div>
 
-    //   <button type="submit" className="form-button">
-    //     {buttonText}
-    //   </button>
-    // </form>
+      <button type="submit" className="form-button">
+        Go to profile
+      </button>
+    </form>
   );
 };
 
