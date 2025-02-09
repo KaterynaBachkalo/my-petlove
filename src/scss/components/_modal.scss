@@ -120,7 +120,7 @@
 
     &:hover {
       color: fn.get-color("light");
-      background-color: fn.get-color("accent");
+      background-color: fn.get-color("backdrop");
     }
   }
 }
