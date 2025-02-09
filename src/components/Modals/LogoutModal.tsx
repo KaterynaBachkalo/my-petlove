@@ -13,8 +13,6 @@ export interface IUserDate {
 const LogoutModal: FC<IUserDate> = ({ userData, onClose }) => {
   const { avatar, name } = userData;
 
-  console.log(avatar, name);
-
   const dispatch = useDispatch<AppDispatch>();
 
   const logOut = () => {
