@@ -9,6 +9,7 @@ import { AppDispatch } from "../redux/store";
 import { selectCurrentUser } from "../redux/auth/selectors";
 import { addFavorites, deleteFavorites } from "../redux/auth/operations";
 import UnathorizedInfoModal from "./Modals/UnathorizedInfoModal";
+import { useLocation } from "react-router-dom";
 
 const NoticeCard: FC<INoticeDate> = ({ data }) => {
   const {
@@ -33,6 +34,8 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
   const favorites = currentUser.favorites;
 
   const dispatch = useDispatch<AppDispatch>();
+
+  const location = useLocation();
 
   const openModal = () => {
     setOpenCardInfo(true);
@@ -109,7 +112,11 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
           <button type="button" className="notices-button" onClick={openModal}>
             Read more
           </button>
-          {_id && favorites.includes(_id) ? (
+          {location.pathname === "/profile" ? (
+            <div className="notices-add-favorite" onClick={deleteFavorite}>
+              <Icon className="icon-heart" name="delete" />
+            </div>
+          ) : _id && favorites.includes(_id) ? (
             <div className="notices-add-favorite" onClick={deleteFavorite}>
               <Icon className="icon-heart" name="icon-heart-circle" />
             </div>
