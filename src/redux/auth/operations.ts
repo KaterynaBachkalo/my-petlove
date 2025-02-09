@@ -1,7 +1,11 @@
 import axios, { AxiosError } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { IForms } from "../../types";
+import { IFormInputs, IForms } from "../../types";
+import {
+  updateUserAvatar,
+  updateUserInfo,
+} from "../../components/services/userApi";
 
 export const petInstance = axios.create({
   baseURL: "http://localhost:4000/api/",
@@ -122,6 +126,37 @@ export const refreshTokenThunk = createAsyncThunk(
         throw new Error("Refresh token is missing");
       }
     } catch (error: unknown) {
+      if (error instanceof AxiosError && error.message) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
+    }
+  }
+);
+
+export const updateAvatarThunk = createAsyncThunk(
+  "auth/avatar",
+  async (newPhoto: File, thunkAPI) => {
+    try {
+      const avatarURL = await updateUserAvatar(newPhoto);
+      return avatarURL;
+    } catch (error) {
+      if (error instanceof AxiosError && error.message) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
+    }
+  }
+);
+
+export const editThunk = createAsyncThunk(
+  "auth/edituserinfo",
+  async (formData: IFormInputs, thunkAPI) => {
+    try {
+      const response = await updateUserInfo(formData);
+
+      return response;
+    } catch (error) {
       if (error instanceof AxiosError && error.message) {
         return thunkAPI.rejectWithValue(error.message);
       }
