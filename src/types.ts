@@ -8,13 +8,13 @@ export interface IUser {
     candidatePassword: string,
     userPassword: string
   ): Promise<boolean>;
-  phone?: string;
+  phone?: number | null;
   avatar?: string;
   favorites: string[];
 }
 
 export interface INotice {
-  _id?: string;
+  _id: string;
   name: string;
   title: string;
   imgURL: string;
@@ -114,4 +114,10 @@ export interface INoticeDate {
   data: INotice;
   addToFavorite?: () => void;
   deleteFavorite?: () => void;
+}
+
+export interface IFormInputs {
+  name?: string;
+  email: string;
+  phone?: number;
 }
