@@ -87,14 +87,18 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
 
       {isAuthorized ? (
         <div className="menu-auth-list">
-          <div
-            onClick={openLogoutModal}
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              openLogoutModal();
+            }}
             className={`menu-link register ${
               location.pathname === "/home" ? "home" : ""
             }`}
           >
             <p className="menu-logout">Logout</p>
-          </div>
+          </button>
         </div>
       ) : (
         <ul className="menu-auth-list">
