@@ -97,7 +97,7 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
               location.pathname === "/home" ? "home" : ""
             }`}
           >
-            <p className="menu-logout">Logout</p>
+            <p className="menu-logout">Log out</p>
           </button>
         </div>
       ) : (
