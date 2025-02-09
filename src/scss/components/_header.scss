@@ -161,6 +161,8 @@
 
 .menu-burger {
   fill: fn.get-color("dark");
+  cursor: pointer;
+
   &.home {
     fill: fn.get-color("light");
   }
