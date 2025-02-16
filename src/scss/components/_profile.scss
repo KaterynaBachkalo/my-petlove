@@ -13,6 +13,13 @@
   }
 }
 
+.profile-tab {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .profile-user-wrapper {
   display: flex;
 
@@ -34,9 +41,15 @@
   color: fn.get-color("light");
   border-radius: 30px;
   padding: 10px;
+  cursor: pointer;
 
   &.my-pets {
     width: 123px;
+
+    &.unactive {
+      background-color: fn.get-color("light");
+      color: fn.get-color("dark");
+    }
   }
 }
 
@@ -84,12 +97,18 @@
   margin-bottom: 0;
 }
 
+.inputFile {
+  display: none;
+}
+
 .profile-upload {
   @include mx.font(12, 16, -2, 500);
 
   color: fn.get-color("dark");
   text-decoration: underline;
   text-align: center;
+
+  cursor: pointer;
 }
 
 .profile-title {
