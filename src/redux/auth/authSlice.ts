@@ -2,7 +2,7 @@ import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   addFavorites,
   deleteFavorites,
-  editThunk,
+  editUserThunk,
   logInThunk,
   logOutThunk,
   refreshTokenThunk,
@@ -169,7 +169,7 @@ const authSlice = createSlice({
         state.user.avatar = action.payload;
       })
 
-      .addCase(editThunk.fulfilled, (state, action) => {
+      .addCase(editUserThunk.fulfilled, (state, action) => {
         state.user.avatar = action.payload;
       })
 
@@ -183,7 +183,7 @@ const authSlice = createSlice({
           addFavorites.pending,
           deleteFavorites.pending,
           updateAvatarThunk.pending,
-          editThunk.pending
+          editUserThunk.pending
         ),
         handlePending
       )
@@ -197,7 +197,7 @@ const authSlice = createSlice({
           addFavorites.rejected,
           deleteFavorites.rejected,
           updateAvatarThunk.rejected,
-          editThunk.rejected
+          editUserThunk.rejected
         ),
         handleRejected
       );
