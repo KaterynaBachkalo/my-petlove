@@ -114,7 +114,15 @@ const Header: FC<IProps> = ({ onOpen }) => {
 
         {currentUser && isAuthorized && (
           <Link to="/profile" className="header-wrap">
-            <img src={LogoAuthImage} alt="logo" className="logo-image" />
+            <img
+              src={
+                currentUser?.avatar
+                  ? `${import.meta.env.VITE_API_URL}${currentUser.avatar}`
+                  : LogoAuthImage
+              }
+              alt="logo"
+              className="logo-image"
+            />
             <p
               className={`header-name ${
                 location.pathname !== "/home" ? "" : "home"
