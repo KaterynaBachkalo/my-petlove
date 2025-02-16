@@ -1,30 +1,40 @@
-import { FC } from "react";
+import { ChangeEvent, forwardRef } from "react";
 import { IUser } from "../../types";
 import LogoAuthImage from "../../img/logoAuth.png";
 import FormProfile from "../FormProfile";
+import UploadFotoForm from "../UploadFotoForm";
 
 export interface IUserDate {
   userData: IUser;
   onClose: () => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const EditModal: FC<IUserDate> = ({ userData, onClose }) => {
-  return (
-    <>
-      <h2 className="profile-title">Edit information</h2>
+const EditModal = forwardRef<HTMLInputElement, IUserDate>(
+  ({ userData, onClose, onChange }, ref) => {
+    return (
+      <>
+        <h2 className="profile-title">Edit information</h2>
 
-      <div className="img-wrap card-info-modal profile">
-        <img
-          src={userData.avatar === "" ? LogoAuthImage : userData.avatar}
-          alt={userData.name ?? "User avatar"}
-          className="card-info-modal-img logout profile"
-        />
-        <p className="profile-upload">Upload photo</p>
-      </div>
+        <div className="img-wrap card-info-modal profile">
+          <img
+            src={
+              userData.avatar
+                ? userData.avatar.startsWith("http")
+                  ? userData.avatar
+                  : `${import.meta.env.VITE_API_URL}${userData.avatar}`
+                : LogoAuthImage
+            }
+            alt={userData.name ?? "User avatar"}
+            className="card-info-modal-img logout profile"
+          />
+          <UploadFotoForm onChange={onChange} ref={ref} />
+        </div>
 
-      <FormProfile onClose={onClose} userData={userData} />
-    </>
-  );
-};
+        <FormProfile onClose={onClose} userData={userData} />
+      </>
+    );
+  }
+);
 
 export default EditModal;
