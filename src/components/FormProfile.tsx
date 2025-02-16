@@ -7,7 +7,7 @@ import { AppDispatch } from "../redux/store";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { IFormInputs, IUser } from "../types";
-import { editThunk } from "../redux/auth/operations";
+import { editUserThunk } from "../redux/auth/operations";
 
 interface IFormProfile {
   onClose: () => void;
@@ -50,7 +50,7 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
 
   const onSubmit = async (data: IFormInputs) => {
     try {
-      await dispatch(editThunk(data));
+      await dispatch(editUserThunk(data));
       navigate("/profile");
       onClose();
 
