@@ -9,7 +9,10 @@ import Modal from "../components/Modals/Modal";
 import LogoutModal from "../components/Modals/LogoutModal";
 import EditModal from "../components/Modals/EditModal";
 import { AppDispatch } from "../redux/store";
-import { updateAvatarThunk } from "../redux/auth/operations";
+import { refreshUserThunk, updateAvatarThunk } from "../redux/auth/operations";
+import UploadFotoForm from "../components/UploadFotoForm";
+import MyInformationForm from "../components/MyInformationForm";
+import ViewedList from "../components/ViewedList";
 
 const ProfilePage = () => {
   const [openLogModal, setOpenLogModal] = useState(false);
@@ -18,30 +21,34 @@ const ProfilePage = () => {
 
   const [file, setFile] = useState<File | null>();
 
+  const [onClickedFav, setOnClickedFav] = useState(true);
+
+  const [onClickedViewed, setOnClickedViewed] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const currentUser = useSelector(selectCurrentUser);
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const openEditModal = () => {
-    setOpenEdModal(true);
-    document.body.classList.add("body-scroll-lock");
+  const handleEditModal = (act: string) => {
+    if (act === "open") {
+      setOpenEdModal(true);
+      document.body.classList.add("body-scroll-lock");
+    } else {
+      setOpenEdModal(false);
+      document.body.classList.remove("body-scroll-lock");
+    }
   };
 
-  const closeEditModal = () => {
-    setOpenEdModal(false);
-    document.body.classList.remove("body-scroll-lock");
-  };
-
-  const openLogoutModal = () => {
-    setOpenLogModal(true);
-    document.body.classList.add("body-scroll-lock");
-  };
-
-  const closeLogoutModal = () => {
-    setOpenLogModal(false);
-    document.body.classList.remove("body-scroll-lock");
+  const handleLogoutModal = (act: string) => {
+    if (act === "open") {
+      setOpenLogModal(true);
+      document.body.classList.add("body-scroll-lock");
+    } else {
+      setOpenLogModal(false);
+      document.body.classList.remove("body-scroll-lock");
+    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,13 +60,18 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    if (file) {
-      dispatch(updateAvatarThunk(file));
-
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
+    const updateAvatar = async () => {
+      if (file) {
+        try {
+          await dispatch(updateAvatarThunk(file)).unwrap();
+          dispatch(refreshUserThunk());
+        } catch (error) {
+          console.error("Failed to update avatar:", error);
+        }
       }
-    }
+    };
+
+    updateAvatar();
   }, [file, dispatch]);
 
   return (
@@ -79,7 +91,7 @@ const ProfilePage = () => {
           <button
             type="button"
             className="profile-edit"
-            onClick={openEditModal}
+            onClick={() => handleEditModal("open")}
           >
             <Icon
               name="edit"
@@ -92,47 +104,19 @@ const ProfilePage = () => {
 
         <div className="img-wrap card-info-modal profile">
           <img
-            src={currentUser.avatar === "" ? LogoAuthImage : currentUser.avatar}
+            src={
+              currentUser?.avatar
+                ? `${import.meta.env.VITE_API_URL}${currentUser.avatar}`
+                : LogoAuthImage
+            }
             alt={currentUser.name ?? "User avatar"}
             className="card-info-modal-img logout profile"
           />
 
-          <form>
-            <input
-              id="inputFile"
-              type="file"
-              onChange={handleChange}
-              className=""
-              ref={fileInputRef}
-            />
-            <label htmlFor="inputFile" className="uploadPhoto">
-              <p className="profile-upload">Upload photo</p>
-            </label>
-          </form>
+          <UploadFotoForm onChange={handleChange} ref={fileInputRef} />
         </div>
 
-        <h2 className="profile-title">My information</h2>
-
-        <form className="wrap-input profile">
-          <input
-            type="text"
-            value={currentUser.name ?? "NONAME"}
-            className="input"
-            readOnly
-          />
-          <input
-            type="email"
-            value={currentUser.email ?? "email"}
-            className="input"
-            readOnly
-          />
-          <input
-            type="tel"
-            value={currentUser.phone ?? "+380"}
-            className="input"
-            readOnly
-          />
-        </form>
+        <MyInformationForm userData={currentUser} />
 
         <div className="profile-user-wrapper addPet">
           <h3 className="profile-title">My pets</h3>
@@ -149,11 +133,12 @@ const ProfilePage = () => {
         </div>
 
         <MyPetsList />
+
         <button
           type="button"
           onClick={(event) => {
             event.stopPropagation();
-            openLogoutModal();
+            handleLogoutModal("open");
           }}
           className="menu-link register"
         >
@@ -161,21 +146,56 @@ const ProfilePage = () => {
         </button>
       </div>
 
-      <div className="profile-background">
-        <div className="profile-user-wrap my-pets">
+      <div className="profile-tab">
+        <div
+          className={`profile-user-wrap my-pets ${
+            (onClickedFav && !onClickedViewed) ||
+            (!onClickedFav && !onClickedViewed)
+              ? ""
+              : "unactive"
+          }`}
+          onClick={() => {
+            setOnClickedFav(true);
+            setOnClickedViewed(false);
+          }}
+        >
           <p className="profile-name">My favorite pets</p>
         </div>
-        <FavoritesList />
+
+        <div
+          className={`profile-user-wrap my-pets ${
+            onClickedViewed && !onClickedFav ? "" : "unactive"
+          }`}
+          onClick={() => {
+            setOnClickedViewed(true);
+            setOnClickedFav(false);
+          }}
+        >
+          <p className="profile-name">Viewed</p>
+        </div>
       </div>
+      <div className="profile-background">
+        {onClickedFav && !onClickedViewed && <FavoritesList />}
+
+        {onClickedViewed && !onClickedFav && <ViewedList />}
+      </div>
+
       {openLogModal && (
-        <Modal onClose={closeLogoutModal}>
-          <LogoutModal userData={currentUser} onClose={closeLogoutModal} />
+        <Modal onClose={() => handleLogoutModal("close")}>
+          <LogoutModal
+            userData={currentUser}
+            onClose={() => handleLogoutModal("close")}
+          />
         </Modal>
       )}
 
       {openEdModal && (
-        <Modal onClose={closeEditModal}>
-          <EditModal userData={currentUser} onClose={closeEditModal} />
+        <Modal onClose={() => handleEditModal("close")}>
+          <EditModal
+            userData={currentUser}
+            onClose={() => handleEditModal("close")}
+            onChange={handleChange}
+          />
         </Modal>
       )}
     </>
