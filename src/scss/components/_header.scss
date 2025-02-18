@@ -52,6 +52,14 @@
 
   &.home {
     color: fn.get-color("light");
+
+    &.dark {
+      color: fn.get-color("dark");
+    }
+  }
+
+  &.dark {
+    color: fn.get-color("light");
   }
 }
 

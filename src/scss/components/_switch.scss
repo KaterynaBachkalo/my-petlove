@@ -1,0 +1,53 @@
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.switch-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.switch-button {
+  border: none;
+  border-radius: 30px;
+  width: 45px;
+  height: 45px;
+  padding: 0;
+
+  &:hover,
+  &:focus {
+    background-color: fn.get-color("accent");
+  }
+}
+
+.switch-icon {
+  padding: 10px;
+  width: 45px;
+  height: 45px;
+  border: 1px solid fn.get-color("accent");
+  border-radius: 30px;
+  cursor: pointer;
+
+  &.light {
+    color: fn.get-color("dark");
+    background-color: fn.get-color("background-primary");
+
+    &:hover,
+    &:focus {
+      background-color: fn.get-color("accent");
+    }
+  }
+
+  &.dark {
+    color: fn.get-color("background-primary");
+    background-color: fn.get-color("accent");
+
+    &:hover,
+    &:focus {
+      background-color: fn.get-color("background-primary");
+    }
+  }
+}

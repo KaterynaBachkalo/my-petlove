@@ -101,6 +101,11 @@
 
   @include mx.mq("lg") {
     width: 362.5px;
+
+    &.profile {
+      padding: 14px;
+      width: 320px;
+    }
   }
 }
 
