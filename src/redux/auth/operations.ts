@@ -81,9 +81,13 @@ export const refreshUserThunk = createAsyncThunk(
     try {
       if (accessToken) setAccessToken(accessToken);
       if (refreshToken) setRefreshToken(refreshToken);
-      const response = await petInstance.get("/users/current");
+      const { data } = await petInstance.get("/users/current");
 
-      return response.data;
+      const updateUser = {
+        ...data,
+        avatar: `${import.meta.env.VITE_API_URL}${data.avatar}`,
+      };
+      return updateUser;
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.message) {
         return thunkAPI.rejectWithValue(error.message);
@@ -139,8 +143,9 @@ export const updateAvatarThunk = createAsyncThunk(
       const { data } = await petInstance.patch("/users/avatars", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+      const avatarUrl = `${import.meta.env.VITE_API_URL}${data.avatar}`;
 
-      return data.avatar;
+      return avatarUrl;
     } catch (error) {
       if (error instanceof AxiosError && error.message) {
         return thunkAPI.rejectWithValue(error.message);

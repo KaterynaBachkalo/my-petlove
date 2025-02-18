@@ -166,7 +166,9 @@ const authSlice = createSlice({
       )
 
       .addCase(updateAvatarThunk.fulfilled, (state, action) => {
-        state.user.avatar = action.payload;
+        if (state.user) {
+          state.user.avatar = action.payload;
+        }
       })
 
       .addCase(editUserThunk.fulfilled, (state, action) => {
