@@ -121,3 +121,8 @@ export interface IFormInputs {
   email: string;
   phone?: number;
 }
+
+export interface IContextTheme {
+  theme: "light" | "dark";
+  tongleTheme: () => void;
+}
