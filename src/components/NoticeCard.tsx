@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { INoticeDate } from "../types";
-import Icon from "./Icon";
+import Icon from "./ComponentsForDesign/Icon";
 import { fixDate } from "../utils/formatDate";
 import CardInfoModal from "./Modals/CardInfoModal";
 import Modal from "./Modals/Modal";
@@ -72,7 +72,7 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
 
   return (
     <>
-      <div className="notices-card">
+      <div className="notices-card profile">
         <div className="notices-card-top">
           <img src={imgURL} alt={title} className="notices-img" />
 

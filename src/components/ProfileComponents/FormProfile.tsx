@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../redux/store";
+import { AppDispatch } from "../../redux/store";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { IFormInputs, IUser } from "../types";
-import { editUserThunk } from "../redux/auth/operations";
+// import { useNavigate } from "react-router-dom";
+import { IFormInputs, IUser } from "../../types";
+import { editUserThunk } from "../../redux/auth/operations";
 
 interface IFormProfile {
   onClose: () => void;
@@ -17,7 +17,7 @@ interface IFormProfile {
 const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const schema = yup
     .object({
@@ -51,7 +51,7 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
   const onSubmit = async (data: IFormInputs) => {
     try {
       await dispatch(editUserThunk(data));
-      navigate("/profile");
+      // navigate("/profile");
       onClose();
 
       if (errors) {

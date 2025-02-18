@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { selectIsAuthenticated } from "../redux/auth/selectors";
-import { selectIsLoading } from "../redux/pet/selectors";
+import { selectIsAuthenticated } from "../../redux/auth/selectors";
+import { selectIsLoading } from "../../redux/pet/selectors";
 
 interface IProps {
   component: React.ComponentType;
@@ -18,8 +18,7 @@ const RestrictedRoute: React.FC<IProps> = ({
 
   if (isloading) return null;
 
-  return authenticated ? <Navigate to={redirectTo} replace /> : <Component/>;
+  return authenticated ? <Navigate to={redirectTo} replace /> : <Component />;
 };
 
 export default RestrictedRoute;
-

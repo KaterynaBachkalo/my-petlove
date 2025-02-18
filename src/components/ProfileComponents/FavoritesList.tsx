@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentUser } from "../redux/auth/selectors";
-import { selectNotices } from "../redux/pet/selectors";
-import { fetchNotices } from "../redux/pet/operations";
-import { clearState } from "../redux/pet/petSlice";
-import { AppDispatch } from "../redux/store";
+import { selectCurrentUser } from "../../redux/auth/selectors";
+import { selectNotices } from "../../redux/pet/selectors";
+import { fetchNotices } from "../../redux/pet/operations";
+// import { clearState } from "../../redux/pet/petSlice";
+import { AppDispatch } from "../../redux/store";
 import { useEffect } from "react";
-import { FetchParams } from "../types";
-import NoticeCard from "./NoticeCard";
+import { FetchParams } from "../../types";
+import NoticeCard from "../NoticeCard";
 
 const FavoritesList = () => {
   const currentUser = useSelector(selectCurrentUser);
@@ -32,13 +32,13 @@ const FavoritesList = () => {
 
     dispatch(fetchNotices(queryParams));
 
-    return () => {
-      dispatch(clearState());
-    };
+    // return () => {
+    //   dispatch(clearState());
+    // };
   }, [dispatch]);
 
   return (
-    <>
+    <div className="favorites-wrap">
       {favorites.length !== 0 ? (
         notices
           ?.filter((notice) => favorites.includes(notice._id))
@@ -46,7 +46,7 @@ const FavoritesList = () => {
       ) : (
         <p className="favorites-no-pets">No favorite pets yet :(</p>
       )}
-    </>
+    </div>
   );
 };
 

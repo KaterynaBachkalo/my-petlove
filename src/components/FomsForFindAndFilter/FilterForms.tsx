@@ -1,9 +1,9 @@
 import { FC } from "react";
+import SortButton from "../SortButton";
+import { ISearchQuery } from "../../types";
+import { useSearchParams } from "react-router-dom";
 import FindForm from "./FindForm";
 import FindFormList from "./FindFormList";
-import SortButton from "./SortButton";
-import { ISearchQuery } from "../types";
-import { useSearchParams } from "react-router-dom";
 
 interface IProps {
   setSearchQuery: React.Dispatch<React.SetStateAction<ISearchQuery>>;

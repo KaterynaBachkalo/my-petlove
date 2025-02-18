@@ -1,18 +1,18 @@
 import { Controller, useForm } from "react-hook-form";
 
 import { FC, useEffect, useRef, useState } from "react";
-import Icon from "./Icon";
 import { useSearchParams } from "react-router-dom";
-import MenuDropdown from "./MenuDropdown";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../redux/store";
-import { categories } from "../data/categories";
-import { gender } from "../data/gender";
-import { types } from "../data/types";
-import { ISearchQuery } from "../types";
-import { setCurrentPage } from "../redux/pet/petSlice";
+import { AppDispatch } from "../../redux/store";
+import { setCurrentPage } from "../../redux/pet/petSlice";
+import Icon from "../ComponentsForDesign/Icon";
+import MenuDropdown from "../MenuDropdown";
+import { gender } from "../../data/gender";
+import { types } from "../../data/types";
+import { categories } from "../../data/categories";
+import { ISearchQuery } from "../../types";
 
 interface IForms {
   category?: string;

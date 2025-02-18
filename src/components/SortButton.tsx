@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Icon from "./Icon";
+import Icon from "./ComponentsForDesign/Icon";
 
 interface IProps {
   setSearchQuery: React.Dispatch<

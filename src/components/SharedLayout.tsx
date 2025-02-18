@@ -3,11 +3,11 @@ import { Suspense, useState } from "react";
 import { ToastContainer } from "react-toastify";
 
 import Header from "./Header";
-import Loader from "./Loader/Loader";
+import Loader from "./ComponentsForDesign/Loader/Loader";
 import Sidebar from "./Sidebar";
 
 import "react-toastify/dist/ReactToastify.css";
-import ScrollToTopButton from "./ScrollToTopButton/ScrollToTopButton";
+import ScrollToTopButton from "./ComponentsForDesign/ScrollToTopButton/ScrollToTopButton";
 
 export const SharedLayout = () => {
   const [isOpenMenu, setOpenMenu] = useState(false);

@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { FC, useEffect } from "react";
-import Icon from "./Icon";
+import Icon from "../ComponentsForDesign/Icon";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { ISearchQuery } from "../types";
+import { ISearchQuery } from "../../types";
 
 interface IForms {
   title: string;

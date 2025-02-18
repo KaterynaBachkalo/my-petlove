@@ -18,16 +18,21 @@ const MyInformationForm: React.FC<IUserProps> = ({ userData }) => {
         <input
           type="text"
           value={name ?? "NONAME"}
-          className="input"
+          className="input profile"
           readOnly
         />
         <input
           type="email"
           value={email ?? "email"}
-          className="input"
+          className="input profile"
           readOnly
         />
-        <input type="tel" value={phone ?? "+380"} className="input" readOnly />
+        <input
+          type="tel"
+          value={phone ?? "+380"}
+          className="input profile"
+          readOnly
+        />
       </form>
     </>
   );

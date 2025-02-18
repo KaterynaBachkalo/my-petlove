@@ -4,11 +4,11 @@ import {
   selectAuthAccessToken,
   selectAuthIsLoading,
   selectIsAuthenticated,
-} from "../redux/auth/selectors";
+} from "../../redux/auth/selectors";
 import { useEffect } from "react";
-import { refreshUserThunk } from "../redux/auth/operations";
+import { refreshUserThunk } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../redux/store";
+import { AppDispatch } from "../../redux/store";
 
 interface IProps {
   component: React.ComponentType;
@@ -35,7 +35,7 @@ const PrivateRoute: React.FC<IProps> = ({
     return null;
   }
 
-  return authenticated ? <Component/> : <Navigate to={redirectTo} replace />;
+  return authenticated ? <Component /> : <Navigate to={redirectTo} replace />;
 };
 
 export default PrivateRoute;

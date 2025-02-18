@@ -1,8 +1,8 @@
 import { ChangeEvent, forwardRef } from "react";
 import { IUser } from "../../types";
 import LogoAuthImage from "../../img/logoAuth.png";
-import FormProfile from "../FormProfile";
-import UploadFotoForm from "../UploadFotoForm";
+import UploadFotoForm from "../ProfileComponents/UploadFotoForm";
+import FormProfile from "../ProfileComponents/FormProfile";
 
 export interface IUserDate {
   userData: IUser;

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { INoticeDate } from "../../types";
-import Icon from "../Icon";
+import Icon from "../ComponentsForDesign/Icon";
 import { fixDate } from "../../utils/formatDate";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";

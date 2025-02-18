@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import Icon from "./Icon";
+import Icon from "./ComponentsForDesign/Icon";
 import { useDispatch } from "react-redux";
 import { logInThunk, registerThunk } from "../redux/auth/operations";
 import { AppDispatch } from "../redux/store";

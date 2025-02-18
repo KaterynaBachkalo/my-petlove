@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import Icon from "./Icon";
+import Icon from "./ComponentsForDesign/Icon";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {

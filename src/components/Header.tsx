@@ -1,6 +1,6 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import LogoAuthImage from "../img/logoAuth.png";
-import Icon from "./Icon";
+import Icon from "./ComponentsForDesign/Icon";
 import { FC, useState } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -9,12 +9,16 @@ import {
 } from "../redux/auth/selectors";
 import Modal from "./Modals/Modal";
 import LogoutModal from "./Modals/LogoutModal";
+import SwitchThemeButtons from "./SwitchThemeButtons";
+import { useTheme } from "../utils/useTheme";
 
 interface IProps {
   onOpen: () => void;
 }
 
 const Header: FC<IProps> = ({ onOpen }) => {
+  const { theme } = useTheme();
+
   const isAuthorized = useSelector(selectIsAuthenticated);
   const currentUser = useSelector(selectCurrentUser);
   const location = useLocation();
@@ -42,7 +46,13 @@ const Header: FC<IProps> = ({ onOpen }) => {
         >
           <p
             className={`header-logo-text ${
-              location.pathname !== "/home" ? "" : "home"
+              location.pathname !== "/home"
+                ? theme === "light"
+                  ? ""
+                  : "dark"
+                : theme === "light"
+                ? "home"
+                : "home dark"
             }`}
           >
             petl
@@ -75,6 +85,8 @@ const Header: FC<IProps> = ({ onOpen }) => {
             </li>
           </ul>
         </nav>
+
+        <SwitchThemeButtons />
 
         {!isAuthorized && (
           <ul className="header-auth-list">
@@ -115,11 +127,7 @@ const Header: FC<IProps> = ({ onOpen }) => {
         {currentUser && isAuthorized && (
           <Link to="/profile" className="header-wrap">
             <img
-              src={
-                currentUser?.avatar
-                  ? `${import.meta.env.VITE_API_URL}${currentUser.avatar}`
-                  : LogoAuthImage
-              }
+              src={currentUser?.avatar ? currentUser.avatar : LogoAuthImage}
               alt="logo"
               className="logo-image"
             />

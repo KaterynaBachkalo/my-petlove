@@ -7,7 +7,6 @@ interface IProps {
 const UploadFotoForm = forwardRef<HTMLInputElement, IProps>(
   ({ onChange }, ref) => {
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-      event.preventDefault();
       onChange(event);
     };
     return (
