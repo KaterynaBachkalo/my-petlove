@@ -8,10 +8,20 @@
 body {
   font-family: "Manrope", sans-serif;
   font-weight: 500;
-  color: fn.get-color("light-secondary");
 
-  background-color: fn.get-color("background-primary");
   height: 100vh;
+  color: fn.get-color("dark");
+  background-color: fn.get-color("background-primary");
+
+  &.light {
+    color: fn.get-color("dark");
+    background-color: fn.get-color("background-primary");
+  }
+
+  &.dark {
+    color: fn.get-color("background-primary");
+    background-color: fn.get-color("background-accent");
+  }
 }
 
 button {
