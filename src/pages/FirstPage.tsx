@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import Icon from "../components/Icon";
-import ProgressBar from "../components/ProgressBar";
+import Icon from "../components/ComponentsForDesign/Icon";
+import ProgressBar from "../components/ComponentsForDesign/ProgressBar";
 import { useState } from "react";
 
 const FirstPage = () => {

@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { AppDispatch } from "../redux/store";
 import { fetchNews } from "../redux/pet/operations";
 import { FetchParams, ISearchQuery } from "../types";
-import FindForm from "../components/FindForm";
 import { formatDate } from "../utils/formatDate";
-import Pagination from "../components/Pagination";
+import Pagination from "../components/ComponentsForDesign/Pagination";
+import FindForm from "../components/FomsForFindAndFilter/FindForm";
 
 const NewsPage = () => {
   const news = useSelector(selectNews);

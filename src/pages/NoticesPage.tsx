@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { AppDispatch } from "../redux/store";
 import { fetchNotices } from "../redux/pet/operations";
 import { FetchParams, ISearchQuery } from "../types";
-import Pagination from "../components/Pagination";
+import Pagination from "../components/ComponentsForDesign/Pagination";
 import NoticeCard from "../components/NoticeCard";
-import FilterForms from "../components/FilterForms";
+import FilterForms from "../components/FomsForFindAndFilter/FilterForms";
 import { useSearchParams } from "react-router-dom";
 import { clearState } from "../redux/pet/petSlice";
 
