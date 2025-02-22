@@ -11,7 +11,11 @@ import ThemeProvider from "./contexts/ThemeProvider.tsx";
 
 export const ThemeContext = createContext<IContextTheme | undefined>(undefined);
 
-createRoot(document.getElementById("root")!).render(
+const rootElement = document.getElementById("root");
+
+const root = createRoot(rootElement!);
+
+root.render(
   <>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
