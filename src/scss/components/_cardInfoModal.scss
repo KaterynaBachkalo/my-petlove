@@ -137,3 +137,9 @@
 .icon-heart.card-info-modal {
   fill: fn.get-color("light");
 }
+
+.header-auth-list.card-info-modal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
