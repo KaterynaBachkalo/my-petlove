@@ -79,7 +79,7 @@ const ProgressBar: FC<ProgressBarProps> = ({ onComplete }) => {
       setProgress((prevProgress) => {
         if (prevProgress >= 100) {
           clearInterval(timer);
-          onComplete(); // Виклик функції після досягнення 100%.
+          setTimeout(onComplete, 100); // Викликаємо onComplete із затримкою
           return 100;
         }
         return prevProgress + 10;
