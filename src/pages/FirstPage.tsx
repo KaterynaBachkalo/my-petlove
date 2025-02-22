@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import Icon from "../components/ComponentsForDesign/Icon";
 import ProgressBar from "../components/ComponentsForDesign/ProgressBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const FirstPage = () => {
   const [loading, setLoading] = useState(false);
-
+  const [progressComplete, setProgressComplete] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -14,17 +14,20 @@ const FirstPage = () => {
   };
 
   const handleProgressComplete = () => {
-    setLoading(false);
-    navigate("/home");
+    setProgressComplete(true);
   };
+
+  useEffect(() => {
+    if (progressComplete) navigate("/home");
+  }, [navigate, progressComplete]);
 
   return (
     <section>
       {loading && <ProgressBar onComplete={handleProgressComplete} />}
 
-      <Link to="/home" className="first-link" onClick={handleClick}>
-        <div className="background-image">
-          {!loading && (
+      {!loading && (
+        <Link to="/home" className="first-link" onClick={handleClick}>
+          <div className="background-image">
             <p className="first-logo">
               petl
               <Icon
@@ -35,9 +38,9 @@ const FirstPage = () => {
               />
               ve
             </p>
-          )}
-        </div>
-      </Link>
+          </div>
+        </Link>
+      )}
     </section>
   );
 };
