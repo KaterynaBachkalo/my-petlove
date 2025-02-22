@@ -3,10 +3,10 @@ import { SharedLayout } from "./components/SharedLayout";
 import { lazy, useEffect } from "react";
 
 import RestrictedRoute from "./components/Routes/RestrictedRoute";
-import PrivateRoute from "./components/Routes/PrivateRoute";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "./redux/store";
 import { refreshUserThunk } from "./redux/auth/operations";
+import { selectCurrentUser } from "./redux/auth/selectors";
 
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -21,6 +21,8 @@ const NoticesPage = lazy(() => import("./pages/NoticesPage"));
 function App() {
   const dispatch = useDispatch<AppDispatch>();
 
+  const currentUser = useSelector(selectCurrentUser);
+
   useEffect(() => {
     dispatch(refreshUserThunk());
   }, [dispatch]);
@@ -31,13 +33,13 @@ function App() {
         <Route path="/" element={<SharedLayout />}>
           <Route path="/" index element={<FirstPage />} />
           <Route
-            path="/register"
+            path="register"
             element={
               <RestrictedRoute component={RegisterPage} redirectTo="/home" />
             }
           />
           <Route
-            path="/login"
+            path="login"
             element={
               <RestrictedRoute component={LoginPage} redirectTo="/home" />
             }
@@ -47,12 +49,8 @@ function App() {
           <Route path="news" element={<NewsPage />} />
           <Route path="friends" element={<FriendsPage />} />
           <Route path="notices" element={<NoticesPage />} />
-
+          <Route path="profile" element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/" />} />
-          <Route
-            path="/profile"
-            element={<PrivateRoute component={ProfilePage} redirectTo="/" />}
-          />
         </Route>
       </Routes>
     </>
