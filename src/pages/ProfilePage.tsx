@@ -78,7 +78,7 @@ const ProfilePage = () => {
           <div className="profile-background my">
             <div className="profile-user-wrapper">
               <div className="profile-user-wrap">
-                <p className="profile-name">{name}</p>
+                <p className="profile-name">{currentUser.name}</p>
                 <Icon
                   name="icon-person"
                   width={18}
@@ -103,15 +103,17 @@ const ProfilePage = () => {
 
             <div className="img-wrap card-info-modal profile">
               <img
-                src={avatar ? avatar : LogoAuthImage}
-                alt={name ?? "User avatar"}
+                src={
+                  currentUser?.avatar ? `${currentUser.avatar}` : LogoAuthImage
+                }
+                alt={currentUser.name ?? "User avatar"}
                 className="card-info-modal-img logout profile"
               />
 
               <UploadFotoForm onChange={handleChange} ref={fileInputRef} />
             </div>
 
-            <MyInformationForm currentUser={currentUser} />
+            <MyInformationForm userData={currentUser} />
 
             <div className="profile-user-wrapper addPet">
               <h3 className="profile-title">My pets</h3>
@@ -171,9 +173,7 @@ const ProfilePage = () => {
               </div>
             </div>
             <div className="profile-background">
-              {onClickedFav && !onClickedViewed && (
-                <FavoritesList currentUser={currentUser} />
-              )}
+              {onClickedFav && !onClickedViewed && <FavoritesList />}
 
               {onClickedViewed && !onClickedFav && <ViewedList />}
             </div>
