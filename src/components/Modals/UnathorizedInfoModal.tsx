@@ -22,7 +22,7 @@ const UnathorizedInfoModal: FC<INoticeDate> = ({ data }) => {
       </div>
 
       <div className="card-info-modal-wrap">
-        <ul className="header-auth-list">
+        <ul className="header-auth-list card-info-modal">
           <li className="header-link login">
             <NavLink to="/login">
               <p className="menu-login">Log in</p>
