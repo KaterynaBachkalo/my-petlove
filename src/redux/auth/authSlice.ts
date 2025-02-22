@@ -166,13 +166,11 @@ const authSlice = createSlice({
       )
 
       .addCase(updateAvatarThunk.fulfilled, (state, action) => {
-        if (state.user) {
-          state.user.avatar = action.payload;
-        }
+        state.user.avatar = action.payload;
       })
 
       .addCase(editUserThunk.fulfilled, (state, action) => {
-        state.user.avatar = action.payload;
+        state.user = { ...state.user, ...action.payload };
       })
 
       .addMatcher(
