@@ -3,10 +3,9 @@ import { SharedLayout } from "./components/SharedLayout";
 import { lazy, useEffect } from "react";
 
 import RestrictedRoute from "./components/Routes/RestrictedRoute";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "./redux/store";
 import { refreshUserThunk } from "./redux/auth/operations";
-import { selectCurrentUser } from "./redux/auth/selectors";
 
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -20,8 +19,6 @@ const NoticesPage = lazy(() => import("./pages/NoticesPage"));
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
-
-  const currentUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
     dispatch(refreshUserThunk());
