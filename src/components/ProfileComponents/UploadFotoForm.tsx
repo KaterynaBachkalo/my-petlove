@@ -10,7 +10,7 @@ const UploadFotoForm = forwardRef<HTMLInputElement, IProps>(
       onChange(event);
     };
     return (
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form>
         <input
           id="inputFile"
           type="file"
