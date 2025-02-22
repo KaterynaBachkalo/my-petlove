@@ -42,11 +42,19 @@ export const logInThunk = createAsyncThunk(
   "auth/login",
   async (formData: IForms, thunkAPI) => {
     try {
-      const response = await petInstance.post("/users/login", formData);
-      setAccessToken(response.data.accessToken);
-      setRefreshToken(response.data.refreshToken);
+      const { data } = await petInstance.post("/users/login", formData);
+      setAccessToken(data.accessToken);
+      setRefreshToken(data.refreshToken);
 
-      return response.data;
+      const updateUser = {
+        ...data.user,
+        avatar: `${import.meta.env.VITE_API_URL}${data.user.avatar}`,
+      };
+
+      return {
+        ...data,
+        user: updateUser,
+      };
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
         return thunkAPI.rejectWithValue(error.response.status);
@@ -144,7 +152,6 @@ export const updateAvatarThunk = createAsyncThunk(
         headers: { "Content-Type": "multipart/form-data" },
       });
       const avatarUrl = `${import.meta.env.VITE_API_URL}${data.avatar}`;
-
       return avatarUrl;
     } catch (error) {
       if (error instanceof AxiosError && error.message) {
