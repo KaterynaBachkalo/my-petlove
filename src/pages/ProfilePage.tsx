@@ -61,17 +61,13 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    const updateAvatar = async () => {
-      if (file) {
-        try {
-          await dispatch(updateAvatarThunk(file));
-        } catch (error) {
-          console.error("Failed to update avatar:", error);
-        }
-      }
-    };
+    if (file) {
+      dispatch(updateAvatarThunk(file));
 
-    updateAvatar();
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
   }, [file, dispatch]);
 
   return (
@@ -82,7 +78,7 @@ const ProfilePage = () => {
           <div className="profile-background my">
             <div className="profile-user-wrapper">
               <div className="profile-user-wrap">
-                <p className="profile-name">{currentUser.name}</p>
+                <p className="profile-name">{name}</p>
                 <Icon
                   name="icon-person"
                   width={18}
@@ -107,17 +103,15 @@ const ProfilePage = () => {
 
             <div className="img-wrap card-info-modal profile">
               <img
-                src={
-                  currentUser?.avatar ? `${currentUser.avatar}` : LogoAuthImage
-                }
-                alt={currentUser.name ?? "User avatar"}
+                src={avatar ? avatar : LogoAuthImage}
+                alt={name ?? "User avatar"}
                 className="card-info-modal-img logout profile"
               />
 
               <UploadFotoForm onChange={handleChange} ref={fileInputRef} />
             </div>
 
-            <MyInformationForm userData={currentUser} />
+            <MyInformationForm currentUser={currentUser} />
 
             <div className="profile-user-wrapper addPet">
               <h3 className="profile-title">My pets</h3>
@@ -177,7 +171,9 @@ const ProfilePage = () => {
               </div>
             </div>
             <div className="profile-background">
-              {onClickedFav && !onClickedViewed && <FavoritesList />}
+              {onClickedFav && !onClickedViewed && (
+                <FavoritesList currentUser={currentUser} />
+              )}
 
               {onClickedViewed && !onClickedFav && <ViewedList />}
             </div>
