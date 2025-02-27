@@ -1,7 +1,9 @@
 import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   addFavorites,
+  addPet,
   deleteFavorites,
+  deletePet,
   editUserThunk,
   logInThunk,
   logOutThunk,
@@ -11,6 +13,7 @@ import {
   updateAvatarThunk,
 } from "./operations";
 import { toast } from "react-toastify";
+import { IMyPet } from "../../types";
 
 export interface IState {
   accessToken: string;
@@ -21,6 +24,7 @@ export interface IState {
     favorites: string[];
     avatar: string;
     phone: number | null;
+    myPets: IMyPet[];
   };
   authenticated: boolean;
   isLoading: boolean;
@@ -94,6 +98,7 @@ const INITIAL_STATE: IState = {
     favorites: [],
     avatar: "",
     phone: null,
+    myPets: [],
   },
   authenticated: false,
   isLoading: false,
@@ -173,6 +178,23 @@ const authSlice = createSlice({
         state.user = { ...state.user, ...action.payload };
       })
 
+      .addCase(
+        addPet.fulfilled,
+        (state: IState, action: PayloadAction<IMyPet>) => {
+          state.user.myPets.push(action.payload);
+        }
+      )
+      .addCase(
+        deletePet.fulfilled,
+        (state: IState, action: PayloadAction<{ petId: string }>) => {
+          state.isLoading = false;
+          state.user.myPets = state.user.myPets.filter(
+            (pet) => pet._id !== action.payload.petId
+          );
+          state.error = null;
+        }
+      )
+
       .addMatcher(
         isAnyOf(
           logOutThunk.pending,
@@ -183,7 +205,9 @@ const authSlice = createSlice({
           addFavorites.pending,
           deleteFavorites.pending,
           updateAvatarThunk.pending,
-          editUserThunk.pending
+          editUserThunk.pending,
+          addPet.pending,
+          deletePet.pending
         ),
         handlePending
       )
@@ -197,7 +221,9 @@ const authSlice = createSlice({
           addFavorites.rejected,
           deleteFavorites.rejected,
           updateAvatarThunk.rejected,
-          editUserThunk.rejected
+          editUserThunk.rejected,
+          addPet.rejected,
+          deletePet.rejected
         ),
         handleRejected
       );
