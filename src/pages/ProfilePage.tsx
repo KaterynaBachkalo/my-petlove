@@ -14,6 +14,7 @@ import UploadFotoForm from "../components/ProfileComponents/UploadFotoForm";
 import MyInformationForm from "../components/ProfileComponents/MyInformationForm";
 import ViewedList from "../components/ProfileComponents/ViewedList";
 import Loader from "../components/ComponentsForDesign/Loader/Loader";
+import { Link } from "react-router-dom";
 
 const ProfilePage = () => {
   const [openLogModal, setOpenLogModal] = useState(false);
@@ -110,15 +111,19 @@ const ProfilePage = () => {
                 className="card-info-modal-img logout profile"
               />
 
-              <UploadFotoForm onChange={handleChange} ref={fileInputRef} />
+              <UploadFotoForm
+                onChange={handleChange}
+                ref={fileInputRef}
+                isModal={false}
+              />
             </div>
 
-            <MyInformationForm userData={currentUser} />
+            <MyInformationForm />
 
             <div className="profile-user-wrapper addPet">
               <h3 className="profile-title">My pets</h3>
 
-              <div className="profile-user-wrap">
+              <Link to="/add-pet" className="profile-user-wrap">
                 <p className="profile-name">Add pet</p>
                 <Icon
                   name="icon-plus"
@@ -126,7 +131,7 @@ const ProfilePage = () => {
                   height={18}
                   className="icon-plus"
                 />
-              </div>
+              </Link>
             </div>
 
             <MyPetsList />
