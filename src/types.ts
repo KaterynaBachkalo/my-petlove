@@ -30,12 +30,35 @@ export interface INotice {
 }
 
 export interface IPet {
+  _id: string;
   name: string;
   title: string;
   imageURL: string;
   species: string;
   birthday: string;
   sex: string;
+}
+
+export interface IMyPet {
+  _id?: string;
+  sex: string | null;
+  imgURL: File | null | undefined;
+  title: string;
+  name: string;
+  birthday: string;
+  species: string;
+}
+
+export interface IMyPets {
+  myPets: {
+    _id?: string;
+    name: string;
+    title: string;
+    imgURL: File;
+    species: string;
+    birthday: string;
+    sex: string;
+  }[];
 }
 
 export interface ICity {
@@ -118,7 +141,7 @@ export interface INoticeDate {
 
 export interface IFormInputs {
   name?: string;
-  email: string;
+  email?: string;
   phone?: number;
 }
 
