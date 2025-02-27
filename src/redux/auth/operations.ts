@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { IFormInputs, IForms } from "../../types";
+import { IFormInputs, IForms, IMyPet } from "../../types";
 
 export const petInstance = axios.create({
   baseURL: "http://localhost:4000/api/",
@@ -46,15 +46,7 @@ export const logInThunk = createAsyncThunk(
       setAccessToken(data.accessToken);
       setRefreshToken(data.refreshToken);
 
-      const updateUser = {
-        ...data.user,
-        avatar: `${import.meta.env.VITE_API_URL}${data.user.avatar}`,
-      };
-
-      return {
-        ...data,
-        user: updateUser,
-      };
+      return data;
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.response) {
         return thunkAPI.rejectWithValue(error.response.status);
@@ -91,10 +83,17 @@ export const refreshUserThunk = createAsyncThunk(
       if (refreshToken) setRefreshToken(refreshToken);
       const { data } = await petInstance.get("/users/current");
 
+      const updatedPets = data.myPets.map((pet: IMyPet) => ({
+        ...pet,
+        imgURL: pet.imgURL,
+      }));
+
       const updateUser = {
         ...data,
-        avatar: `${import.meta.env.VITE_API_URL}${data.avatar}`,
+        avatar: data.avatar,
+        myPets: updatedPets,
       };
+
       return updateUser;
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.message) {
@@ -151,8 +150,8 @@ export const updateAvatarThunk = createAsyncThunk(
       const { data } = await petInstance.patch("/users/avatars", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      const avatarUrl = `${import.meta.env.VITE_API_URL}${data.avatar}`;
-      return avatarUrl;
+
+      return data.avatar;
     } catch (error) {
       if (error instanceof AxiosError && error.message) {
         return thunkAPI.rejectWithValue(error.message);
@@ -166,9 +165,9 @@ export const editUserThunk = createAsyncThunk(
   "auth/edituserinfo",
   async (formData: IFormInputs, thunkAPI) => {
     try {
-      const { data } = await petInstance.put("/users/current/edit", formData);
+      const { data } = await petInstance.patch("/users/current/edit", formData);
 
-      return data.user;
+      return data;
     } catch (error) {
       if (error instanceof AxiosError && error.message) {
         return thunkAPI.rejectWithValue(error.message);
@@ -201,6 +200,57 @@ export const deleteFavorites = createAsyncThunk(
     try {
       await petInstance.delete(`notices/favorites/remove/${favoriteId}`);
       return { favoriteId };
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.message) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
+    }
+  }
+);
+
+export const addPet = createAsyncThunk(
+  "addPet",
+  async (formData: IMyPet, thunkAPI) => {
+    try {
+      const myformData = new FormData();
+
+      if (formData.imgURL instanceof File) {
+        myformData.append("imgURL", formData.imgURL);
+      }
+      if (formData.sex) {
+        myformData.append("sex", formData.sex);
+      }
+
+      myformData.append("title", formData.title);
+      myformData.append("name", formData.name);
+      myformData.append("birthday", formData.birthday);
+      myformData.append("species", formData.species);
+
+      const { data } = await petInstance.post(
+        "users/current/pets/add",
+        myformData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      return data;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.message) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
+    }
+  }
+);
+
+export const deletePet = createAsyncThunk(
+  "deletePets",
+  async (petId: string, thunkAPI) => {
+    try {
+      await petInstance.delete(`/current/pets/remove/${petId}`);
+      return { petId };
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.message) {
         return thunkAPI.rejectWithValue(error.message);
