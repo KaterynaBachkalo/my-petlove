@@ -1,15 +1,10 @@
-import React from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/auth/selectors";
 
-interface IUserProps {
-  userData: {
-    name: string | null;
-    email: string | null;
-    phone: number | null;
-  };
-}
+const MyInformationForm = () => {
+  const currentUser = useSelector(selectCurrentUser);
 
-const MyInformationForm: React.FC<IUserProps> = ({ userData }) => {
-  const { name, email, phone } = userData;
+  const { name, email, phone } = currentUser;
   return (
     <>
       <h2 className="profile-title">My information</h2>
