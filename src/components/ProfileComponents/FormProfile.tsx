@@ -5,7 +5,6 @@ import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { toast } from "react-toastify";
-// import { useNavigate } from "react-router-dom";
 import { IFormInputs, IUser } from "../../types";
 import { editUserThunk } from "../../redux/auth/operations";
 
@@ -17,12 +16,10 @@ interface IFormProfile {
 const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  // const navigate = useNavigate();
-
   const schema = yup
     .object({
       name: yup.string(),
-      email: yup.string().email().required("Email is required"),
+      email: yup.string().email(),
       phone: yup.number(),
     })
     .required();
@@ -44,19 +41,24 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
 
   useEffect(() => {
     setValue("name", userData.name || "");
-    setValue("email", userData.email || "");
     setValue("phone", userData.phone || 0);
   }, [userData, setValue]);
 
   const onSubmit = async (data: IFormInputs) => {
+    const updateData = {
+      name: data.name,
+      phone: data.phone,
+    };
     try {
-      await dispatch(editUserThunk(data));
-      // navigate("/profile");
+      await dispatch(editUserThunk(updateData));
+
       onClose();
 
-      if (errors) {
+      if (Object.keys(errors).length !== 0) {
         return toast.error("Something went wrong...");
       }
+
+      toast.success("Your data is successfully updated");
     } catch {
       toast.error("Something went wrong, please try again.");
     }
@@ -68,7 +70,7 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
         <div>
           <input
             {...register("name")}
-            className="input"
+            className="input edit"
             value={watch("name")}
             onChange={(e) => setValue("name", e.target.value)}
           />
@@ -78,17 +80,16 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
         <div>
           <input
             {...register("email")}
-            className="input"
+            className="input edit"
             value={watch("email")}
-            onChange={(e) => setValue("email", e.target.value)}
+            readOnly
           />
-          <p className="form-errors">{errors.email?.message}</p>
         </div>
 
         <div>
           <input
             {...register("phone")}
-            className="input"
+            className="input edit"
             value={watch("phone")}
             onChange={(e) => setValue("phone", Number(e.target.value))}
           />
