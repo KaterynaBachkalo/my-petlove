@@ -18,17 +18,11 @@ const EditModal = forwardRef<HTMLInputElement, IUserDate>(
 
         <div className="img-wrap card-info-modal profile">
           <img
-            src={
-              userData.avatar
-                ? userData.avatar.startsWith("http")
-                  ? userData.avatar
-                  : `${import.meta.env.VITE_API_URL}${userData.avatar}`
-                : LogoAuthImage
-            }
+            src={userData.avatar ? userData.avatar : LogoAuthImage}
             alt={userData.name ?? "User avatar"}
             className="card-info-modal-img logout profile"
           />
-          <UploadFotoForm onChange={onChange} ref={ref} />
+          <UploadFotoForm onChange={onChange} ref={ref} isModal={true} />
         </div>
 
         <FormProfile onClose={onClose} userData={userData} />
