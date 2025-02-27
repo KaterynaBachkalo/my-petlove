@@ -29,3 +29,8 @@ export const selectAuthIsLoading = createSelector(
 );
 
 export const selectAuthError = createSelector(selectAuth, (auth) => auth.error);
+
+export const selectPets = createSelector(
+  selectAuth,
+  (auth) => auth.user.myPets
+);
