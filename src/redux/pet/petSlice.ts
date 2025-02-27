@@ -1,6 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { fetchFriends, fetchNews, fetchNotices } from "./operations";
-import { ICity, IFriend, INew, INotice, IPet } from "../../types";
+import { ICity, IFriend, IMyPets, INew, INotice, IPet } from "../../types";
 import { toast } from "react-toastify";
 
 export interface IState {
@@ -79,26 +79,17 @@ const petSlice = createSlice({
       state.notices = [];
       state.pets = [];
       state.cities = [];
-      // state.favorites = [];
+
       state.totalNews = 0;
       state.totalNotices = 0;
     },
     setCurrentPage(state: IState, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
-    // addToFavorites(state: IState, action: PayloadAction<string>) {
-    //   state.favorites.push(action.payload);
-    // },
-    // deleteFromFavorites(state: IState, action: PayloadAction<string>) {
-    //   state.favorites = state.favorites.filter(
-    //     (favorite) => favorite !== action.payload
-    //   );
-    // },
   },
 
   extraReducers: (builder) => {
     builder
-      .addCase(fetchNews.pending, handlePending)
       .addCase(
         fetchNews.fulfilled,
         (state: IState, action: PayloadAction<Payload>) => {
@@ -108,9 +99,7 @@ const petSlice = createSlice({
           state.error = null;
         }
       )
-      .addCase(fetchNews.rejected, handleRejected)
 
-      .addCase(fetchFriends.pending, handlePending)
       .addCase(
         fetchFriends.fulfilled,
         (state: IState, action: PayloadAction<Payload>) => {
@@ -119,9 +108,7 @@ const petSlice = createSlice({
           state.error = null;
         }
       )
-      .addCase(fetchFriends.rejected, handleRejected)
 
-      .addCase(fetchNotices.pending, handlePending)
       .addCase(
         fetchNotices.fulfilled,
         (state: IState, action: PayloadAction<Payload>) => {
@@ -131,105 +118,24 @@ const petSlice = createSlice({
           state.error = null;
         }
       )
-      .addCase(fetchNotices.rejected, handleRejected);
 
-    // .addCase(addProduct.pending, handlePending)
-    // .addCase(
-    //   addProduct.fulfilled,
-    //   (state: IState, action: PayloadAction<IProducts>) => {
-    //     state.isLoading = false;
-    //     state.products.unshift(action.payload);
-    //     state.error = null;
-    //     toast.success("New product was successfully added");
-    //   }
-    // )
-    // .addCase(
-    //   addProduct.rejected,
-    //   (state: IState, action: PayloadAction<unknown>): void => {
-    //     state.isLoading = false;
-    //     state.error = action.payload;
+      .addMatcher(
+        isAnyOf(fetchNews.pending, fetchFriends.pending, fetchNotices.pending),
+        handlePending
+      )
 
-    //     if (state.error === "Request failed with status code 409") {
-    //       toast.error("The product exists with this name");
-    //     }
-    //   }
-    // )
-
-    // .addCase(deleteProduct.pending, handlePending)
-    // .addCase(
-    //   deleteProduct.fulfilled,
-    //   (state: IState, action: PayloadAction<{ productId: string }>) => {
-    //     state.isLoading = false;
-    //     state.products = state.products.filter(
-    //       (product) => product._id !== action.payload.productId
-    //     );
-    //     state.error = null;
-    //   }
-    // )
-    // .addCase(deleteProduct.rejected, handleRejected)
-
-    // .addCase(editProduct.pending, handlePending)
-    // .addCase(
-    //   editProduct.fulfilled,
-    //   (state: IState, action: PayloadAction<IProducts>) => {
-    //     state.isLoading = false;
-    //     const index = state.products.findIndex(
-    //       (product) => product._id === action.payload._id
-    //     );
-    //     if (index !== -1) {
-    //       state.products[index] = action.payload;
-    //     }
-    //     state.error = null;
-    //   }
-    // )
-    // .addCase(editProduct.rejected, handleRejected)
-
-    // .addCase(addSupplier.pending, handlePending)
-    // .addCase(
-    //   addSupplier.fulfilled,
-    //   (state: IState, action: PayloadAction<ISuppliers>) => {
-    //     state.isLoading = false;
-    //     state.suppliers.push(action.payload);
-    //     state.error = null;
-    //     toast.success("New product was successfully added");
-    //   }
-    // )
-    // .addCase(
-    //   addSupplier.rejected,
-    //   (state: IState, action: PayloadAction<unknown>): void => {
-    //     state.isLoading = false;
-    //     state.error = action.payload;
-
-    //     if (state.error === "Request failed with status code 409") {
-    //       toast.error("The product exists with this name");
-    //     }
-    //   }
-    // )
-
-    // .addCase(editSupplier.pending, handlePending)
-    // .addCase(
-    //   editSupplier.fulfilled,
-    //   (state: IState, action: PayloadAction<ISuppliers>) => {
-    //     state.isLoading = false;
-    //     const index = state.suppliers.findIndex(
-    //       (supplier) => supplier._id === action.payload._id
-    //     );
-    //     if (index !== -1) {
-    //       state.suppliers[index] = action.payload;
-    //     }
-    //     state.error = null;
-    //   }
-    // )
-    // .addCase(editSupplier.rejected, handleRejected);
+      .addMatcher(
+        isAnyOf(
+          fetchNews.rejected,
+          fetchFriends.rejected,
+          fetchNotices.rejected
+        ),
+        handleRejected
+      );
   },
 });
 
-export const {
-  clearState,
-  setCurrentPage,
-  // addToFavorites,
-  // deleteFromFavorites,
-} = petSlice.actions;
+export const { clearState, setCurrentPage } = petSlice.actions;
 
 // Редюсер слайсу
 export const petReducer = petSlice.reducer;
