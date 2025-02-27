@@ -1,0 +1,74 @@
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.addPet-img {
+  margin-bottom: 10px;
+}
+
+.addPet-background {
+  background-color: fn.get-color("light");
+  border-radius: 30px;
+  padding: 28px 20px;
+
+  @include mx.mq("lg") {
+  }
+}
+
+.addPet-title {
+  @include mx.font(28, 28, -3, 700);
+
+  color: fn.get-color("dark");
+  margin-bottom: 24px;
+
+  & > span {
+    @include mx.font(14, 18, 0, 700);
+    color: fn.get-color("grey");
+  }
+}
+
+.addPet-icon-wrap {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.addPet-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &.woman {
+    background-color: fn.get-color("female");
+  }
+  &.man {
+    background-color: fn.get-color("male");
+  }
+  &.man-woman {
+    background-color: fn.get-color("background-secondary");
+  }
+}
+
+.icon-man,
+.icon-woman {
+  margin-left: 3px;
+  fill: fn.get-color("single-sex");
+}
+
+.icon-man-woman {
+  margin-left: 3px;
+
+  fill: fn.get-color("accent");
+}
+
+.pet-avatar {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 68px;
+  height: 68px;
+}

@@ -47,6 +47,10 @@
       }
     }
   }
+
+  &.edit {
+    border: 1px solid fn.get-color("accent");
+  }
 }
 
 .find-form-wrap {
