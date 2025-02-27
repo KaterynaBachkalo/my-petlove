@@ -1,7 +1,17 @@
+import { useSelector } from "react-redux";
+import { selectPets } from "../../redux/auth/selectors";
+import MyPet from "./MyPet";
+
 const MyPetsList = () => {
+  const pets = useSelector(selectPets);
+
   return (
     <section className="my-pets-list">
-      <p className="favorites-no-pets">No my pets yet :(</p>
+      {pets?.length !== 0 ? (
+        pets.map((pet) => <MyPet key={pet._id} data={pet} />)
+      ) : (
+        <p className="favorites-no-pets">No my pets yet :(</p>
+      )}
     </section>
   );
 };
