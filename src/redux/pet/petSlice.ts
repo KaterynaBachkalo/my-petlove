@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { fetchFriends, fetchNews, fetchNotices } from "./operations";
-import { ICity, IFriend, IMyPets, INew, INotice, IPet } from "../../types";
+import { ICity, IFriend, INew, INotice, IPet } from "../../types";
 import { toast } from "react-toastify";
 
 export interface IState {
