@@ -249,7 +249,7 @@ export const deletePet = createAsyncThunk(
   "deletePets",
   async (petId: string, thunkAPI) => {
     try {
-      await petInstance.delete(`/current/pets/remove/${petId}`);
+      await petInstance.delete(`users/current/pets/remove/${petId}`);
       return { petId };
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.message) {
