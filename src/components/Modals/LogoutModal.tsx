@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { logOutThunk } from "../../redux/auth/operations";
 import LogoAuthImage from "../../img/logoAuth.png";
+import { useNavigate } from "react-router-dom";
 
 export interface IUserDate {
   userData: IUser;
@@ -15,9 +16,12 @@ const LogoutModal: FC<IUserDate> = ({ userData, onClose }) => {
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const navigate = useNavigate();
+
   const logOut = () => {
     dispatch(logOutThunk());
     onClose();
+    navigate("/home");
   };
 
   return (
