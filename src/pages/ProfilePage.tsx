@@ -78,7 +78,7 @@ const ProfilePage = () => {
         <div className="profile-main-wrap">
           <div className="profile-background my">
             <div className="profile-user-wrapper">
-              <div className="profile-user-wrap">
+              <div className="profile-user-wrap name">
                 <p className="profile-name">{currentUser.name}</p>
                 <Icon
                   name="icon-person"
