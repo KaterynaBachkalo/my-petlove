@@ -124,3 +124,36 @@
     }
   }
 }
+
+//***** EDIT MODAL *****//
+
+.icon-upload {
+  fill: fn.get-color("accent");
+}
+
+.profile-upload-wrap {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  background-color: fn.get-color("background-secondary");
+  border-radius: 30px;
+  padding: 12px;
+  width: 126px;
+  border: none;
+}
+
+.selected-file-input-wrap {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.selected-file-input {
+  border: 1px solid fn.get-color("accent");
+  border-radius: 30px;
+  padding: 12px;
+  width: calc(100% - 126px);
+}
