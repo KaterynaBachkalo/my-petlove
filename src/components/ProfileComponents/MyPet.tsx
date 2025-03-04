@@ -20,38 +20,38 @@ const MyPet = ({ data }: IProps) => {
   };
 
   return (
-    <div className="notices-card profile">
-      <div className="notices-card-top">
+    <div className="my-pet-border">
+      <div className="my-pet-wrapper">
         {imgURL ? (
-          <img src={imgURL.toString()} alt={title} className="notices-img" />
+          <img src={imgURL.toString()} alt={title} className="my-pet-img" />
         ) : (
           <Icon className="icon-paw" name="icon-paw" />
         )}
-
-        <div className="notices-text-wrapper">
-          <div className="notices-text-wrap">
-            <p className="notices-title-text">Name</p>
-            <p>{name}</p>
-          </div>
-          <div className="notices-text-wrap">
-            <p className="notices-title-text">Birthday</p>
-            <p>{birthday}</p>
-          </div>
-          <div className="notices-text-wrap">
-            <p className="notices-title-text">Sex</p>
-            <p>{sex}</p>
-          </div>
-          <div className="notices-text-wrap">
-            <p className="notices-title-text">Species</p>
-            <p>{species}</p>
+        <div>
+          <h3 className="my-pet-title">{title}</h3>
+          <div className="my-pet-text-wrapper">
+            <div className="notices-text-wrap my-pet">
+              <p className="notices-title-text">Name</p>
+              <p>{name}</p>
+            </div>
+            <div className="notices-text-wrap my-pet">
+              <p className="notices-title-text">Birthday</p>
+              <p>{birthday}</p>
+            </div>
+            <div className="notices-text-wrap my-pet">
+              <p className="notices-title-text">Sex</p>
+              <p>{sex}</p>
+            </div>
+            <div className="notices-text-wrap my-pet">
+              <p className="notices-title-text">Species</p>
+              <p>{species}</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="notices-button-wrap">
-        <div className="notices-add-favorite" onClick={deleteMyPet}>
-          <Icon className="icon-heart" name="delete" />
-        </div>
+      <div className="my-pet-delete" onClick={deleteMyPet}>
+        <Icon className="icon-heart delete" name="delete" />
       </div>
     </div>
   );
