@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { AppDispatch } from "../redux/store";
 import { addPet } from "../redux/auth/operations";
+import { Link } from "react-router-dom";
 
 interface IFormPetProfile {
   petData: {
@@ -103,9 +104,14 @@ const FormPetProfile: FC<IFormPetProfile> = ({ petData, resetPetData }) => {
         </div>
       </div>
 
-      <button type="submit" className="form-button">
-        Go to profile
-      </button>
+      <div className="my-pet-button-wrapper">
+        <Link to="/profile" className="form-button back">
+          Back
+        </Link>
+        <button type="submit" className="form-button submit">
+          Submit
+        </button>
+      </div>
     </form>
   );
 };
