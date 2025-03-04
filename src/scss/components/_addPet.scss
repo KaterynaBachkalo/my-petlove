@@ -56,7 +56,6 @@
 
 .icon-man,
 .icon-woman {
-  margin-left: 3px;
   fill: fn.get-color("single-sex");
 }
 
@@ -71,4 +70,42 @@
   border-radius: 50%;
   width: 68px;
   height: 68px;
+}
+
+.my-pet-button-wrapper {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.form-button.back {
+  color: #262626;
+  background-color: rgba(38, 38, 38, 0.0509803922);
+  transition: all 0.5s ease-in;
+  width: 100px;
+  text-align: center;
+
+  &:hover {
+    color: fn.get-color("light");
+    background-color: fn.get-color("backdrop");
+  }
+}
+
+.form-button.submit {
+  width: 100px;
+  transition: all 0.5s ease-in;
+
+  &:hover {
+    color: fn.get-color("accent");
+    background-color: fn.get-color("background-hover");
+  }
+}
+
+.profile-upload-wrap {
+  &:hover {
+    border-radius: 30px;
+    color: fn.get-color("accent");
+    background-color: fn.get-color("background-hover");
+  }
 }
