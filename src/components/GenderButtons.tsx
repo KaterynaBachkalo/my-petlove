@@ -14,7 +14,7 @@ const GenderButtons: FC<IProps> = ({ handleCheckGender }) => {
           onClick={() => handleCheckGender("woman")}
         >
           <Icon
-            name="icon-woman"
+            name="icon-female"
             className="icon-woman"
             width={20}
             height={20}
@@ -24,14 +24,14 @@ const GenderButtons: FC<IProps> = ({ handleCheckGender }) => {
           className="addPet-icon man"
           onClick={() => handleCheckGender("man")}
         >
-          <Icon name="icon-man" className="icon-man" width={20} height={20} />
+          <Icon name="icon-male" className="icon-man" width={20} height={20} />
         </div>
         <div
           className="addPet-icon man-woman"
           onClick={() => handleCheckGender("man-woman")}
         >
           <Icon
-            name="icon-man-woman"
+            name="icon-male-female"
             className="icon-man-woman"
             width={20}
             height={20}
