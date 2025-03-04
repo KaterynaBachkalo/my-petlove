@@ -203,10 +203,12 @@
 
 .notices-add-favorite {
   border-radius: 30px;
-  padding: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: fn.get-color("background-secondary");
   border: none;
-  width: 46px;
+  min-width: 46px;
   height: 46px;
   cursor: pointer;
   transition: all 0.5s ease-in;
