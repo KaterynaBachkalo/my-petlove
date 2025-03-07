@@ -4,6 +4,7 @@ import TabImage1x from "../img/home_page/tab/image@2x.png";
 import TabImage2x from "../img/home_page/tab/image@2x.png";
 import MobImage1x from "../img/home_page/mob/image@2x.png";
 import MobImage2x from "../img/home_page/mob/image@2x.png";
+import Picture from "../components/Picture";
 
 const HomePage = () => {
   return (
@@ -17,34 +18,16 @@ const HomePage = () => {
           life with immeasurable joy and tenderness.
         </p>
       </div>
-      <picture className="home-picture">
-        <source
-          media="(min-width: 1280px)"
-          srcSet={`${DeskImage1x} 1x, ${DeskImage2x} 2x`}
-          type="image/png"
-          width={592}
-          height={654}
-        />
-        <source
-          media="(min-width: 768px)"
-          srcSet={`${TabImage1x} 1x, ${TabImage2x} 2x`}
-          type="image/png"
-          width={704}
-          height={496}
-        />
-        <source
-          media="(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)"
-          srcSet={`${MobImage1x} 1x, ${MobImage2x} 2x`}
-          type="image/png"
-          width={335}
-          height={402}
-        />
-        <img
-          src={MobImage1x}
-          alt="Girl with dog"
-          className="registration-img"
-        />
-      </picture>
+      <Picture
+        mob1x={MobImage1x}
+        mob2x={MobImage2x}
+        tab1x={TabImage1x}
+        tab2x={TabImage2x}
+        desk1x={DeskImage1x}
+        desk2x={DeskImage2x}
+        alt="Girl with dog"
+        className="registration-img"
+      />
     </div>
   );
 };
