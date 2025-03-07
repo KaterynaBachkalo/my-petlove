@@ -10,9 +10,6 @@
   justify-content: center;
 
   margin-bottom: 20px;
-
-  @include mx.mq("md") {
-  }
 }
 
 .card-info-modal-img {
