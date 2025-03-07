@@ -1,0 +1,132 @@
+@use "../utils/placeholders";
+@use "../utils/variables" as var;
+@use "../utils/functions" as fn;
+@use "../utils/mixins" as mx;
+
+.my-pets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  margin-bottom: 20px;
+
+  @include mx.mq("md") {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @include mx.mq("lg") {
+    flex-direction: column;
+    margin-bottom: 40px;
+  }
+}
+
+.my-pet-border {
+  position: relative;
+  border: 1px solid rgba(38, 38, 38, 0.1);
+  border-radius: 20px;
+  padding: 16px 46px 16px 16px;
+  width: 100%;
+
+  @include mx.mq("md") {
+    width: calc((100% - 14px) / 2);
+  }
+
+  @include mx.mq("lg") {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+.my-pet-wrapper {
+  display: flex;
+  gap: 14px;
+
+  @include mx.mq("lg") {
+    gap: 25px;
+  }
+}
+
+.my-pet-img {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+
+  @include mx.mq("lg") {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+.my-pet-title {
+  @include mx.font(14, 18, 0, 700);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 150px;
+  cursor: pointer;
+  margin-bottom: 8px;
+
+  @include mx.mq("lg") {
+    width: 250px;
+    margin-bottom: 12px;
+  }
+}
+
+.my-pet-notices-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+  cursor: pointer;
+}
+
+.my-pet-text-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.notices-text-wrap.my-pet {
+  margin-bottom: 0;
+}
+
+.my-pet-delete {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  min-height: 30px;
+  border-radius: 30px;
+  background-color: fn.get-color("background-secondary");
+  border: none;
+
+  cursor: pointer;
+  transition: all 0.5s ease-in;
+
+  &:hover,
+  &:focus {
+    background-color: fn.get-color("background-hover");
+  }
+
+  @include mx.mq("lg") {
+    min-height: 38px;
+    width: 38px;
+
+    right: 20px;
+    top: 20px;
+  }
+}
+
+.icon-heart.delete {
+  padding: 0;
+  width: 16px;
+  height: 16px;
+
+  @include mx.mq("lg") {
+    width: 20px;
+    height: 20px;
+  }
+}
