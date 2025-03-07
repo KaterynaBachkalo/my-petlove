@@ -136,7 +136,7 @@ const Header: FC<IProps> = ({ onOpen }) => {
                 location.pathname !== "/home" ? "" : "home"
               }`}
             >
-              {currentUser.name}
+              {currentUser.name ? currentUser.name : "User name"}
             </p>
           </Link>
         )}
