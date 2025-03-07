@@ -28,11 +28,15 @@ const MyPet = ({ data }: IProps) => {
           <Icon className="icon-paw" name="icon-paw" />
         )}
         <div>
-          <h3 className="my-pet-title">{title}</h3>
+          <h3 className="my-pet-title" title={title}>
+            {title}
+          </h3>
           <div className="my-pet-text-wrapper">
             <div className="notices-text-wrap my-pet">
               <p className="notices-title-text">Name</p>
-              <p>{name}</p>
+              <p className="my-pet-notices-text" title={name}>
+                {name}
+              </p>
             </div>
             <div className="notices-text-wrap my-pet">
               <p className="notices-title-text">Birthday</p>
