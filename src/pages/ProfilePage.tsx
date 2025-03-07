@@ -53,11 +53,15 @@ const ProfilePage = () => {
     }
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      const selected = files[0];
-      setFile(selected);
+  const handleChange = (event: ChangeEvent<HTMLInputElement> | File) => {
+    if (event instanceof File) {
+      setFile(event);
+    } else {
+      const files = event.target.files;
+      if (files && files.length > 0) {
+        const selected = files[0];
+        setFile(selected);
+      }
     }
   };
 
@@ -102,7 +106,7 @@ const ProfilePage = () => {
               </button>
             </div>
 
-            <div className="img-wrap card-info-modal profile">
+            <div className="pet-avatar">
               <img
                 src={
                   currentUser?.avatar ? `${currentUser.avatar}` : LogoAuthImage
@@ -110,7 +114,9 @@ const ProfilePage = () => {
                 alt={currentUser.name ?? "User avatar"}
                 className="card-info-modal-img logout profile"
               />
+            </div>
 
+            <div className="img-wrap card-info-modal profile">
               <UploadFotoForm
                 onChange={handleChange}
                 ref={fileInputRef}
@@ -177,7 +183,7 @@ const ProfilePage = () => {
                 <p className="profile-name">Viewed</p>
               </div>
             </div>
-            <div className="profile-background">
+            <div className="profile-background favorite">
               {onClickedFav && !onClickedViewed && <FavoritesList />}
 
               {onClickedViewed && !onClickedFav && <ViewedList />}
