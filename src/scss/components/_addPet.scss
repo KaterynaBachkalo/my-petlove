@@ -3,6 +3,15 @@
 @use "../utils/functions" as fn;
 @use "../utils/mixins" as mx;
 
+.add-pet-section {
+  @include mx.mq("lg") {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .addPet-img {
   margin-bottom: 10px;
 }
@@ -12,7 +21,8 @@
   border-radius: 30px;
   padding: 28px 20px;
 
-  @include mx.mq("lg") {
+  @include mx.mq("md") {
+    padding: 40px 135px;
   }
 }
 
@@ -38,38 +48,99 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+
   border-radius: 50%;
   cursor: pointer;
 
   &.woman {
     background-color: fn.get-color("female");
+
+    &:hover,
+    &:focus,
+    &.active {
+      background-color: fn.get-color("female-hover");
+    }
   }
+
   &.man {
     background-color: fn.get-color("male");
+
+    &:hover,
+    &:focus,
+    &.active {
+      background-color: fn.get-color("male-hover");
+    }
   }
+
   &.man-woman {
     background-color: fn.get-color("background-secondary");
+
+    &:hover,
+    &:focus,
+    &.active {
+      background-color: fn.get-color("accent");
+    }
   }
 }
 
 .icon-man,
 .icon-woman {
-  fill: fn.get-color("single-sex");
+  fill: fn.get-color("single-sex-icon");
+
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+
+  &:hover,
+  &:focus,
+  &.active {
+    fill: fn.get-color("light");
+  }
 }
 
 .icon-man-woman {
-  margin-left: 3px;
-
   fill: fn.get-color("accent");
+
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+
+  &:hover,
+  &:focus,
+  &.active {
+    fill: fn.get-color("light");
+  }
 }
 
 .pet-avatar {
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 8px;
+}
+
+.icon-pet-avatar {
+  height: 68px;
+  width: 68px;
   object-fit: cover;
   border-radius: 50%;
-  width: 68px;
-  height: 68px;
+
+  @include mx.mq("md") {
+    height: 86px;
+    width: 86px;
+  }
+}
+
+.add-mypet-input-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include mx.mq("md") {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+  }
 }
 
 .my-pet-button-wrapper {
@@ -80,15 +151,18 @@
 }
 
 .form-button.back {
-  color: #262626;
-  background-color: rgba(38, 38, 38, 0.0509803922);
-  transition: all 0.5s ease-in;
+  color: fn.get-color("dark");
+  background-color: fn.get-color("background-btn");
   width: 100px;
   text-align: center;
 
   &:hover {
     color: fn.get-color("light");
     background-color: fn.get-color("backdrop");
+  }
+
+  @include mx.mq("md") {
+    width: 170px;
   }
 }
 
@@ -99,6 +173,10 @@
   &:hover {
     color: fn.get-color("accent");
     background-color: fn.get-color("background-hover");
+  }
+
+  @include mx.mq("md") {
+    width: 170px;
   }
 }
 
