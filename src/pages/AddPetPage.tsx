@@ -3,14 +3,17 @@ import { useDispatch } from "react-redux";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { AppDispatch } from "../redux/store";
 import Icon from "../components/ComponentsForDesign/Icon";
+
+import GenderButtons from "../components/GenderButtons";
+import FormPetProfile from "../components/FormPetProfile";
+import Picture from "../components/Picture";
+
 import MobImage1x from "../img/addPet_page/mob/image@1x.png";
 import MobImage2x from "../img/addPet_page/mob/image@2x.png";
 import DeskImage1x from "../img/addPet_page/desk/image@1x.png";
 import DeskImage2x from "../img/addPet_page/desk/image@2x.png";
 import TabImage1x from "../img/addPet_page/tab/image@1x.png";
 import TabImage2x from "../img/addPet_page/tab/image@2x.png";
-import GenderButtons from "../components/GenderButtons";
-import FormPetProfile from "../components/FormPetProfile";
 
 const AddPetPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,18 +22,30 @@ const AddPetPage = () => {
 
   const [file, setFile] = useState<File | null>();
 
+  const [fileUrl, setFileUrl] = useState<File | null>();
+
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      const selected = files[0];
-      setFile(selected);
+  const handleChange = (input: ChangeEvent<HTMLInputElement> | File) => {
+    if (input instanceof File) {
+      //URL
+      setPreviewUrl(null);
+      setFile(null);
+      setFileUrl(input);
+    } else {
+      //Computer
+      const files = input.target.files;
+      if (files && files.length > 0) {
+        const selected = files[0];
 
-      const objectUrl = URL.createObjectURL(selected);
-      setPreviewUrl(objectUrl);
+        resetUrlInput();
+        setFile(selected);
+
+        const objectUrl = URL.createObjectURL(selected);
+        setPreviewUrl(objectUrl);
+      }
     }
   };
 
@@ -55,66 +70,82 @@ const AddPetPage = () => {
 
   const petData = {
     sex: selectedGender,
-    imgURL: file,
+    imgURL: file || fileUrl,
   };
 
   const resetPetData = () => {
     setPreviewUrl(null);
+    setFile(null);
+    resetUrlInput();
     petData.sex = "";
   };
 
-  return (
-    <>
-      <picture>
-        <source
-          media="(min-width: 1280px)"
-          srcSet={`${DeskImage1x} 1x, ${DeskImage2x} 2x`}
-          type="image/png"
-          width={592}
-          height={654}
-        />
-        <source
-          media="(min-width: 768px)"
-          srcSet={`${TabImage1x} 1x, ${TabImage2x} 2x`}
-          type="image/png"
-          width={704}
-        />
-        <source
-          media="(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)"
-          srcSet={`${MobImage1x} 1x, ${MobImage2x} 2x`}
-          type="image/png"
-        />
-        <img src={MobImage1x} alt="dog" className="addPet-img" />
-      </picture>
+  const resetUrlInput = () => {
+    setFileUrl(null);
+    const input = document.querySelector(
+      ".selected-file-input"
+    ) as HTMLInputElement | null;
 
+    if (input) {
+      console.log(input.value);
+      input.value = "";
+    }
+  };
+
+  // console.log("previewUrl: ", previewUrl);
+  // console.log("fileUrl: ", fileUrl);
+
+  return (
+    <section className="add-pet-section">
+      <Picture
+        mob1x={MobImage1x}
+        mob2x={MobImage2x}
+        tab1x={TabImage1x}
+        tab2x={TabImage2x}
+        desk1x={DeskImage1x}
+        desk2x={DeskImage2x}
+        alt="dog"
+        className="addPet-img"
+      />
       <div className="addPet-background">
         <h2 className="addPet-title">
           Add my pet/ <span>Personal details</span>
         </h2>
 
-        <GenderButtons handleCheckGender={handleCheckGender} />
+        <GenderButtons
+          handleCheckGender={handleCheckGender}
+          selectedGender={selectedGender}
+        />
 
-        <div className="img-wrap card-info-modal profile">
-          {previewUrl ? (
+        <div className="pet-avatar">
+          {previewUrl && !fileUrl?.name ? (
             <img
               src={previewUrl}
               alt={file?.name ?? "Pet avatar"}
-              className="pet-avatar"
+              className="icon-pet-avatar"
+            />
+          ) : !previewUrl && fileUrl?.name ? (
+            <img
+              src={fileUrl?.name}
+              alt={fileUrl?.name ?? "Pet avatar"}
+              className="icon-pet-avatar"
             />
           ) : (
-            <Icon name="icon-paw" className="" width={68} height={68} />
+            <Icon name="icon-paw" className="icon-pet-avatar" />
           )}
+        </div>
+
+        <div className="img-wrap card-info-modal profile">
           <UploadFotoForm
             onChange={handleChange}
             ref={fileInputRef}
             isModal={true}
-            petAvatarUrl={previewUrl}
           />
         </div>
 
         <FormPetProfile petData={petData} resetPetData={resetPetData} />
       </div>
-    </>
+    </section>
   );
 };
 
