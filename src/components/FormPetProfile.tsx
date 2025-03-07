@@ -39,6 +39,7 @@ const FormPetProfile: FC<IFormPetProfile> = ({ petData, resetPetData }) => {
     register,
     handleSubmit,
     reset,
+
     formState: { errors },
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
@@ -85,22 +86,24 @@ const FormPetProfile: FC<IFormPetProfile> = ({ petData, resetPetData }) => {
           <p className="form-errors">{errors.name?.message}</p>
         </div>
 
-        <div>
-          <input
-            {...register("birthday")}
-            className="input"
-            // onChange={(e) => setValue("date", e.target.value)}
-          />
-          <p className="form-errors">{errors.birthday?.message}</p>
-        </div>
+        <div className="add-mypet-input-wrap">
+          <div>
+            <input
+              {...register("birthday")}
+              className="input"
+              // onChange={(e) => setValue("date", e.target.value)}
+            />
+            <p className="form-errors">{errors.birthday?.message}</p>
+          </div>
 
-        <div>
-          <input
-            {...register("species")}
-            className="input"
-            // onChange={(e) => setValue("species", e.target.value)}
-          />
-          <p className="form-errors">{errors.species?.message}</p>
+          <div>
+            <input
+              {...register("species")}
+              className="input"
+              // onChange={(e) => setValue("species", e.target.value)}
+            />
+            <p className="form-errors">{errors.species?.message}</p>
+          </div>
         </div>
       </div>
 
