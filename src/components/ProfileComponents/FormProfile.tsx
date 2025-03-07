@@ -20,7 +20,10 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
     .object({
       name: yup.string(),
       email: yup.string().email(),
-      phone: yup.number(),
+      phone: yup
+        .string()
+        .matches(/^\d+$/, "The phone must contain only numbers.")
+        .length(9, "The phone must contain exactly 9 digits"),
     })
     .required();
 
@@ -29,19 +32,21 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors },
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
     defaultValues: {
-      name: userData.name || "",
+      name: userData.name || "User name",
       email: userData.email || "",
-      phone: userData.phone || 0,
+      phone: userData.phone?.toString() || "",
     },
+    mode: "onBlur",
   });
 
   useEffect(() => {
-    setValue("name", userData.name || "");
-    setValue("phone", userData.phone || 0);
+    setValue("name", userData.name || "User name");
+    setValue("phone", userData.phone?.toString() || "");
   }, [userData, setValue]);
 
   const onSubmit = async (data: IFormInputs) => {
@@ -51,12 +56,8 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
     };
     try {
       await dispatch(editUserThunk(updateData));
-
+      reset(updateData);
       onClose();
-
-      if (Object.keys(errors).length !== 0) {
-        return toast.error("Something went wrong...");
-      }
 
       toast.success("Your data is successfully updated");
     } catch {
@@ -91,7 +92,7 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
             {...register("phone")}
             className="input edit"
             value={watch("phone")}
-            onChange={(e) => setValue("phone", Number(e.target.value))}
+            onChange={(e) => setValue("phone", e.target.value)}
           />
           <p className="form-errors">{errors.phone?.message}</p>
         </div>
