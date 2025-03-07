@@ -142,7 +142,7 @@ export interface INoticeDate {
 export interface IFormInputs {
   name?: string;
   email?: string;
-  phone?: number;
+  phone?: string;
 }
 
 export interface IContextTheme {
