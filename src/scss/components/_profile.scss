@@ -15,12 +15,19 @@
   }
 
   &.my {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+
+    @include mx.mq("md") {
+      padding: 40px;
+      width: 704px;
+      margin-bottom: 40px;
+    }
 
     @include mx.mq("lg") {
       background-color: fn.get-color("light");
-      padding: 18px 20px;
+
       width: 520px;
+      margin-bottom: 0px;
     }
   }
 }
@@ -124,7 +131,7 @@
 .img-wrap.card-info-modal.profile {
   flex-direction: column;
   gap: 8px;
-  align-items: center;
+
   margin-bottom: 28px;
 }
 
@@ -185,82 +192,32 @@
   }
 }
 
-//***** MY PETS *****//
-.my-pets-list {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
+//***** FAVORITE PETS *****//
 
-.my-pet-border {
-  position: relative;
-  border: 1px solid rgba(38, 38, 38, 0.1);
-  border-radius: 20px;
-  padding: 16px 46px 16px 16px;
-}
+.favorites-no-pets {
+  @include mx.font(14, 18, -2, 700);
 
-.my-pet-wrapper {
-  display: flex;
-  gap: 14px;
-}
+  text-align: center;
+  color: fn.get-color("dark");
 
-.my-pet-img {
-  width: 66px;
-  height: 66px;
-  border-radius: 50%;
-}
-
-.my-pet-title {
-  @include mx.font(14, 18, 0, 700);
-
-  margin-bottom: 8px;
-}
-
-.my-pet-text-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.notices-text-wrap.my-pet {
-  margin-bottom: 0;
-}
-
-.my-pet-delete {
-  position: absolute;
-  right: 12px;
-  top: 12px;
+  & > p > span {
+    color: fn.get-color("accent");
+  }
 
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  min-height: 30px;
-  border-radius: 30px;
-  background-color: fn.get-color("background-secondary");
-  border: none;
+  margin: 80px auto;
 
-  cursor: pointer;
-  transition: all 0.5s ease-in;
+  @include mx.mq("md") {
+    @include mx.font(16, 20, -2, 700);
 
-  &:hover,
-  &:focus {
-    background-color: fn.get-color("background-hover");
+    margin: 180px auto;
   }
-}
-
-.icon-heart.delete {
-  padding: 0;
-  width: 16px;
-  height: 16px;
-}
-
-//***** FAVORITE PETS *****//
-
-.favorites-no-pets {
-  text-align: center;
-  margin: 40px auto;
+  @include mx.mq("lg") {
+    margin: auto;
+    height: 100vh;
+  }
 }
 
 .favorites-wrap {
@@ -276,5 +233,19 @@
 
   @include mx.mq("lg") {
     gap: 24px;
+
+    display: flex;
+
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.favorites-link {
+  color: fn.get-color("accent");
+
+  &:hover,
+  &:focus {
+    color: fn.get-color("background-hover");
   }
 }
