@@ -6,32 +6,22 @@ import TabImage1x from "../img/authorization/login/tab/image@1x.png";
 import TabImage2x from "../img/authorization/login/tab/image@2x.png";
 import MobImage1x from "../img/authorization/login/image@1x.png";
 import MobImage2x from "../img/authorization/login/image@2x.png";
+import Picture from "../components/Picture";
 
 const LoginPage = () => {
   return (
     <>
       <div className="auth-wrapper">
-        <picture>
-          <source
-            media="(min-width: 1280px)"
-            srcSet={`${DeskImage1x} 1x, ${DeskImage2x} 2x`}
-            type="image/png"
-            width={592}
-            height={654}
-          />
-          <source
-            media="(min-width: 768px)"
-            srcSet={`${TabImage1x} 1x, ${TabImage2x} 2x`}
-            type="image/png"
-            width={704}
-          />
-          <source
-            media="(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)"
-            srcSet={`${MobImage1x} 1x, ${MobImage2x} 2x`}
-            type="image/png"
-          />
-          <img src={MobImage1x} alt="dog" className="registration-img" />
-        </picture>
+        <Picture
+          mob1x={MobImage1x}
+          mob2x={MobImage2x}
+          tab1x={TabImage1x}
+          tab2x={TabImage2x}
+          desk1x={DeskImage1x}
+          desk2x={DeskImage2x}
+          alt="Dog"
+          className="registration-img"
+        />
         <div className="login-wrap">
           <h2 className="login-title">Log in</h2>
           <h3 className="login-subtitle">
