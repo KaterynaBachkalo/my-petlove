@@ -7,7 +7,7 @@ import FormProfile from "../ProfileComponents/FormProfile";
 export interface IUserDate {
   userData: IUser;
   onClose: () => void;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement> | File) => void;
 }
 
 const EditModal = forwardRef<HTMLInputElement, IUserDate>(
@@ -16,12 +16,14 @@ const EditModal = forwardRef<HTMLInputElement, IUserDate>(
       <>
         <h2 className="profile-title">Edit information</h2>
 
-        <div className="img-wrap card-info-modal profile">
+        <div className="pet-avatar">
           <img
             src={userData.avatar ? userData.avatar : LogoAuthImage}
             alt={userData.name ?? "User avatar"}
             className="card-info-modal-img logout profile"
           />
+        </div>
+        <div className="img-wrap card-info-modal profile">
           <UploadFotoForm onChange={onChange} ref={ref} isModal={true} />
         </div>
 
