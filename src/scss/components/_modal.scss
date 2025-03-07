@@ -149,6 +149,10 @@
   display: flex;
   gap: 8px;
   align-items: center;
+
+  &.my-pet {
+    width: 100%;
+  }
 }
 
 .selected-file-input {
