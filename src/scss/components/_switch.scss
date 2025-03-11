@@ -27,27 +27,64 @@
   padding: 10px;
   width: 45px;
   height: 45px;
-  border: 1px solid fn.get-color("accent");
+  border: 1px solid fn.get-color("light-dark");
   border-radius: 30px;
   cursor: pointer;
 
-  &.light {
+  &.white {
     color: fn.get-color("dark");
-    background-color: fn.get-color("background-primary");
-
-    &:hover,
-    &:focus {
-      background-color: fn.get-color("accent");
-    }
-  }
-
-  &.dark {
-    color: fn.get-color("background-primary");
     background-color: fn.get-color("accent");
 
     &:hover,
     &:focus {
       background-color: fn.get-color("background-primary");
+    }
+  }
+
+  &.light {
+    color: fn.get-color("dark");
+    background-color: fn.get-color("light-dark");
+
+    &:hover,
+    &:focus {
+      background-color: fn.get-color("background-primary");
+    }
+  }
+
+  &.dark {
+    color: fn.get-color("background-primary");
+    background-color: fn.get-color("background-accent");
+
+    &:hover,
+    &:focus {
+      background-color: fn.get-color("background-primary");
+    }
+  }
+
+  &.home {
+    &.dark {
+      color: fn.get-color("background-primary");
+      background-color: fn.get-color("accent-dark");
+    }
+
+    &.white {
+      color: fn.get-color("dark");
+      background-color: fn.get-color("light");
+
+      &:hover,
+      &:focus {
+        background-color: fn.get-color("accent");
+      }
+    }
+
+    &.accent {
+      color: fn.get-color("dark");
+      background-color: fn.get-color("accent");
+
+      &:hover,
+      &:focus {
+        background-color: fn.get-color("background-primary");
+      }
     }
   }
 }
