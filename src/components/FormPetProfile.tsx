@@ -14,6 +14,7 @@ interface IFormPetProfile {
     imgURL: File | null | undefined;
   };
   resetPetData: () => void;
+  setErrorMessage: (value: string) => void;
 }
 
 interface IFormInputs {
@@ -23,14 +24,18 @@ interface IFormInputs {
   species: string;
 }
 
-const FormPetProfile: FC<IFormPetProfile> = ({ petData, resetPetData }) => {
+const FormPetProfile: FC<IFormPetProfile> = ({
+  petData,
+  resetPetData,
+  setErrorMessage,
+}) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const schema = yup
     .object({
       title: yup.string().default(""),
       name: yup.string().default(""),
-      birthday: yup.string().default(""),
+      birthday: yup.string().length(10).default(""),
       species: yup.string().default(""),
     })
     .required();
@@ -46,12 +51,18 @@ const FormPetProfile: FC<IFormPetProfile> = ({ petData, resetPetData }) => {
   });
 
   const onSubmit = async (data: IFormInputs) => {
+    if (!petData.sex) {
+      setErrorMessage("Please select your pet's gender");
+      return;
+    }
+
     const newPet = {
       title: data.title,
       name: data.name,
       birthday: data.birthday,
       species: data.species,
-      ...petData,
+      sex: petData.sex,
+      imgURL: petData.imgURL,
     };
 
     try {
