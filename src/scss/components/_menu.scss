@@ -31,6 +31,7 @@
 
   &.open {
     animation: slideIn 0.5s forwards;
+    overflow: auto;
   }
 
   @include mx.mq("md") {
@@ -44,7 +45,7 @@
 
 .menu-close-wrap {
   text-align: end;
-  margin-bottom: 176px;
+  margin-bottom: auto;
 }
 
 .menu-close {
@@ -59,6 +60,7 @@
 .menu-nav {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .menu-list {
