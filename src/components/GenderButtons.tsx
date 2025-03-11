@@ -1,12 +1,23 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Icon from "./ComponentsForDesign/Icon";
 
 interface IProps {
   handleCheckGender: (value: string) => void;
   selectedGender: string | null;
+  errorMessage: string;
+  setErrorMessage: (value: string) => void;
 }
 
-const GenderButtons: FC<IProps> = ({ handleCheckGender, selectedGender }) => {
+const GenderButtons: FC<IProps> = ({
+  handleCheckGender,
+  selectedGender,
+  errorMessage,
+  setErrorMessage,
+}) => {
+  useEffect(() => {
+    setErrorMessage("");
+  }, [selectedGender, setErrorMessage]);
+
   return (
     <>
       <div className="addPet-icon-wrap">
@@ -48,6 +59,7 @@ const GenderButtons: FC<IProps> = ({ handleCheckGender, selectedGender }) => {
           />
         </div>
       </div>
+      <p className="form-errors">{errorMessage}</p>
     </>
   );
 };
