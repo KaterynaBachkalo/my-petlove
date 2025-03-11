@@ -18,11 +18,13 @@ import TabImage2x from "../img/addPet_page/tab/image@2x.png";
 const AddPetPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const [file, setFile] = useState<File | null>();
+  const [file, setFile] = useState<File | null>(null);
 
-  const [fileUrl, setFileUrl] = useState<File | null>();
+  const [fileUrl, setFileUrl] = useState<File | null>(null);
 
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
@@ -77,7 +79,7 @@ const AddPetPage = () => {
     setPreviewUrl(null);
     setFile(null);
     resetUrlInput();
-    petData.sex = "";
+    setSelectedGender(null);
   };
 
   const resetUrlInput = () => {
@@ -87,13 +89,9 @@ const AddPetPage = () => {
     ) as HTMLInputElement | null;
 
     if (input) {
-      console.log(input.value);
       input.value = "";
     }
   };
-
-  // console.log("previewUrl: ", previewUrl);
-  // console.log("fileUrl: ", fileUrl);
 
   return (
     <section className="add-pet-section">
@@ -115,6 +113,8 @@ const AddPetPage = () => {
         <GenderButtons
           handleCheckGender={handleCheckGender}
           selectedGender={selectedGender}
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
         />
 
         <div className="pet-avatar">
@@ -143,7 +143,11 @@ const AddPetPage = () => {
           />
         </div>
 
-        <FormPetProfile petData={petData} resetPetData={resetPetData} />
+        <FormPetProfile
+          petData={petData}
+          resetPetData={resetPetData}
+          setErrorMessage={setErrorMessage}
+        />
       </div>
     </section>
   );
