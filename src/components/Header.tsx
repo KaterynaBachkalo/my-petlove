@@ -36,7 +36,15 @@ const Header: FC<IProps> = ({ onOpen }) => {
   };
 
   return (
-    <header className={`header ${location.pathname !== "/home" ? "" : "home"}`}>
+    <header
+      className={`header ${
+        location.pathname !== "/home"
+          ? ""
+          : theme === "light"
+          ? "home light"
+          : "home dark"
+      }`}
+    >
       <nav className="header-nav">
         <Link
           to={isAuthorized ? "/home" : "/"}
@@ -59,7 +67,11 @@ const Header: FC<IProps> = ({ onOpen }) => {
             <Icon
               name="icon-heart-circle"
               className={`logo-heart ${
-                location.pathname !== "/home" ? "" : "home"
+                location.pathname !== "/home"
+                  ? ""
+                  : theme === "light"
+                  ? "home"
+                  : "home dark"
               }`}
             />
             ve
@@ -147,7 +159,11 @@ const Header: FC<IProps> = ({ onOpen }) => {
             width={32}
             height={32}
             className={`menu-burger ${
-              location.pathname !== "/home" ? "" : "home"
+              location.pathname !== "/home"
+                ? ""
+                : theme === "light"
+                ? "home"
+                : "home dark"
             }`}
           />
         </div>
