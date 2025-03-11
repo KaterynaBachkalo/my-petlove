@@ -209,6 +209,21 @@ export const deleteFavorites = createAsyncThunk(
   }
 );
 
+export const addViewed = createAsyncThunk(
+  "viewed/addViewed",
+  async (viewedId: string, thunkAPI) => {
+    try {
+      const response = await petInstance.post(`notices/viewed/add/${viewedId}`);
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.message) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
+    }
+  }
+);
+
 export const addPet = createAsyncThunk(
   "addPet",
   async (formData: IMyPet, thunkAPI) => {
