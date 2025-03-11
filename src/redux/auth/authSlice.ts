@@ -2,6 +2,7 @@ import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   addFavorites,
   addPet,
+  addViewed,
   deleteFavorites,
   deletePet,
   editUserThunk,
@@ -22,6 +23,7 @@ export interface IState {
     email: string | null;
     name: string | null;
     favorites: string[];
+    viewed: string[];
     avatar: string;
     phone: number | null;
     myPets: IMyPet[];
@@ -96,6 +98,7 @@ const INITIAL_STATE: IState = {
     email: null,
     name: null,
     favorites: [],
+    viewed: [],
     avatar: "",
     phone: null,
     myPets: [],
@@ -169,7 +172,14 @@ const authSlice = createSlice({
           toast.success("New favorite pet was successfully removed");
         }
       )
-
+      .addCase(
+        addViewed.fulfilled,
+        (state: IState, action: PayloadAction<string[]>) => {
+          state.isLoading = false;
+          state.user.viewed = action.payload;
+          state.error = null;
+        }
+      )
       .addCase(updateAvatarThunk.fulfilled, (state, action) => {
         state.user.avatar = action.payload;
       })
@@ -203,6 +213,7 @@ const authSlice = createSlice({
           refreshUserThunk.pending,
           refreshTokenThunk.pending,
           addFavorites.pending,
+          addViewed.pending,
           deleteFavorites.pending,
           updateAvatarThunk.pending,
           editUserThunk.pending,
@@ -219,6 +230,7 @@ const authSlice = createSlice({
           refreshUserThunk.rejected,
           refreshTokenThunk.rejected,
           addFavorites.rejected,
+          addViewed.rejected,
           deleteFavorites.rejected,
           updateAvatarThunk.rejected,
           editUserThunk.rejected,
