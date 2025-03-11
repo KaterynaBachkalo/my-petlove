@@ -7,7 +7,11 @@ import Modal from "./Modals/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { selectCurrentUser } from "../redux/auth/selectors";
-import { addFavorites, deleteFavorites } from "../redux/auth/operations";
+import {
+  addFavorites,
+  addViewed,
+  deleteFavorites,
+} from "../redux/auth/operations";
 import UnathorizedInfoModal from "./Modals/UnathorizedInfoModal";
 import { useLocation } from "react-router-dom";
 
@@ -37,7 +41,12 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
 
   const location = useLocation();
 
+  const addToViewed = () => {
+    dispatch(addViewed(_id));
+  };
+
   const openModal = () => {
+    addToViewed();
     setOpenCardInfo(true);
     document.body.classList.add("body-scroll-lock");
   };
