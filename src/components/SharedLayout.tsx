@@ -14,10 +14,12 @@ export const SharedLayout = () => {
 
   const openSidebar = () => {
     setOpenMenu(true);
+    document.body.classList.add("body-scroll-lock");
   };
 
   const closeSidebar = () => {
     setOpenMenu(false);
+    document.body.classList.remove("body-scroll-lock");
   };
 
   const location = useLocation();
