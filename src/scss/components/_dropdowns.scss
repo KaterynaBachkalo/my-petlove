@@ -38,6 +38,16 @@
 
   color: fn.get-color("dark-list");
   background-color: fn.get-color("light");
+
+  &.add {
+    max-height: 105px;
+    top: 45px;
+
+    @include mx.mq("md") {
+      max-height: 120px;
+      top: 52px;
+    }
+  }
 }
 
 .menu-modal-container {
