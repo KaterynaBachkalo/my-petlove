@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/auth/selectors";
 import { useLocation } from "react-router-dom";
 import { decodeFileName } from "../../utils/decodeFileName";
-import axios from "axios";
-import { toast } from "react-toastify";
+import fetchImageByURL from "../../redux/fetchImageByURL";
 
 interface IProps {
   onChange: (event: ChangeEvent<HTMLInputElement> | File) => void;
@@ -36,30 +35,8 @@ const UploadFotoForm = forwardRef<HTMLInputElement, IProps>(
       setUrl(e.target.value);
     };
 
-    const fetchImageFromUrl = async () => {
-      if (!url) return;
-
-      try {
-        const proxyUrl = `http://localhost:4000/api/proxy?url=${encodeURIComponent(
-          url
-        )}`;
-
-        const response = await axios.get(proxyUrl, { responseType: "blob" });
-
-        const blob = response.data;
-
-        const file = new File([blob], url, {
-          type: blob.type,
-        });
-
-        onChange(file);
-      } catch {
-        toast.error("Error loading image by URL");
-      }
-    };
-
     const handleBlur = () => {
-      fetchImageFromUrl();
+      fetchImageByURL(url, onChange);
     };
 
     return (
