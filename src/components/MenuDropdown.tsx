@@ -1,5 +1,6 @@
 import React, { FC, LegacyRef, RefObject, useRef } from "react";
 import useCloseDropdown from "../utils/useCloseDropdown";
+import { useLocation } from "react-router-dom";
 
 interface IProps {
   onSelect: (value: string) => void;
@@ -20,15 +21,23 @@ const MenuDropdown: FC<IProps> = React.forwardRef(
 
     const inputRef = useRef(null);
 
+    const location = useLocation();
+
     useCloseDropdown(onClose, inputRef, ref as RefObject<HTMLDivElement>);
 
     return (
-      <div className="menu-modal">
+      <div
+        className={`menu-modal ${
+          location.pathname === "/add-pet" ? "add" : ""
+        }`}
+      >
         <div className="menu-modal-container">
           <ul className="menu-categories-list" ref={inputRef}>
-            <li className="menu-categories-item" onClick={handleClickShowAll}>
-              Show all
-            </li>
+            {location.pathname !== "/add-pet" && (
+              <li className="menu-categories-item" onClick={handleClickShowAll}>
+                Show all
+              </li>
+            )}
             {data &&
               data.map((item) => (
                 <li
