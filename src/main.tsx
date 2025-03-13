@@ -8,6 +8,9 @@ import { Provider } from "react-redux";
 import { createContext } from "react";
 import { IContextTheme } from "./types.ts";
 import ThemeProvider from "./contexts/ThemeProvider.tsx";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import "dayjs/locale/en";
 
 export const ThemeContext = createContext<IContextTheme | undefined>(undefined);
 
@@ -21,7 +24,9 @@ root.render(
       <PersistGate persistor={persistor}>
         <BrowserRouter basename="/my-petlove">
           <ThemeProvider>
-            <App />
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
+              <App />
+            </LocalizationProvider>
           </ThemeProvider>
         </BrowserRouter>
       </PersistGate>
