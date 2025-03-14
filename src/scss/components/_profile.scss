@@ -212,11 +212,13 @@
   @include mx.mq("md") {
     @include mx.font(16, 20, -2, 700);
 
-    margin: 180px auto;
+    margin: 40px auto;
   }
+
   @include mx.mq("lg") {
-    margin: auto;
-    height: 100vh;
+    &.my-pets {
+      margin: 40px auto;
+    }
   }
 }
 
@@ -238,6 +240,7 @@
 
     align-items: center;
     width: 100%;
+    height: calc(100vh - 300px);
   }
 }
 

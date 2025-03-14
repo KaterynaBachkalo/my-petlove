@@ -47,8 +47,13 @@
   }
 }
 
-.my-pet-img {
-  width: 66px;
+.my-pet-middle-part {
+  width: 240px;
+}
+
+.my-pet-img,
+.icon-paw {
+  min-width: 66px;
   height: 66px;
   border-radius: 50%;
 

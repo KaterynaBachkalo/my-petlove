@@ -34,6 +34,7 @@
   &.white {
     color: fn.get-color("dark");
     background-color: fn.get-color("accent");
+    transition: all 0.5s ease-in;
 
     &:hover,
     &:focus {
@@ -44,6 +45,7 @@
   &.light {
     color: fn.get-color("dark");
     background-color: fn.get-color("light-dark");
+    transition: all 0.5s ease-in;
 
     &:hover,
     &:focus {
@@ -54,6 +56,7 @@
   &.dark {
     color: fn.get-color("background-primary");
     background-color: fn.get-color("background-accent");
+    transition: all 0.5s ease-in;
 
     &:hover,
     &:focus {
@@ -70,6 +73,7 @@
     &.white {
       color: fn.get-color("dark");
       background-color: fn.get-color("light");
+      transition: all 0.5s ease-in;
 
       &:hover,
       &:focus {
@@ -80,6 +84,7 @@
     &.accent {
       color: fn.get-color("dark");
       background-color: fn.get-color("accent");
+      transition: all 0.5s ease-in;
 
       &:hover,
       &:focus {

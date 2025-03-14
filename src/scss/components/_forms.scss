@@ -19,6 +19,12 @@
   color: fn.get-color("dark");
   padding: 16px;
 
+  &:focus,
+  &:hover {
+    border: 1px solid fn.get-color("accent");
+    outline: none;
+  }
+
   @include mx.mq("md") {
     height: 52px;
   }
@@ -39,7 +45,7 @@
     }
 
     @include mx.mq("md") {
-      height: 48px;
+      height: 52px;
       width: 100%;
 
       &.notices {

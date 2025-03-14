@@ -156,8 +156,15 @@
 }
 
 .selected-file-input {
-  border: 1px solid fn.get-color("accent");
+  border: 1px solid fn.get-color("border-dark-primary");
+
   border-radius: 30px;
   padding: 12px;
   width: calc(100% - 126px);
+
+  &:focus,
+  &:hover {
+    border: 1px solid fn.get-color("accent");
+    outline: none;
+  }
 }
