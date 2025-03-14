@@ -1,5 +1,11 @@
 import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { fetchFriends, fetchNews, fetchNotices } from "./operations";
+import {
+  addToNotices,
+  deleteFromNotices,
+  fetchFriends,
+  fetchNews,
+  fetchNotices,
+} from "./operations";
 import { ICity, IFriend, INew, INotice, IPet } from "../../types";
 import { toast } from "react-toastify";
 
@@ -119,8 +125,34 @@ const petSlice = createSlice({
         }
       )
 
+      .addCase(
+        addToNotices.fulfilled,
+        (state: IState, action: PayloadAction<INotice>) => {
+          state.notices.unshift(action.payload);
+          state.isLoading = false;
+          state.error = null;
+        }
+      )
+
+      .addCase(
+        deleteFromNotices.fulfilled,
+        (state: IState, action: PayloadAction<{ noticeId: string }>) => {
+          state.notices = state.notices.filter(
+            (notice) => notice._id !== action.payload.noticeId
+          );
+          state.isLoading = false;
+          state.error = null;
+        }
+      )
+
       .addMatcher(
-        isAnyOf(fetchNews.pending, fetchFriends.pending, fetchNotices.pending),
+        isAnyOf(
+          fetchNews.pending,
+          fetchFriends.pending,
+          fetchNotices.pending,
+          addToNotices.pending,
+          deleteFromNotices.pending
+        ),
         handlePending
       )
 
@@ -128,7 +160,9 @@ const petSlice = createSlice({
         isAnyOf(
           fetchNews.rejected,
           fetchFriends.rejected,
-          fetchNotices.rejected
+          fetchNotices.rejected,
+          addToNotices.rejected,
+          deleteFromNotices.rejected
         ),
         handleRejected
       );
