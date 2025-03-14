@@ -151,11 +151,14 @@ const FormPetProfile: FC<IFormPetProfile> = ({
                           "& button": {
                             padding: { xs: "12px", sm: "16px" },
                           },
+                          "&:hover svg": {
+                            color: "#f6b83d",
+                          },
                           "&:hover fieldset": {
-                            borderColor: "#f6b83d",
+                            border: "1px solid #f6b83d",
                           },
                           "&.Mui-focused fieldset": {
-                            borderColor: "#f6b83d",
+                            border: "1px solid #f6b83d",
                           },
                         },
                       },
