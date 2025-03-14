@@ -56,3 +56,35 @@ export const fetchNotices = createAsyncThunk(
     }
   }
 );
+
+export const addToNotices = createAsyncThunk(
+  "notices/addToNotices",
+  async (noticeId: string, thunkAPI) => {
+    try {
+      const response = await petInstance.post(`notices/add/${noticeId}`);
+
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.message) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
+    }
+  }
+);
+
+export const deleteFromNotices = createAsyncThunk(
+  "notices/deleteFromNotices",
+  async (noticeId: string, thunkAPI) => {
+    try {
+      const response = await petInstance.delete(`notices/remove/${noticeId}`);
+
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError && error.message) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
+    }
+  }
+);
