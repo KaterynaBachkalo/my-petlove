@@ -87,10 +87,12 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
 
           <div className="notices-title-wrap">
             <h3 className="notices-title">{title}</h3>
-            <div className="notices-icon-wrap">
-              <Icon className="icon-star" name="star" />
-              <p className="notices-popularity">{popularity}</p>
-            </div>
+            {popularity && (
+              <div className="notices-icon-wrap">
+                <Icon className="icon-star" name="star" />
+                <p className="notices-popularity">{popularity}</p>
+              </div>
+            )}
           </div>
           <div className="notices-text-wrapper">
             <div className="notices-text-wrap">
@@ -109,10 +111,12 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
               <p className="notices-title-text">Species</p>
               <p>{species}</p>
             </div>
-            <div className="notices-text-wrap">
-              <p className="notices-title-text">Category</p>
-              <p>{category}</p>
-            </div>
+            {category && (
+              <div className="notices-text-wrap">
+                <p className="notices-title-text">Category</p>
+                <p>{category}</p>
+              </div>
+            )}
           </div>
           <p className="notices-text">{comment}</p>
         </div>
