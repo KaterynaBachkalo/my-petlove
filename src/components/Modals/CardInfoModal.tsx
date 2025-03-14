@@ -2,7 +2,6 @@ import { FC } from "react";
 import { INoticeDate } from "../../types";
 import Icon from "../ComponentsForDesign/Icon";
 import { fixDate } from "../../utils/formatDate";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/auth/selectors";
 
@@ -34,15 +33,20 @@ const CardInfoModal: FC<INoticeDate> = ({
         <div className="img-wrap card-info-modal">
           <img src={imgURL} alt={title} className="card-info-modal-img" />
           <p className="card-info-modal-category">
-            {category.charAt(0).toUpperCase() + category.slice(1).toLowerCase()}
+            {category
+              ? category.charAt(0).toUpperCase() +
+                category.slice(1).toLowerCase()
+              : ""}
           </p>
         </div>
         <div>
           <h3 className="notices-title card-info-modal">{title}</h3>
-          <div className="notices-icon-wrap card-info-modal">
-            <Icon className="icon-star" name="star" />
-            <p className="notices-popularity">{popularity}</p>
-          </div>
+          {popularity && (
+            <div className="notices-icon-wrap card-info-modal">
+              <Icon className="icon-star" name="star" />
+              <p className="notices-popularity">{popularity}</p>
+            </div>
+          )}
         </div>
         <div className="notices-text-wrapper card-info-modal">
           <div className="notices-text-wrap">
@@ -62,7 +66,7 @@ const CardInfoModal: FC<INoticeDate> = ({
             <p>{species}</p>
           </div>
         </div>
-        <p className="notices-text card-info-modal">{comment}</p>
+        <p className="notices-text card-info-modal">{comment && ""}</p>
       </div>
 
       <div className="card-info-modal-wrap">
@@ -90,10 +94,6 @@ const CardInfoModal: FC<INoticeDate> = ({
             <Icon className="icon-heart card-info-modal" name="heart" />
           </div>
         )}
-
-        <Link to="" className="card-info-modal-contact">
-          Contact
-        </Link>
       </div>
     </>
   );
