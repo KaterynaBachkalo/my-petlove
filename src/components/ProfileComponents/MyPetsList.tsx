@@ -10,7 +10,7 @@ const MyPetsList = () => {
       {pets?.length !== 0 ? (
         pets.map((pet) => <MyPet key={pet._id} data={pet} />)
       ) : (
-        <p className="favorites-no-pets">No my pets yet :(</p>
+        <p className="favorites-no-pets my-pets">No my pets yet :(</p>
       )}
     </section>
   );
