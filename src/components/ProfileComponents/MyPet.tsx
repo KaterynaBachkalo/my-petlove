@@ -3,6 +3,7 @@ import { IMyPet } from "../../types";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { deletePet } from "../../redux/auth/operations";
+import { addToNotices, deleteFromNotices } from "../../redux/pet/operations";
 
 interface IProps {
   data: IMyPet;
@@ -14,9 +15,15 @@ const MyPet = ({ data }: IProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const deleteMyPet = () => {
-    if (_id) {
-      dispatch(deletePet(_id));
-    }
+    if (_id) dispatch(deletePet(_id));
+  };
+
+  const publicMyPet = () => {
+    if (_id) dispatch(addToNotices(_id));
+  };
+
+  const deleteFromPublicMyPet = () => {
+    if (_id) dispatch(deleteFromNotices(_id));
   };
 
   return (
@@ -27,7 +34,7 @@ const MyPet = ({ data }: IProps) => {
         ) : (
           <Icon className="icon-paw" name="icon-paw" />
         )}
-        <div>
+        <div className="my-pet-middle-part">
           <h3 className="my-pet-title" title={title}>
             {title}
           </h3>
@@ -57,6 +64,12 @@ const MyPet = ({ data }: IProps) => {
       <div className="my-pet-delete" onClick={deleteMyPet}>
         <Icon className="icon-heart delete" name="delete" />
       </div>
+      <button type="button" onClick={publicMyPet}>
+        To public
+      </button>
+      <button type="button" onClick={deleteFromPublicMyPet}>
+        Delete from publication
+      </button>
     </div>
   );
 };
