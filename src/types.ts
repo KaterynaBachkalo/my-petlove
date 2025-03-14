@@ -25,7 +25,7 @@ export interface INotice {
   price?: number;
   comment: string;
   locationId?: string;
-  user?: IUser;
+  owner?: IUser;
   popularity: number;
 }
 
