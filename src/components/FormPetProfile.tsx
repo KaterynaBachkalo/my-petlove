@@ -13,6 +13,7 @@ import { SvgIcon, SvgIconProps } from "@mui/material";
 import MenuDropdown from "./MenuDropdown";
 import { types } from "../data/types";
 import Icon from "./ComponentsForDesign/Icon";
+import { useTheme } from "../utils/useTheme";
 
 interface IFormPetProfile {
   petData: {
@@ -39,6 +40,8 @@ const FormPetProfile: FC<IFormPetProfile> = ({
   const [isMenuTypes, setMenuTypes] = useState(false);
 
   const itemTypeRef = useRef(null);
+
+  const { theme } = useTheme();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -105,14 +108,18 @@ const FormPetProfile: FC<IFormPetProfile> = ({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="wrap-input">
         <div>
-          <input {...register("title")} className="input" placeholder="Title" />
+          <input
+            {...register("title")}
+            className={`input ${theme === "light" ? "" : "dark"}`}
+            placeholder="Title"
+          />
           <p className="form-errors">{errors.title?.message}</p>
         </div>
 
         <div>
           <input
             {...register("name")}
-            className="input"
+            className={`input ${theme === "light" ? "" : "dark"}`}
             placeholder="Pet's Name"
           />
           <p className="form-errors">{errors.name?.message}</p>
@@ -123,34 +130,42 @@ const FormPetProfile: FC<IFormPetProfile> = ({
             <Controller
               name="birthday"
               control={control}
-              rules={{ required: "Birthday is required" }} // правила валідації
+              rules={{ required: "Birthday is required" }}
               render={({ field }) => (
                 <DatePicker
                   {...field}
-                  value={field.value ? dayjs(field.value) : null} // Конвертуємо значення в dayjs
-                  onChange={(date) => field.onChange(date)} // Оновлюємо значення
+                  value={field.value ? dayjs(field.value) : null}
+                  onChange={(date) => field.onChange(date)}
                   format="DD.MM.YYYY"
                   slots={{
-                    openPickerIcon: CustomCalendarIcon, // Використовуємо кастомну іконку
+                    openPickerIcon: CustomCalendarIcon,
                   }}
                   slotProps={{
                     textField: {
                       sx: {
                         "& .MuiOutlinedInput-root": {
-                          height: { xs: "45px", sm: "55px" },
                           width: {
-                            xs: "295px",
-                            sm: "223px",
+                            xs: "240px",
+                            sm: "295px",
+                            md: "223px",
                             lg: "184px",
                           },
                           "& fieldset": {
                             borderColor: "#26262626",
                             borderRadius: "30px",
-                            top: "-2.5px",
+
+                            width: {
+                              xs: "240px",
+                              sm: "295px",
+                              md: "223px",
+                              lg: "184px",
+                            },
                           },
-                          "& button": {
-                            padding: { xs: "12px", sm: "16px" },
+                          "& input": {
+                            padding: { xs: "9.5px", md: "14.5px" },
+                            width: { xs: "177px", sm: "261px", md: "140px" },
                           },
+                          "& button": {},
                           "&:hover svg": {
                             color: "#f6b83d",
                           },
@@ -172,14 +187,16 @@ const FormPetProfile: FC<IFormPetProfile> = ({
             )}
           </div>
 
-          <div className={`find-form-wrap By type`}>
+          <div className={`find-form-wrap type`}>
             <Controller
               name="species"
               control={control}
               render={({ field }) => (
                 <input
                   {...field}
-                  className="input find-input"
+                  className={`input ${
+                    theme === "light" ? "find-input" : "dark find-input"
+                  }`}
                   placeholder="Type of pet"
                   value={selectedType}
                 />
