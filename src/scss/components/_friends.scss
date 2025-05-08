@@ -34,6 +34,10 @@
 
   background: fn.get-color("light");
 
+  &.dark {
+    background-color: fn.get-color("light-dark");
+  }
+
   @include mx.mq("md") {
     width: 342px;
   }

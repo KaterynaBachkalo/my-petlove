@@ -4,9 +4,9 @@
 @use "../utils/mixins" as mx;
 
 .profile-background {
-  background-color: fn.get-color("light");
+  background-color: fn.get-color("transparent");
   border-radius: 30px;
-  padding: 18px 20px;
+  // padding: 18px 20px;
 
   @include mx.mq("lg") {
     background-color: transparent;
@@ -16,6 +16,10 @@
 
   &.my {
     margin-bottom: 20px;
+
+    &.dark {
+      background-color: fn.get-color("light-dark");
+    }
 
     @include mx.mq("md") {
       padding: 40px;
@@ -93,6 +97,10 @@
     &.unactive {
       background-color: fn.get-color("light");
       color: fn.get-color("dark");
+
+      &.dark {
+        background-color: fn.get-color("light-dark");
+      }
     }
   }
 }
@@ -200,7 +208,7 @@
   text-align: center;
   color: fn.get-color("dark");
 
-  & > p > span {
+  &>p>span {
     color: fn.get-color("accent");
   }
 
@@ -226,6 +234,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  gap: 24px;
 
   @include mx.mq("md") {
     flex-direction: row;
@@ -234,13 +244,9 @@
   }
 
   @include mx.mq("lg") {
-    gap: 24px;
 
     display: flex;
-
-    align-items: center;
     width: 100%;
-    height: calc(100vh - 300px);
   }
 }
 

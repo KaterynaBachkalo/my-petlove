@@ -7,16 +7,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: fn.get-color("dark");
+
+  &.dark {
+    color: fn.get-color("light-dark");
+  }
 }
 
-.pagination > li {
+.pagination>li {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: fn.get-color("dark");
   background: transparent;
-  border-radius: 50%;
   border: 1px solid rgba(38, 38, 38, 0.2);
+
+  border-radius: 50%;
   width: 44px;
   height: 44px;
   margin: 0 5px;
@@ -30,8 +35,8 @@
   }
 }
 
-.pagination > li > a,
-.pagination > li > span {
+.pagination>li>a,
+.pagination>li>span {
   text-decoration: none;
   border-radius: 50%;
   display: flex;
@@ -40,13 +45,17 @@
   transition: all 0.5s ease-in;
   width: 44px;
   height: 44px;
+
+  &.dark {
+    color: fn.get-color("light-dark");
+  }
 }
 
-.pagination > li.active {
+.pagination>li.active {
   border: none;
 }
 
-.pagination > li.active > a {
+.pagination>li.active>a {
   background-color: fn.get-color("accent");
   color: fn.get-color("light");
 
@@ -58,6 +67,10 @@
     color: fn.get-color("light");
     border: none;
   }
+
+  &.dark {
+    color: fn.get-color("light-dark");
+  }
 }
 
 .previous,
@@ -67,6 +80,10 @@
     color: fn.get-color("form-dark");
     background: transparent;
     cursor: auto;
+  }
+
+  &.dark {
+    color: fn.get-color("light-dark");
   }
 }
 
@@ -101,6 +118,7 @@
       color: fn.get-color("light");
       border: none;
     }
+
     &:disabled {
       background: transparent;
       border: 1px solid rgba(38, 38, 38, 0.05);

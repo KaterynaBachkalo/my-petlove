@@ -25,6 +25,10 @@
 
   background-color: fn.get-color("background-secondary");
 
+  &.dark {
+    background-color: fn.get-color("accent-dark");
+  }
+
   @include mx.mq("md") {
     padding: 40px 35px 40px 32px;
   }
@@ -83,6 +87,7 @@
   @include mx.mq("lg") {
     padding: 0 32px;
     gap: 40px 32px;
+    justify-content: center;
   }
 }
 
@@ -94,6 +99,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  &.dark {
+    background-color: fn.get-color("light-dark");
+  }
 
   @include mx.mq("md") {
     width: 342px;
@@ -140,6 +149,10 @@
 
 .notices-title {
   @include mx.font(16, 20, 0, 700);
+
+  &.dark {
+    color: fn.get-color("dark");
+  }
 
   @include mx.mq("md") {
     @include mx.font(18, 24, 0, 700);

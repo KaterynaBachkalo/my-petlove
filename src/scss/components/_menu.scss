@@ -7,6 +7,7 @@
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -40,6 +41,10 @@
 
   &.home {
     background-color: fn.get-color("light");
+
+    &.dark {
+      background-color: fn.get-color("light-dark");
+    }
   }
 }
 
@@ -120,6 +125,7 @@
     height: 42px;
     padding: 12px;
     cursor: pointer;
+    transition: all 0.5s ease-in;
 
     &.home {
       color: fn.get-color("accent");

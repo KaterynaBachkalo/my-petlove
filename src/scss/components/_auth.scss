@@ -33,6 +33,10 @@
     padding: 77px 84px;
     width: 592px;
   }
+
+  &.dark {
+    background-color: fn.get-color("light-dark");
+  }
 }
 
 .login-wrap {

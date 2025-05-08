@@ -12,7 +12,7 @@
     border-color: fn.get-color("accent");
     background-color: fn.get-color("accent");
     padding: 18px 20px 0 20px;
-    margin-bottom: 0;
+    margin-bottom: 0px;
 
     &.light {
       color: fn.get-color("dark");
@@ -86,6 +86,7 @@
 
   &.home {
     fill: fn.get-color("light");
+
     &.dark {
       fill: fn.get-color("light-dark");
     }
@@ -113,6 +114,10 @@
   display: none;
 
   color: fn.get-color("dark");
+
+  &.dark {
+    color: fn.get-color("light-dark");
+  }
 
   @extend %header-name;
 
@@ -190,8 +195,13 @@
   fill: fn.get-color("dark");
   cursor: pointer;
 
+  &.dark {
+    fill: fn.get-color("light-dark");
+  }
+
   &.home {
     fill: fn.get-color("light");
+
     &.dark {
       fill: fn.get-color("light-dark");
     }
@@ -238,5 +248,9 @@
   &[aria-current="page"] {
     background-color: fn.get-color("transparent");
     border-color: fn.get-color("accent");
+  }
+
+  &.dark {
+    color: fn.get-color("light-dark");
   }
 }

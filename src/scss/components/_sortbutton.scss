@@ -18,6 +18,10 @@
   cursor: pointer;
   transition: all 0.5s ease-in;
 
+  &.dark {
+    background-color: fn.get-color("background-hover");
+  }
+
   &:hover,
   &:focus {
     background-color: fn.get-color("background-hover");
