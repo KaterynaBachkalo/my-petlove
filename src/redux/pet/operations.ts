@@ -77,9 +77,9 @@ export const deleteFromNotices = createAsyncThunk(
   "notices/deleteFromNotices",
   async (noticeId: string, thunkAPI) => {
     try {
-      const response = await petInstance.delete(`notices/remove/${noticeId}`);
+      await petInstance.delete(`notices/remove/${noticeId}`);
 
-      return response.data;
+      return { noticeId };
     } catch (error: unknown) {
       if (error instanceof AxiosError && error.message) {
         return thunkAPI.rejectWithValue(error.message);
