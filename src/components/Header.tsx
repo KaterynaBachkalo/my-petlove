@@ -81,17 +81,32 @@ const Header: FC<IProps> = ({ onOpen }) => {
         <nav className="header-menu-nav">
           <ul className="header-menu-list">
             <li>
-              <NavLink to="/news" className="header-menu-link">
+              <NavLink
+                to="/news"
+                className={`header-menu-link ${
+                  theme === "light" ? "" : "dark"
+                }`}
+              >
                 <p className="">News</p>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/notices" className="header-menu-link">
+              <NavLink
+                to="/notices"
+                className={`header-menu-link ${
+                  theme === "light" ? "" : "dark"
+                }`}
+              >
                 <p className="">Find pet</p>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/friends" className="header-menu-link">
+              <NavLink
+                to="/friends"
+                className={`header-menu-link ${
+                  theme === "light" ? "" : "dark"
+                }`}
+              >
                 <p className="">Our friends</p>
               </NavLink>
             </li>
@@ -146,7 +161,7 @@ const Header: FC<IProps> = ({ onOpen }) => {
             <p
               className={`header-name ${
                 location.pathname !== "/home" ? "" : "home"
-              }`}
+              } ${theme === "light" ? "" : "dark"}`}
             >
               {currentUser.name ? currentUser.name : "User name"}
             </p>
@@ -160,7 +175,9 @@ const Header: FC<IProps> = ({ onOpen }) => {
             height={32}
             className={`menu-burger ${
               location.pathname !== "/home"
-                ? ""
+                ? theme === "light"
+                  ? ""
+                  : "dark"
                 : theme === "light"
                 ? "home"
                 : "home dark"
