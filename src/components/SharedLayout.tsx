@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { Suspense, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import { ToastContainer } from "react-toastify";
 
 import Header from "./Header";
@@ -24,6 +24,8 @@ export const SharedLayout = () => {
 
   const location = useLocation();
 
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
   return (
     <div
       className={
@@ -34,7 +36,7 @@ export const SharedLayout = () => {
     >
       {location.pathname !== "/" && <Header onOpen={openSidebar} />}
       {isOpenMenu && (
-        <div onClick={closeSidebar}>
+        <div ref={modalRef}>
           <Sidebar onClose={closeSidebar} isOpen={isOpenMenu} />
         </div>
       )}
