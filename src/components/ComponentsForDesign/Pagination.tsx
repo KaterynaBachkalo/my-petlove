@@ -1,5 +1,6 @@
 import { FC } from "react";
 import ReactPaginate from "react-paginate";
+import { useTheme } from "../../utils/useTheme";
 
 interface IProps {
   totalItems: number;
@@ -9,6 +10,7 @@ interface IProps {
 
 const Pagination: FC<IProps> = ({ totalItems, currentPage, onPageChange }) => {
   const limit = 6;
+  const { theme } = useTheme();
 
   const totalPages = Math.max(1, Math.ceil(totalItems / limit));
 
@@ -34,7 +36,7 @@ const Pagination: FC<IProps> = ({ totalItems, currentPage, onPageChange }) => {
         marginPagesDisplayed={2}
         pageRangeDisplayed={1}
         onPageChange={handlePageClick}
-        containerClassName={"pagination"}
+        containerClassName={`pagination ${theme === "light" ? "" : "dark"}`}
         activeClassName={"active"}
         forcePage={currentPage - 1}
         nextClassName={`next ${

@@ -7,8 +7,11 @@ import TabImage2x from "../img/authorization/registration/tab/image@2x.png";
 import MobImage1x from "../img/authorization/registration/image@1x.png";
 import MobImage2x from "../img/authorization/registration/image@2x.png";
 import Picture from "../components/Picture";
+import { useTheme } from "../utils/useTheme";
 
 const RegisterPage = () => {
+  const { theme } = useTheme();
+
   return (
     <>
       <div className="auth-wrapper">
@@ -23,7 +26,7 @@ const RegisterPage = () => {
           className="registration-img"
         />
 
-        <div className="registration-wrap">
+        <div className={`registration-wrap ${theme === "light" ? "" : "dark"}`}>
           <h2 className="registration-title">Registration</h2>
           <h3 className="registration-subtitle">
             Thank you for your interest in our platform.

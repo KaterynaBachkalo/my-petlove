@@ -14,6 +14,7 @@ import {
 } from "../redux/auth/operations";
 import UnathorizedInfoModal from "./Modals/UnathorizedInfoModal";
 import { useLocation } from "react-router-dom";
+import { useTheme } from "../utils/useTheme";
 
 const NoticeCard: FC<INoticeDate> = ({ data }) => {
   const {
@@ -28,6 +29,8 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
     comment,
     _id,
   } = data;
+
+  const { theme } = useTheme();
 
   const [openCardInfo, setOpenCardInfo] = useState(false);
 
@@ -81,12 +84,18 @@ const NoticeCard: FC<INoticeDate> = ({ data }) => {
 
   return (
     <>
-      <div className="notices-card profile">
+      <div
+        className={`notices-card ${
+          theme === "light" ? "profile" : "dark profile"
+        }`}
+      >
         <div className="notices-card-top">
           <img src={imgURL} alt={title} className="notices-img" />
 
           <div className="notices-title-wrap">
-            <h3 className="notices-title">{title}</h3>
+            <h3 className={`notices-title ${theme === "light" ? "" : "dark"}`}>
+              {title}
+            </h3>
             {popularity && (
               <div className="notices-icon-wrap">
                 <Icon className="icon-star" name="star" />

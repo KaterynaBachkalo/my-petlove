@@ -8,8 +8,11 @@ import { FetchParams, ISearchQuery } from "../types";
 import { formatDate } from "../utils/formatDate";
 import Pagination from "../components/ComponentsForDesign/Pagination";
 import FindForm from "../components/FomsForFindAndFilter/FindForm";
+import { useTheme } from "../utils/useTheme";
 
 const NewsPage = () => {
+  const { theme } = useTheme();
+
   const news = useSelector(selectNews);
 
   const limit = 6;
@@ -65,8 +68,12 @@ const NewsPage = () => {
             <div key={url} className="news-card">
               <div className="news-card-top">
                 <img src={imgUrl} alt={title} className="news-img" />
-                <h3 className="news-title">{title}</h3>
-                <p className="news-text">{text}</p>
+                <h3 className={`news-title ${theme === "light" ? "" : "dark"}`}>
+                  {title}
+                </h3>
+                <p className={`news-text ${theme === "light" ? "" : "dark"}`}>
+                  {text}
+                </p>
               </div>
               <div className="news-wrap">
                 <p className="news-date">{formatDate(date)}</p>

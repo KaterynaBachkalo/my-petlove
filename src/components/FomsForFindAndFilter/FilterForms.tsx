@@ -4,12 +4,15 @@ import { ISearchQuery } from "../../types";
 import { useSearchParams } from "react-router-dom";
 import FindForm from "./FindForm";
 import FindFormList from "./FindFormList";
+import { useTheme } from "../../utils/useTheme";
 
 interface IProps {
   setSearchQuery: React.Dispatch<React.SetStateAction<ISearchQuery>>;
 }
 
 const FilterForms: FC<IProps> = ({ setSearchQuery }) => {
+  const { theme } = useTheme();
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortFromParams = searchParams.get("sort");
@@ -33,7 +36,7 @@ const FilterForms: FC<IProps> = ({ setSearchQuery }) => {
 
   return (
     <>
-      <div className="notices-form-wrap">
+      <div className={`notices-form-wrap ${theme === "light" ? "" : "dark"}`}>
         <div className="notices-form-top">
           <FindForm setSearchQuery={setSearchQuery} placeholder="Search" />
 

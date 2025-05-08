@@ -1,5 +1,6 @@
 import { FC } from "react";
 import Icon from "./ComponentsForDesign/Icon";
+import { useTheme } from "../utils/useTheme";
 
 interface IProps {
   setSearchQuery: React.Dispatch<
@@ -29,12 +30,15 @@ const SortButton: FC<IProps> = ({
     }));
     onClick();
   };
+  const { theme } = useTheme();
 
   return (
     <div className="button-wrap">
       <button
         type="submit"
-        className={`sort-button ${isActive ? "cross" : ""}`}
+        className={`sort-button ${theme === "light" ? "" : "dark"} ${
+          isActive ? "cross" : ""
+        }`}
         onClick={handleClick}
       >
         {text}

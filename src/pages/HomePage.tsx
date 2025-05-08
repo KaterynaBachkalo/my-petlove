@@ -5,11 +5,14 @@ import TabImage2x from "../img/home_page/tab/image@2x.png";
 import MobImage1x from "../img/home_page/mob/image@2x.png";
 import MobImage2x from "../img/home_page/mob/image@2x.png";
 import Picture from "../components/Picture";
+import { useTheme } from "../utils/useTheme";
 
 const HomePage = () => {
+  const { theme } = useTheme();
+
   return (
     <div className="home-wrap">
-      <div className="home-back">
+      <div className={`home-back  ${theme === "light" ? "" : "dark"}`}>
         <h2 className="home-title">
           Take good <span className="home-span">care</span> of your small pets
         </h2>

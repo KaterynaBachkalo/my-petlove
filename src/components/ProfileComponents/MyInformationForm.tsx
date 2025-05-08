@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/auth/selectors";
+import { useTheme } from "../../utils/useTheme";
 
 const MyInformationForm = () => {
   const currentUser = useSelector(selectCurrentUser);
+  const { theme } = useTheme();
 
   const { name, email, phone } = currentUser;
 
@@ -23,19 +25,19 @@ const MyInformationForm = () => {
         <input
           type="text"
           value={!name ? "User name" : name}
-          className="input profile"
+          className={`input profile ${theme === "light" ? "" : "dark"}`}
           readOnly
         />
         <input
           type="email"
           value={email ?? "email"}
-          className="input profile"
+          className={`input profile ${theme === "light" ? "" : "dark"}`}
           readOnly
         />
         <input
           type="tel"
           value={`+380 ${phoneNumber}`}
-          className="input profile"
+          className={`input profile ${theme === "light" ? "" : "dark"}`}
           readOnly
         />
       </form>

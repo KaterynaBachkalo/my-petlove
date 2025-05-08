@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useRef } from "react";
 import Icon from "./ComponentsForDesign/Icon";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -8,6 +8,8 @@ import {
 } from "../redux/auth/selectors";
 import LogoutModal from "./Modals/LogoutModal";
 import Modal from "./Modals/Modal";
+import useCloseModals from "../utils/useCloseModals";
+import { useTheme } from "../utils/useTheme";
 
 interface IProps {
   onClose: () => void;
@@ -21,6 +23,8 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
 
   const location = useLocation();
 
+  const { theme } = useTheme();
+
   const currentUser = useSelector(selectCurrentUser);
 
   const openLogoutModal = () => {
@@ -33,11 +37,20 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
     document.body.classList.remove("body-scroll-lock");
   };
 
+  const sidebarRef = useRef(null);
+
+  useCloseModals(onClose, sidebarRef);
+
   return (
     <div
       className={`menu ${isOpen ? "open" : ""} ${
-        location.pathname === "/home" ? "home" : ""
+        location.pathname === "/home"
+          ? theme === "light"
+            ? "home"
+            : "home dark"
+          : ""
       }`}
+      ref={sidebarRef}
     >
       <div onClick={onClose} className="menu-close-wrap">
         <Icon
@@ -52,7 +65,7 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
 
       <nav className="menu-nav">
         <ul className="menu-list">
-          <li>
+          <li onClick={onClose}>
             <NavLink
               to="/news"
               className={`menu-link ${
@@ -62,7 +75,7 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
               <p className="">News</p>
             </NavLink>
           </li>
-          <li>
+          <li onClick={onClose}>
             <NavLink
               to="/notices"
               className={`menu-link ${
@@ -72,7 +85,7 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
               <p className="">Find pet</p>
             </NavLink>
           </li>
-          <li>
+          <li onClick={onClose}>
             <NavLink
               to="/friends"
               className={`menu-link ${
@@ -107,7 +120,7 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
               location.pathname === "/home" ? "home" : ""
             }`}
           >
-            <NavLink to="/login">
+            <NavLink to="/login" onClick={onClose}>
               <p className="menu-login">Log in</p>
             </NavLink>
           </li>
@@ -117,7 +130,7 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
               location.pathname === "/home" ? "home" : ""
             }`}
           >
-            <NavLink to="/register">
+            <NavLink to="/register" onClick={onClose}>
               <p className="menu-register">Registration</p>
             </NavLink>
           </li>

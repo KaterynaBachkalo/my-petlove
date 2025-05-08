@@ -7,6 +7,7 @@ import { AppDispatch } from "../../redux/store";
 import { toast } from "react-toastify";
 import { IFormInputs, IUser } from "../../types";
 import { editUserThunk } from "../../redux/auth/operations";
+import { useTheme } from "../../utils/useTheme";
 
 interface IFormProfile {
   onClose: () => void;
@@ -26,6 +27,8 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
         .length(9, "The phone must contain exactly 9 digits"),
     })
     .required();
+
+  const { theme } = useTheme();
 
   const {
     register,
@@ -71,7 +74,7 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
         <div>
           <input
             {...register("name")}
-            className="input edit"
+            className={`input ${theme === "light" ? "" : "dark"} edit`}
             value={watch("name")}
             onChange={(e) => setValue("name", e.target.value)}
           />
@@ -81,7 +84,7 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
         <div>
           <input
             {...register("email")}
-            className="input edit"
+            className={`input ${theme === "light" ? "" : "dark"} edit`}
             value={watch("email")}
             readOnly
           />
@@ -90,7 +93,7 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
         <div>
           <input
             {...register("phone")}
-            className="input edit"
+            className={`input ${theme === "light" ? "" : "dark"} edit`}
             value={watch("phone")}
             onChange={(e) => setValue("phone", e.target.value)}
           />

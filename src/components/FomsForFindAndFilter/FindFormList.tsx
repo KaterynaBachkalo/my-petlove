@@ -13,6 +13,7 @@ import { gender } from "../../data/gender";
 import { types } from "../../data/types";
 import { categories } from "../../data/categories";
 import { ISearchQuery } from "../../types";
+import { useTheme } from "../../utils/useTheme";
 
 interface IForms {
   category?: string;
@@ -32,6 +33,8 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
       species: yup.string(),
     })
     .required();
+
+  const { theme } = useTheme();
 
   const { handleSubmit, control, setValue } = useForm<IForms>({
     resolver: yupResolver(schema),
@@ -151,7 +154,7 @@ const FindFormList: FC<IProps> = ({ placeholder, setSearchQuery }) => {
           render={({ field }) => (
             <input
               {...field}
-              className="input find-input"
+              className={`input ${theme === "light" ? "" : "dark"} find-input`}
               placeholder={placeholder}
               value={
                 placeholder === "Category"

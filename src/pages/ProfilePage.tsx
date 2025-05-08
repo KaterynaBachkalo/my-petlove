@@ -15,8 +15,11 @@ import MyInformationForm from "../components/ProfileComponents/MyInformationForm
 import ViewedList from "../components/ProfileComponents/ViewedList";
 import Loader from "../components/ComponentsForDesign/Loader/Loader";
 import { Link } from "react-router-dom";
+import { useTheme } from "../utils/useTheme";
 
 const ProfilePage = () => {
+  const { theme } = useTheme();
+
   const [openLogModal, setOpenLogModal] = useState(false);
 
   const [openEdModal, setOpenEdModal] = useState(false);
@@ -80,7 +83,11 @@ const ProfilePage = () => {
       {!currentUser && <Loader />}
       {currentUser && (
         <div className="profile-main-wrap">
-          <div className="profile-background my">
+          <div
+            className={`profile-background my ${
+              theme === "light" ? "" : "dark"
+            }`}
+          >
             <div className="profile-user-wrapper">
               <div className="profile-user-wrap name">
                 <p className="profile-name">{currentUser.name}</p>
@@ -162,7 +169,7 @@ const ProfilePage = () => {
                   (!onClickedFav && !onClickedViewed)
                     ? ""
                     : "unactive"
-                }`}
+                } ${theme === "light" ? "" : "dark"}`}
                 onClick={() => {
                   setOnClickedFav(true);
                   setOnClickedViewed(false);
@@ -174,7 +181,7 @@ const ProfilePage = () => {
               <div
                 className={`profile-user-wrap my-pets ${
                   onClickedViewed && !onClickedFav ? "" : "unactive"
-                }`}
+                } ${theme === "light" ? "" : "dark"}`}
                 onClick={() => {
                   setOnClickedViewed(true);
                   setOnClickedFav(false);

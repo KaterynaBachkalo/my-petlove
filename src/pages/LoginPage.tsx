@@ -7,8 +7,11 @@ import TabImage2x from "../img/authorization/login/tab/image@2x.png";
 import MobImage1x from "../img/authorization/login/image@1x.png";
 import MobImage2x from "../img/authorization/login/image@2x.png";
 import Picture from "../components/Picture";
+import { useTheme } from "../utils/useTheme";
 
 const LoginPage = () => {
+  const { theme } = useTheme();
+
   return (
     <>
       <div className="auth-wrapper">
@@ -22,7 +25,7 @@ const LoginPage = () => {
           alt="Dog"
           className="registration-img"
         />
-        <div className="login-wrap">
+        <div className={`login-wrap ${theme === "light" ? "" : "dark"}`}>
           <h2 className="login-title">Log in</h2>
           <h3 className="login-subtitle">
             Welcome! Please enter your credentials to login to the platform:{" "}

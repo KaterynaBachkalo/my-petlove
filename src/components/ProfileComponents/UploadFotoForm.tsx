@@ -5,6 +5,7 @@ import { selectCurrentUser } from "../../redux/auth/selectors";
 import { useLocation } from "react-router-dom";
 import { decodeFileName } from "../../utils/decodeFileName";
 import fetchImageByURL from "../../redux/fetchImageByURL";
+import { useTheme } from "../../utils/useTheme";
 
 interface IProps {
   onChange: (event: ChangeEvent<HTMLInputElement> | File) => void;
@@ -14,6 +15,8 @@ interface IProps {
 const UploadFotoForm = forwardRef<HTMLInputElement, IProps>(
   ({ onChange, isModal }, ref) => {
     const [url, setUrl] = useState<string>("");
+
+    const { theme } = useTheme();
 
     const location = useLocation();
 
@@ -59,13 +62,19 @@ const UploadFotoForm = forwardRef<HTMLInputElement, IProps>(
               value={
                 location.pathname === "/add-pet" ? undefined : correctName || ""
               }
-              className="selected-file-input"
+              className={`selected-file-input ${
+                theme === "light" ? "" : "dark"
+              }`}
               placeholder="Enter URL"
               onChange={handleUrlChange}
               onBlur={handleBlur}
             />
             <label htmlFor="inputFile" className="uploadPhoto">
-              <div className="profile-upload-wrap">
+              <div
+                className={`profile-upload-wrap ${
+                  theme === "light" ? "" : "dark"
+                }`}
+              >
                 <p className="profile-upload edit">Upload photo</p>
                 <Icon
                   name="icon-upload"

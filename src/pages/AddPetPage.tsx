@@ -14,9 +14,12 @@ import DeskImage1x from "../img/addPet_page/desk/image@1x.png";
 import DeskImage2x from "../img/addPet_page/desk/image@2x.png";
 import TabImage1x from "../img/addPet_page/tab/image@1x.png";
 import TabImage2x from "../img/addPet_page/tab/image@2x.png";
+import { useTheme } from "../utils/useTheme";
 
 const AddPetPage = () => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const { theme } = useTheme();
 
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -105,7 +108,7 @@ const AddPetPage = () => {
         alt="dog"
         className="addPet-img"
       />
-      <div className="addPet-background">
+      <div className={`addPet-background ${theme === "light" ? "" : "dark"}`}>
         <h2 className="addPet-title">
           Add my pet/ <span>Personal details</span>
         </h2>

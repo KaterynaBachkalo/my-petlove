@@ -3,6 +3,7 @@ import { FC, useEffect } from "react";
 import Icon from "../ComponentsForDesign/Icon";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { ISearchQuery } from "../../types";
+import { useTheme } from "../../utils/useTheme";
 
 interface IForms {
   title: string;
@@ -15,6 +16,8 @@ interface IProps {
 
 const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
   const { handleSubmit, register, setValue, watch } = useForm<IForms>();
+
+  const { theme } = useTheme();
 
   const mylocation = useLocation();
 
@@ -67,7 +70,7 @@ const FindForm: FC<IProps> = ({ setSearchQuery, placeholder }) => {
       >
         <input
           {...register("title")}
-          className={`input find-input ${
+          className={`input ${theme === "light" ? "" : "dark"} find-input ${
             mylocation.pathname === "/notices" ? "notices" : ""
           }`}
           placeholder={placeholder}

@@ -4,8 +4,11 @@ import { AppDispatch } from "../redux/store";
 import { useEffect } from "react";
 import { fetchFriends } from "../redux/pet/operations";
 import { Link } from "react-router-dom";
+import { useTheme } from "../utils/useTheme";
 
 const FriendsPage = () => {
+  const { theme } = useTheme();
+
   const friends = useSelector(selectFriends);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -45,7 +48,10 @@ const FriendsPage = () => {
                   : "Closed";
 
               return (
-                <div key={url} className="friends-card">
+                <div
+                  key={url}
+                  className={`friends-card ${theme === "light" ? "" : "dark"}`}
+                >
                   <div className="working-hours-wrap">
                     <p className="working-hours">{workingHours}</p>
                   </div>
