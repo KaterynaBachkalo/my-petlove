@@ -9,6 +9,7 @@ import { AppDispatch } from "../redux/store";
 import { IForms, IFormsBD } from "../types";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useTheme } from "../utils/useTheme";
 
 interface IFormText {
   formText: string;
@@ -52,6 +53,8 @@ const FormLogin: FC<IFormText> = ({
     resolver: yupResolver(schema),
   });
 
+  const { theme } = useTheme();
+
   const onSubmit = async (data: IForms) => {
     try {
       if (location.pathname === "/register") {
@@ -88,13 +91,21 @@ const FormLogin: FC<IFormText> = ({
       <div className="wrap-input">
         {isInput && (
           <div>
-            <input {...register("name")} placeholder="Name" className="input" />
+            <input
+              {...register("name")}
+              placeholder="Name"
+              className={`input ${theme === "light" ? "" : "dark"}`}
+            />
             <p className="form-errors">{errors.name?.message}</p>
           </div>
         )}
 
         <div>
-          <input {...register("email")} placeholder="Email" className="input" />
+          <input
+            {...register("email")}
+            placeholder="Email"
+            className={`input ${theme === "light" ? "" : "dark"}`}
+          />
           <p className="form-errors">{errors.email?.message}</p>
         </div>
 
@@ -103,7 +114,7 @@ const FormLogin: FC<IFormText> = ({
             {...register("password")}
             placeholder="Password"
             type={showPassword ? "text" : "password"}
-            className="input"
+            className={`input ${theme === "light" ? "" : "dark"}`}
           />
           {showPassword ? (
             <div onClick={() => setShowPassword(false)}>
@@ -123,7 +134,7 @@ const FormLogin: FC<IFormText> = ({
               {...register("confirmPassword")}
               placeholder="Confirm password"
               type={showConfirmPassword ? "text" : "password"}
-              className="input"
+              className={`input ${theme === "light" ? "" : "dark"}`}
             />
             {showConfirmPassword ? (
               <div onClick={() => setShowConfirmPassword(false)}>
