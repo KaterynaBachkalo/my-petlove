@@ -147,5 +147,5 @@ export interface IFormInputs {
 
 export interface IContextTheme {
   theme: "light" | "dark";
-  tongleTheme: () => void;
+  toggleTheme: () => void;
 }
