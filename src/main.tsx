@@ -5,14 +5,10 @@ import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./redux/store.ts";
 import { Provider } from "react-redux";
-import { createContext } from "react";
-import { IContextTheme } from "./types.ts";
-import ThemeProvider from "./contexts/ThemeProvider.tsx";
+import MyThemeProvider from "./contexts/ThemeProvider.tsx";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/en";
-
-export const ThemeContext = createContext<IContextTheme | undefined>(undefined);
 
 const rootElement = document.getElementById("root");
 
@@ -23,11 +19,11 @@ root.render(
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <BrowserRouter basename="/my-petlove">
-          <ThemeProvider>
+          <MyThemeProvider>
             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
               <App />
             </LocalizationProvider>
-          </ThemeProvider>
+          </MyThemeProvider>
         </BrowserRouter>
       </PersistGate>
     </Provider>
