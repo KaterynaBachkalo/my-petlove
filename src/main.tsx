@@ -18,7 +18,7 @@ root.render(
   <>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <HashRouter basename="/my-petlove">
+        <HashRouter>
           <MyThemeProvider>
             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
               <App />
