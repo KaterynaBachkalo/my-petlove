@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import "./scss/index.scss";
 import App from "./App.tsx";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./redux/store.ts";
 import { Provider } from "react-redux";
@@ -18,13 +18,13 @@ root.render(
   <>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <BrowserRouter basename="/my-petlove">
+        <HashRouter basename="/my-petlove">
           <MyThemeProvider>
             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
               <App />
             </LocalizationProvider>
           </MyThemeProvider>
-        </BrowserRouter>
+        </HashRouter>
       </PersistGate>
     </Provider>
   </>
