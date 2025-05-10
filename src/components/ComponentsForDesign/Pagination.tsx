@@ -1,6 +1,7 @@
 import { FC } from "react";
 import ReactPaginate from "react-paginate";
 import { useTheme } from "../../utils/useTheme";
+import { useMediaQuery } from "react-responsive";
 
 interface IProps {
   totalItems: number;
@@ -18,6 +19,8 @@ const Pagination: FC<IProps> = ({ totalItems, currentPage, onPageChange }) => {
     onPageChange(event.selected + 1);
   };
 
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
   return (
     <div className="pagination-container">
       <button
@@ -33,7 +36,7 @@ const Pagination: FC<IProps> = ({ totalItems, currentPage, onPageChange }) => {
         breakLabel={<span>...</span>}
         breakClassName={"break-me"}
         pageCount={totalPages}
-        marginPagesDisplayed={2}
+        marginPagesDisplayed={isMobile ? 0 : 2}
         pageRangeDisplayed={1}
         onPageChange={handlePageClick}
         containerClassName={`pagination ${theme === "light" ? "" : "dark"}`}
