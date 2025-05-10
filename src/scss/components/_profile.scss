@@ -6,7 +6,7 @@
 .profile-background {
   background-color: fn.get-color("transparent");
   border-radius: 30px;
-  // padding: 18px 20px;
+  padding: 18px 20px;
 
   @include mx.mq("lg") {
     background-color: transparent;
@@ -207,6 +207,10 @@
 
   text-align: center;
   color: fn.get-color("dark");
+
+  &.dark {
+    color: fn.get-color("light-dark");
+  }
 
   &>p>span {
     color: fn.get-color("accent");
