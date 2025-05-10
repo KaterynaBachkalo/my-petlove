@@ -4,8 +4,7 @@ import { RootState } from "../store";
 import { IFormInputs, IForms, IMyPet } from "../../types";
 
 export const petInstance = axios.create({
-  baseURL: "http://localhost:4000/api/",
-  // baseURL: "https://my-petlove-backend.vercel.app/api/",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 const setAccessToken = (accessToken: string) => {
