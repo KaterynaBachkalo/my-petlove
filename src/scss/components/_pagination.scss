@@ -22,8 +22,8 @@
   border: 1px solid rgba(38, 38, 38, 0.2);
 
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  width: 30px;
+  height: 30px;
   margin: 0 5px;
   list-style: none;
 
@@ -32,6 +32,11 @@
     background-color: fn.get-color("accent");
     color: fn.get-color("light");
     border: none;
+  }
+
+  @include mx.mq('md') {
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -43,11 +48,16 @@
   align-items: center;
   justify-content: center;
   transition: all 0.5s ease-in;
-  width: 44px;
-  height: 44px;
+  width: 30px;
+  height: 30px;
 
   &.dark {
     color: fn.get-color("light-dark");
+  }
+
+  @include mx.mq('md') {
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -107,8 +117,8 @@
     background: transparent;
     border-radius: 50%;
     border: 1px solid rgba(38, 38, 38, 0.2);
-    width: 44px;
-    height: 44px;
+    width: 30px;
+    height: 30px;
 
     transition: all 0.5s ease-in;
     cursor: pointer;
@@ -124,6 +134,11 @@
       border: 1px solid rgba(38, 38, 38, 0.05);
       color: fn.get-color("form-dark");
       cursor: auto;
+    }
+
+    @include mx.mq('md') {
+      width: 44px;
+      height: 44px;
     }
   }
 }
