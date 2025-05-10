@@ -8,8 +8,11 @@ import { FetchParams } from "../../types";
 import NoticeCard from "../NoticeCard";
 import { clearState } from "../../redux/pet/petSlice";
 import { Link } from "react-router-dom";
+import { useTheme } from "../../utils/useTheme";
 
 const FavoritesList = () => {
+  const { theme } = useTheme();
+
   const currentUser = useSelector(selectCurrentUser);
 
   const favorites = currentUser.favorites;
@@ -45,7 +48,7 @@ const FavoritesList = () => {
           ?.filter((notice) => favorites.includes(notice._id))
           .map((notice) => <NoticeCard key={notice._id} data={notice} />)
       ) : (
-        <div className="favorites-no-pets">
+        <div className={`favorites-no-pets ${theme === "light" ? "" : "dark"}`}>
           <p>
             Oops, <span>looks like there aren't any furries</span> on our
             adorable page yet. Do not worry! View your pets on the{" "}
