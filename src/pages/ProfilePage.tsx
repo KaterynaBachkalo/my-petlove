@@ -148,17 +148,6 @@ const ProfilePage = () => {
             </div>
 
             <MyPetsList />
-
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                handleLogoutModal("open");
-              }}
-              className="menu-link register"
-            >
-              <p className="menu-logout">Log out</p>
-            </button>
           </div>
 
           <div className="profile-right-part">
