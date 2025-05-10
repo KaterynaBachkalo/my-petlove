@@ -8,8 +8,11 @@ import { fetchNotices } from "../../redux/pet/operations";
 import { clearState } from "../../redux/pet/petSlice";
 import NoticeCard from "../NoticeCard";
 import { Link } from "react-router-dom";
+import { useTheme } from "../../utils/useTheme";
 
 const ViewedList = () => {
+  const { theme } = useTheme();
+
   const currentUser = useSelector(selectCurrentUser);
 
   const viewed = currentUser.viewed;
@@ -45,7 +48,7 @@ const ViewedList = () => {
           ?.filter((notice) => viewed.includes(notice._id))
           .map((notice) => <NoticeCard key={notice._id} data={notice} />)
       ) : (
-        <div className="favorites-no-pets">
+        <div className={`favorites-no-pets ${theme === "light" ? "" : "dark"}`}>
           <p>
             Oops, <span>looks like there aren't any viewed furries</span> on our
             adorable page yet. Do not worry! View your pets on the{" "}
