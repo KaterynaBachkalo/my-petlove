@@ -60,7 +60,9 @@ const UploadFotoForm = forwardRef<HTMLInputElement, IProps>(
             <input
               type="text"
               value={
-                location.pathname === "/add-pet" ? undefined : correctName || ""
+                location.pathname === "/add-pet"
+                  ? undefined
+                  : correctName || url
               }
               className={`selected-file-input ${
                 theme === "light" ? "" : "dark"
