@@ -15,7 +15,7 @@ const MyInformationForm = () => {
     }
   };
 
-  const phoneNumber = formatPhoneNumber(phone);
+  const phoneNumber = phone ? formatPhoneNumber(phone) : "";
 
   return (
     <>
