@@ -121,6 +121,13 @@ const authSlice = createSlice({
         authenticated: false,
       });
     },
+    setToken(state: IState, action) {
+      return (state = {
+        ...state,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+      });
+    },
   },
 
   extraReducers: (builder) => {
@@ -242,6 +249,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { resetToken } = authSlice.actions;
+export const { resetToken, setToken } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

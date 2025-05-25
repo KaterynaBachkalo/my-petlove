@@ -4,7 +4,8 @@ import { RootState } from "../store";
 import { IFormInputs, IForms, IMyPet } from "../../types";
 
 export const petInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  // baseURL: import.meta.env.VITE_API_URL,
+  baseURL: "http://localhost:4000/api/",
 });
 
 const setAccessToken = (accessToken: string) => {
