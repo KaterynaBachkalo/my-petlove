@@ -6,6 +6,7 @@ import RestrictedRoute from "./components/Routes/RestrictedRoute";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./redux/store";
 import { refreshUserThunk } from "./redux/auth/operations";
+import AuthRoute from "./components/Routes/AuthRoute";
 
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -33,15 +34,14 @@ function App() {
           <Route
             path="register"
             element={
-              <RestrictedRoute component={RegisterPage} redirectTo="/home" />
+              <RestrictedRoute component={RegisterPage} redirectTo="/" />
             }
           />
           <Route
             path="login"
-            element={
-              <RestrictedRoute component={LoginPage} redirectTo="/home" />
-            }
+            element={<RestrictedRoute component={LoginPage} redirectTo="/" />}
           />
+          <Route path="auth" element={<AuthRoute />} />
 
           <Route path="home" element={<HomePage />} />
           <Route path="news" element={<NewsPage />} />
