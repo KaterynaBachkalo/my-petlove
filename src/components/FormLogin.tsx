@@ -154,6 +154,20 @@ const FormLogin: FC<IFormText> = ({
         {buttonText}
       </button>
 
+      <a
+        href={`${import.meta.env.VITE_API_URL}users/google`}
+        className="googleLogin"
+      >
+        <Icon
+          name="icon-google-icon"
+          width={24}
+          height={24}
+          className="googleIcon"
+        />
+
+        <p className="googleText">Enter with Google</p>
+      </a>
+
       <p className="form-text">
         {formText}{" "}
         <Link to={link} className="form-link">
