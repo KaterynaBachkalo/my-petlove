@@ -90,13 +90,14 @@ const FormProfile: FC<IFormProfile> = ({ onClose, userData }) => {
           />
         </div>
 
-        <div>
+        <div className="input-wrap-number">
           <input
             {...register("phone")}
             className={`input ${theme === "light" ? "" : "dark"} edit`}
             value={watch("phone")}
             onChange={(e) => setValue("phone", e.target.value)}
           />
+          <p className="form-number-default">+380</p>
           <p className="form-errors">{errors.phone?.message}</p>
         </div>
       </div>
