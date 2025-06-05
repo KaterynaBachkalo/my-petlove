@@ -72,7 +72,7 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
                 location.pathname === "/home" ? "home" : ""
               }`}
             >
-              <p className="">News</p>
+              News
             </NavLink>
           </li>
           <li onClick={onClose}>
@@ -82,7 +82,7 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
                 location.pathname === "/home" ? "home" : ""
               }`}
             >
-              <p className="">Find pet</p>
+              Find pet
             </NavLink>
           </li>
           <li onClick={onClose}>
@@ -92,7 +92,7 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
                 location.pathname === "/home" ? "home" : ""
               }`}
             >
-              <p className="">Our friends</p>
+              Our friends
             </NavLink>
           </li>
         </ul>
@@ -120,8 +120,8 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
               location.pathname === "/home" ? "home" : ""
             }`}
           >
-            <NavLink to="/login" onClick={onClose}>
-              <p className="menu-login">Log in</p>
+            <NavLink to="/login" onClick={onClose} className="menu-login">
+              Log in
             </NavLink>
           </li>
 
@@ -130,8 +130,8 @@ const Sidebar: FC<IProps> = ({ onClose, isOpen }) => {
               location.pathname === "/home" ? "home" : ""
             }`}
           >
-            <NavLink to="/register" onClick={onClose}>
-              <p className="menu-register">Registration</p>
+            <NavLink to="/register" onClick={onClose} className="menu-register">
+              Registration
             </NavLink>
           </li>
         </ul>
