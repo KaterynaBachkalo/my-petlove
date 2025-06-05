@@ -15,19 +15,18 @@
 
 .menu {
   position: fixed;
-  width: 218px;
+  width: 100%;
   height: 100%;
   background-color: fn.get-color("accent");
-  right: 0;
+  left: 0;
+
   top: 0;
-  bottom: 0;
   z-index: 100;
   padding: 28px 20px 40px 20px;
 
   display: flex;
   flex-direction: column;
 
-  transform: translateX(100%);
   transition: transform 0.5s ease;
 
   &.open {
@@ -35,9 +34,6 @@
     overflow: auto;
   }
 
-  @include mx.mq("md") {
-    width: 374px;
-  }
 
   &.home {
     background-color: fn.get-color("light");
