@@ -87,7 +87,7 @@ const Header: FC<IProps> = ({ onOpen }) => {
                   theme === "light" ? "" : "dark"
                 }`}
               >
-                <p className="">News</p>
+                News
               </NavLink>
             </li>
             <li>
@@ -97,7 +97,7 @@ const Header: FC<IProps> = ({ onOpen }) => {
                   theme === "light" ? "" : "dark"
                 }`}
               >
-                <p className="">Find pet</p>
+                Find pet
               </NavLink>
             </li>
             <li>
@@ -107,7 +107,7 @@ const Header: FC<IProps> = ({ onOpen }) => {
                   theme === "light" ? "" : "dark"
                 }`}
               >
-                <p className="">Our friends</p>
+                Our friends
               </NavLink>
             </li>
           </ul>
@@ -118,14 +118,14 @@ const Header: FC<IProps> = ({ onOpen }) => {
         {!isAuthorized && (
           <ul className="header-auth-list">
             <li className="header-link login">
-              <NavLink to="/login">
-                <p className="menu-login">Log in</p>
+              <NavLink to="/login" className="menu-login">
+                Log in
               </NavLink>
             </li>
 
             <li className="header-link register">
-              <NavLink to="/register">
-                <p className="menu-register">Registration</p>
+              <NavLink to="/register" className="menu-register">
+                Registration
               </NavLink>
             </li>
           </ul>
